@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <link rel="stylesheet" href="../chen/css/daohang.css">
+    <script>
+        function over(bg)
+{
+    bg.children[0].style.color='red';
+
+}
+function out(that){
+    that.children[0].style.color='blue'
+}
+
+
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <my-component>
+           <div class="chen">
+            <nav>
+                <li onmouseover="over(this)" onmouseout="out(this)" ><a href="#">首页信息</a></li>
+                <li onmouseover="over(this)" onmouseout="out(this)"><a href="#">公司简介</a></li>
+                <li onmouseover="over(this)" onmouseout="out(this)"><a href="#">招聘信息</a></li>
+                <li onmouseover="over(this)" onmouseout="out(this)"><a href="#"> 策划活动</a></li>
+                <li onmouseover="over(this)" onmouseout="out(this)"><a href="#">师资力量</a></li>
+            </nav>
+        </div>
+        </my-component>
+    </div>
+    <template id="myTemplate">
+        <div>
+            <slot></slot>
+        </div>
+    </template>
+    <script>
+        Vue.component("my-component", {
+            template: "#myTemplate"
+        });
+        var vm = new Vue({
+            el: '#app',
+            data: {
+
+            }
+
+        })
+    </script>
+</body>
+
+</html>
