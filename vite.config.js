@@ -29,14 +29,41 @@ export default defineConfig({
     assetsDir: 'assets',
     // 源码映射，便于调试
     sourcemap: true,
-    // 代码分割
+    // 代码分割优化
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vue-vendor': ['vue', 'vue-router']
-        }
+        manualChunks: (id) => {
+          // 将 vue 相关依赖分离
+          if (id.includes('node_modules/vue') || id.includes('node_modules/@vue')) {
+            return 'vue-vendor'
+          }
+          // 将 vue-router 分离
+          if (id.includes('node_modules/vue-router')) {
+            return 'vue-router'
+          }
+          // 将 echarts 分离（这是一个大库）
+          if (id.includes('node_modules/echarts')) {
+            return 'echarts'
+          }
+          // 其他 node_modules 依赖
+          if (id.includes('node_modules')) {
+            return 'vendor'
+          }
+        },
+        // 优化 chunk 文件命名
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
+        assetFileNames: 'assets/[ext]/[name]-[hash].[ext]'
       }
-    }
+    },
+    // 提高 chunk 大小警告限制（因为 echarts 本身就很大）
+    chunkSizeWarningLimit: 1000,
+    // 启用压缩（使用 esbuild，速度更快）
+    minify: 'esbuild',
+    // 压缩选项
+    cssCodeSplit: true,
+    // 优化资源内联阈值
+    assetsInlineLimit: 4096
   },
   // 优化依赖预构建
   optimizeDeps: {
