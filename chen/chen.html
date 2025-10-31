@@ -1,56 +1,227 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>企业门户网站</title>
     <script src="vue.js"></script>
-    <link rel="stylesheet" href="../chen/css/daohang.css">
-    <script>
-        function over(bg)
-{
-    bg.children[0].style.color='red';
+    <link rel="stylesheet" href="css/daohang.css">
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-}
-function out(that){
-    that.children[0].style.color='blue'
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-in-out;
+        }
 
-    </script>
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .content-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .content-section p {
+            line-height: 1.8;
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        .active-page {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div id="app">
-        <my-component>
-           <div class="chen">
+    <div id="app" class="container">
+        <div class="header">
+            <h1>{{ companyName }}</h1>
+            <p>{{ slogan }}</p>
+        </div>
+        
+        <navigation-component :menu-items="menuItems" @page-change="changePage"></navigation-component>
+        
+        <div class="content">
+            <div class="active-page">当前页面：{{ currentPage }}</div>
+            
+            <transition name="fade" mode="out-in">
+                <div :key="currentPage" class="content-section">
+                    <h2>{{ pageContent.title }}</h2>
+                    <p>{{ pageContent.description }}</p>
+                </div>
+            </transition>
+        </div>
+    </div>
+
+    <template id="navTemplate">
+        <div class="chen">
             <nav>
-                <li onmouseover="over(this)" onmouseout="out(this)" ><a href="#">首页信息</a></li>
-                <li onmouseover="over(this)" onmouseout="out(this)"><a href="#">公司简介</a></li>
-                <li onmouseover="over(this)" onmouseout="out(this)"><a href="#">招聘信息</a></li>
-                <li onmouseover="over(this)" onmouseout="out(this)"><a href="#"> 策划活动</a></li>
-                <li onmouseover="over(this)" onmouseout="out(this)"><a href="#">师资力量</a></li>
+                <li v-for="(item, index) in menuItems" 
+                    :key="index"
+                    @mouseenter="hoverItem(index)" 
+                    @mouseleave="leaveItem(index)"
+                    @click="selectPage(item.name)">
+                    <a href="#" 
+                       :style="{ color: hoveredIndex === index ? 'red' : 'white' }"
+                       @click.prevent>
+                        {{ item.name }}
+                    </a>
+                </li>
             </nav>
         </div>
-        </my-component>
-    </div>
-    <template id="myTemplate">
-        <div>
-            <slot></slot>
-        </div>
     </template>
+
     <script>
-        Vue.component("my-component", {
-            template: "#myTemplate"
+        Vue.component("navigation-component", {
+            template: "#navTemplate",
+            props: {
+                menuItems: {
+                    type: Array,
+                    required: true
+                }
+            },
+            data() {
+                return {
+                    hoveredIndex: null
+                }
+            },
+            methods: {
+                hoverItem(index) {
+                    this.hoveredIndex = index;
+                },
+                leaveItem(index) {
+                    this.hoveredIndex = null;
+                },
+                selectPage(pageName) {
+                    this.$emit('page-change', pageName);
+                }
+            }
         });
+
         var vm = new Vue({
             el: '#app',
             data: {
-
+                companyName: '创新科技有限公司',
+                slogan: '科技引领未来，创新驱动发展',
+                currentPage: '首页信息',
+                menuItems: [
+                    { name: '首页信息', icon: '🏠' },
+                    { name: '公司简介', icon: '🏢' },
+                    { name: '招聘信息', icon: '💼' },
+                    { name: '策划活动', icon: '🎉' },
+                    { name: '师资力量', icon: '👨‍🏫' }
+                ],
+                pageData: {
+                    '首页信息': {
+                        title: '欢迎来到我们的企业门户',
+                        description: '这里是首页信息区域。我们致力于为客户提供最优质的服务和最前沿的技术解决方案。通过不断创新和努力，我们已经成为行业内的领军企业。'
+                    },
+                    '公司简介': {
+                        title: '关于我们',
+                        description: '我们公司成立于2020年，是一家专注于创新技术研发的高科技企业。公司拥有一支经验丰富的专业团队，致力于为客户提供全方位的技术服务和解决方案。'
+                    },
+                    '招聘信息': {
+                        title: '加入我们',
+                        description: '我们正在寻找充满激情的人才加入我们的团队！目前开放的职位包括：前端工程师、后端工程师、产品经理、UI设计师等。提供有竞争力的薪资待遇和良好的职业发展空间。'
+                    },
+                    '策划活动': {
+                        title: '精彩活动',
+                        description: '我们定期举办各种技术分享会、团建活动和行业交流会。通过这些活动，促进团队协作，提升技术能力，同时也为员工提供更好的工作体验和成长机会。'
+                    },
+                    '师资力量': {
+                        title: '专业团队',
+                        description: '我们拥有一支由行业资深专家组成的团队。团队成员平均拥有10年以上的行业经验，曾参与多个大型项目的开发和管理，具备深厚的技术功底和丰富的实战经验。'
+                    }
+                }
+            },
+            computed: {
+                pageContent() {
+                    return this.pageData[this.currentPage] || {
+                        title: '页面加载中...',
+                        description: '内容正在加载...'
+                    };
+                }
+            },
+            methods: {
+                changePage(pageName) {
+                    this.currentPage = pageName;
+                }
             }
-
-        })
+        });
     </script>
 </body>
 

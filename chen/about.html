@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公司简介 - 创新科技有限公司</title>
+    <link rel="stylesheet" href="css/daohang.css">
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .content h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .content h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .content p {
+            line-height: 2;
+            color: #555;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .info-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .timeline {
+            margin-top: 30px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 2em;
+            line-height: 1;
+        }
+
+        .timeline-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>创新科技有限公司</h1>
+            <p>科技引领未来，创新驱动发展</p>
+        </div>
+        
+        <div class="chen">
+            <nav>
+                <li><a href="index.html">🏠 首页信息</a></li>
+                <li><a href="about.html" style="color: #ff6b6b;">🏢 公司简介</a></li>
+                <li><a href="jobs.html">💼 招聘信息</a></li>
+                <li><a href="events.html">🎉 策划活动</a></li>
+                <li><a href="team.html">👨‍🏫 师资力量</a></li>
+            </nav>
+        </div>
+        
+        <div class="content">
+            <h2>关于我们</h2>
+            
+            <div class="info-section">
+                <p>创新科技有限公司成立于2020年，是一家专注于创新技术研发的高科技企业。公司总部位于中国，业务遍及全国各地，为数百家企业提供优质的技术服务和解决方案。</p>
+            </div>
+
+            <h3>企业文化</h3>
+            <p>我们秉承"创新、协作、专业、共赢"的企业价值观，致力于打造一个充满活力和创造力的工作环境。公司鼓励员工持续学习和创新，为员工提供广阔的发展空间和成长机会。</p>
+
+            <h3>核心优势</h3>
+            <div class="info-section">
+                <p><strong>技术实力：</strong>拥有一支经验丰富的研发团队，掌握多项核心技术，持续投入研发创新。</p>
+                <p><strong>服务质量：</strong>以客户需求为导向，提供全方位、高质量的技术服务和支持。</p>
+                <p><strong>行业经验：</strong>深耕行业多年，积累了丰富的项目经验和成功案例。</p>
+                <p><strong>创新能力：</strong>紧跟技术发展趋势，不断探索和应用新技术、新方法。</p>
+            </div>
+
+            <h3>发展历程</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>2020年 - 公司成立</h4>
+                    <p>创新科技有限公司正式成立，开始技术服务业务。</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>2021年 - 业务拓展</h4>
+                    <p>成功服务50+企业客户，团队规模扩大到30人。</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>2022年 - 技术突破</h4>
+                    <p>完成多项核心技术研发，获得行业认可。</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>2023年 - 持续增长</h4>
+                    <p>客户数量突破100家，成为行业领军企业。</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>2024年 - 展望未来</h4>
+                    <p>继续深化技术创新，为更多客户创造价值。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
