@@ -1,0 +1,110 @@
+/* 策划活动页面样式 */
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 35px;
+}
+
+.event-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+}
+
+.event-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.event-header {
+    background: #93c5fd;
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+.event-icon {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.event-content {
+    padding: 30px;
+    background: white;
+}
+
+.event-card h3 {
+    color: #1e40af;
+    font-size: 1.4em;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.event-date {
+    color: #718096;
+    font-size: 0.95em;
+    margin-bottom: 18px;
+    font-weight: 500;
+}
+
+.event-card p {
+    line-height: 1.9;
+    color: #4a5568;
+    margin-bottom: 18px;
+    font-size: 0.95em;
+}
+
+.event-status {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 3px;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.status-upcoming {
+    background: #e6f7f0;
+    color: #047857;
+    border: 1px solid #047857;
+}
+
+.status-ongoing {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #92400e;
+}
+
+.status-completed {
+    background: #f3f4f6;
+    color: #4b5563;
+    border: 1px solid #9ca3af;
+}
+
+.activity-value {
+    margin-top: 45px;
+    padding: 30px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    border-left: 4px solid #60a5fa;
+}
+
+.activity-value h3 {
+    color: #1e40af;
+    margin-bottom: 18px;
+    font-weight: 600;
+}
+
+.activity-value ul {
+    line-height: 2;
+    color: #4a5568;
+}
+
+@media (max-width: 768px) {
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+}
