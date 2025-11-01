@@ -1,11 +1,14 @@
 <template>
   <div class="chen" :class="{ 'transparent': isHomePage, 'scrolled': isScrolled }">
     <div class="nav-container">
-      <div class="logo">创新科技</div>
       <button class="mobile-menu-toggle" @click="toggleMenu" aria-label="菜单">
         {{ menuIcon }}
       </button>
-      <nav :class="{ active: isMenuOpen }">
+      <div class="logo">
+        <img src="/logo.svg" alt="辰锋软件分发工作室" class="logo-img" />
+        <span class="logo-text">辰锋软件分发工作室</span>
+      </div>
+      <nav class="desktop-nav">
         <li v-for="(item, index) in menuItems" :key="index">
           <router-link 
             :to="item.path" 
@@ -22,11 +25,21 @@
         <router-link v-else to="/login" class="login-link">登录</router-link>
       </div>
     </div>
+    <nav class="mobile-nav" :class="{ active: isMenuOpen }">
+      <li v-for="(item, index) in menuItems" :key="index">
+        <router-link 
+          :to="item.path" 
+          :class="{ active: $route.name === item.name }"
+          @click="closeMenu">
+          {{ item.label }}
+        </router-link>
+      </li>
+    </nav>
   </div>
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { user as userState, initAuth } from '../store/auth'
 import UserProfile from './UserProfile.vue'
@@ -82,12 +95,30 @@ export default {
     // 点击页面其他地方关闭菜单
     const handleClickOutside = (event) => {
       const navContainer = event.target.closest('.nav-container')
-      if (!navContainer && isMenuOpen.value) {
+      const mobileNav = event.target.closest('.mobile-nav')
+      const toggleBtn = event.target.closest('.mobile-menu-toggle')
+      
+      // 如果点击的不是导航容器、移动菜单和切换按钮，且菜单是打开的，则关闭菜单
+      if (!navContainer && !mobileNav && !toggleBtn && isMenuOpen.value) {
         isMenuOpen.value = false
       }
     }
     
+    // 监听路由变化时关闭菜单
+    const stopWatcher = watch(() => route.path, () => {
+      if (isMenuOpen.value) {
+        isMenuOpen.value = false
+      }
+    })
+    
     document.addEventListener('click', handleClickOutside)
+    
+    // 组件卸载时清理
+    onUnmounted(() => {
+      document.removeEventListener('click', handleClickOutside)
+      stopWatcher()
+      window.removeEventListener('scroll', handleScroll)
+    })
     
     return {
       isMenuOpen,

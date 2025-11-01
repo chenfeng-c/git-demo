@@ -111,5 +111,15 @@ export async function getCurrentUser() {
   return null
 }
 
+/**
+ * 更新用户信息
+ */
+export function updateUser(userData) {
+  if (user.value) {
+    user.value = { ...user.value, ...userData }
+    localStorage.setItem('user', JSON.stringify(user.value))
+  }
+}
+
 // 导出响应式引用
 export { user, token, isAuthenticated }

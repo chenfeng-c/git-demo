@@ -129,6 +129,67 @@ export async function mockRegister(userData) {
   }, '注册成功')
 }
 
+/**
+ * 模拟更新用户信息 API
+ */
+export async function mockUpdateUserInfo(token, userData) {
+  await delay(600)
+  
+  const userId = token ? parseInt(token.split('_')[2]) : null
+  const userIndex = mockUsers.findIndex(u => u.id === userId)
+  
+  if (userIndex === -1 || !token) {
+    return createResponse(false, null, '用户不存在或 Token 无效')
+  }
+  
+  const { username, email } = userData
+  
+  // 检查用户名是否已被其他用户使用
+  if (username && mockUsers.some(u => u.username === username && u.id !== userId)) {
+    return createResponse(false, null, '用户名已被使用')
+  }
+  
+  // 检查邮箱是否已被其他用户使用
+  if (email && mockUsers.some(u => u.email === email && u.id !== userId)) {
+    return createResponse(false, null, '邮箱已被使用')
+  }
+  
+  // 更新用户信息
+  mockUsers[userIndex] = {
+    ...mockUsers[userIndex],
+    ...userData
+  }
+  
+  const { password: _, ...userWithoutPassword } = mockUsers[userIndex]
+  return createResponse(true, {
+    user: userWithoutPassword
+  }, '更新成功')
+}
+
+/**
+ * 模拟修改密码 API
+ */
+export async function mockChangePassword(token, oldPassword, newPassword) {
+  await delay(600)
+  
+  const userId = token ? parseInt(token.split('_')[2]) : null
+  const user = mockUsers.find(u => u.id === userId)
+  
+  if (!user || !token) {
+    return createResponse(false, null, '用户不存在或 Token 无效')
+  }
+  
+  // 验证旧密码
+  if (user.password !== oldPassword) {
+    return createResponse(false, null, '原密码不正确')
+  }
+  
+  // 更新密码
+  user.password = newPassword
+  
+  return createResponse(true, null, '密码修改成功')
+}
+
 // 导出 mock 用户数据（仅用于开发调试）
 export { mockUsers }
 

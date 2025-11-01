@@ -1,0 +1,438 @@
+/* 个人中心页面样式 */
+
+.profile-page {
+  min-height: 100vh;
+  background: #f7fafc;
+}
+
+.profile-section {
+  margin-bottom: 30px;
+}
+
+.profile-card {
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.profile-card:hover {
+  box-shadow: 0 8px 24px rgba(66, 153, 225, 0.15);
+  transform: translateY(-2px);
+}
+
+.profile-header-info {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 40px;
+  background: linear-gradient(135deg, rgba(66, 153, 225, 0.05) 0%, rgba(44, 82, 130, 0.05) 100%);
+}
+
+.profile-avatar-large {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4299e1 0%, #2c5282 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 8px 24px rgba(66, 153, 225, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.profile-card:hover .profile-avatar-large {
+  transform: scale(1.05);
+}
+
+.avatar-text {
+  font-size: 48px;
+  font-weight: 700;
+  color: white;
+}
+
+.profile-basic-info {
+  flex: 1;
+}
+
+.profile-name-large {
+  font-size: 2em;
+  font-weight: 700;
+  color: #1a365d;
+  margin: 0 0 8px 0;
+}
+
+.profile-username-large {
+  font-size: 1.2em;
+  color: #718096;
+  margin: 0 0 8px 0;
+}
+
+.profile-email-large {
+  font-size: 1.05em;
+  color: #4a5568;
+  margin: 0;
+}
+
+.details-section {
+  margin-bottom: 40px;
+}
+
+.details-card {
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.details-card:hover {
+  box-shadow: 0 8px 24px rgba(66, 153, 225, 0.15);
+  transform: translateY(-2px);
+}
+
+.section-header-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.section-title {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #1a365d;
+  margin: 0;
+}
+
+.user-descriptions {
+  margin-top: 20px;
+}
+
+.user-descriptions :deep(.el-descriptions__label) {
+  font-weight: 600;
+  color: #4a5568;
+  width: 120px;
+}
+
+.user-descriptions :deep(.el-descriptions__content) {
+  color: #2d3748;
+}
+
+.actions-section {
+  margin-bottom: 60px;
+}
+
+.action-buttons-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.action-buttons-row :deep(.el-col) {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.action-button-wrapper {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+@media (max-width: 992px) {
+  .action-buttons-row {
+    gap: 0;
+    row-gap: 20px;
+  }
+
+  .action-buttons-row :deep(.el-col) {
+    padding-bottom: 20px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .action-buttons-row :deep(.el-col:last-child) {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+.action-button-wrapper {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.action-button {
+  width: 100% !important;
+  height: 50px !important;
+  font-size: 16px !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+.action-button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.button-icon {
+  font-size: 1.2em;
+  display: inline-block;
+}
+
+.button-text {
+  display: inline-block;
+}
+
+/* 对话框样式优化 */
+.profile-dialog :deep(.el-dialog) {
+  border-radius: 12px;
+  margin: 0 auto;
+}
+
+.profile-dialog :deep(.el-dialog__header) {
+  padding: 20px 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.profile-dialog :deep(.el-dialog__title) {
+  font-size: 1.3em;
+  font-weight: 600;
+  color: #1a365d;
+}
+
+.profile-dialog :deep(.el-dialog__body) {
+  padding: 24px;
+}
+
+.profile-dialog :deep(.el-dialog__footer) {
+  padding: 16px 24px;
+  border-top: 1px solid #e2e8f0;
+  background: transparent !important;
+  text-align: center !important;
+}
+
+.profile-dialog :deep(.el-form-item__label) {
+  font-weight: 500;
+  color: #4a5568;
+}
+
+.profile-dialog :deep(.el-input__wrapper) {
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.profile-dialog :deep(.el-input__wrapper:hover) {
+  box-shadow: 0 0 0 1px #4299e1 inset;
+}
+
+.profile-dialog :deep(.dialog-footer) {
+  display: inline-flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 20px !important;
+  flex-wrap: wrap;
+}
+
+.profile-dialog :deep(.dialog-footer .el-button) {
+  min-width: 80px;
+  margin: 0 !important;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .profile-header-info {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px;
+    gap: 20px;
+  }
+
+  .profile-avatar-large {
+    width: 100px;
+    height: 100px;
+  }
+
+  .avatar-text {
+    font-size: 40px;
+  }
+
+  .profile-name-large {
+    font-size: 1.6em;
+  }
+
+  .profile-username-large {
+    font-size: 1.1em;
+  }
+
+  .details-card :deep(.el-card__body) {
+    padding: 25px !important;
+  }
+
+  .section-title {
+    font-size: 1.3em;
+    margin-bottom: 20px;
+  }
+
+  .actions-section {
+    margin-bottom: 50px;
+  }
+
+  .action-buttons-row {
+    gap: 0 !important;
+    row-gap: 20px !important;
+  }
+
+  .action-buttons-row :deep(.el-col) {
+    padding-bottom: 20px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .action-buttons-row :deep(.el-col:last-child) {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .action-button-wrapper {
+    margin-bottom: 0;
+  }
+
+  .action-button {
+    height: 48px !important;
+    font-size: 15px !important;
+  }
+
+  /* 768px弹窗footer优化 */
+  .profile-dialog :deep(.el-dialog__footer) {
+    background: transparent !important;
+    text-align: center !important;
+  }
+
+  .profile-dialog :deep(.dialog-footer) {
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 15px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-header-info {
+    padding: 25px 15px;
+  }
+
+  .profile-avatar-large {
+    width: 80px;
+    height: 80px;
+  }
+
+  .avatar-text {
+    font-size: 32px;
+  }
+
+  .profile-name-large {
+    font-size: 1.4em;
+  }
+
+  .details-card :deep(.el-card__body) {
+    padding: 20px !important;
+  }
+
+  .section-title {
+    font-size: 1.2em;
+  }
+
+  .actions-section {
+    margin-bottom: 40px;
+  }
+
+  .action-buttons-row {
+    gap: 0 !important;
+    row-gap: 16px !important;
+  }
+
+  .action-buttons-row :deep(.el-col) {
+    padding-bottom: 16px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .action-buttons-row :deep(.el-col:last-child) {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .action-button-wrapper {
+    margin-bottom: 0;
+  }
+
+  .action-button {
+    height: 46px !important;
+    font-size: 14px !important;
+  }
+
+  .button-icon {
+    font-size: 1.1em;
+  }
+
+  .user-descriptions :deep(.el-descriptions__label) {
+    width: 100px;
+    font-size: 14px;
+  }
+
+  /* 480px以下弹窗优化 */
+  .profile-dialog :deep(.el-dialog) {
+    margin: 3vh auto !important;
+    max-height: 94vh;
+    border-radius: 8px;
+    overflow-y: auto;
+  }
+
+  .profile-dialog :deep(.el-dialog__header) {
+    padding: 14px 16px;
+  }
+
+  .profile-dialog :deep(.el-dialog__title) {
+    font-size: 1.1em;
+  }
+
+  .profile-dialog :deep(.el-dialog__body) {
+    padding: 16px;
+  }
+
+  .profile-dialog :deep(.el-dialog__footer) {
+    padding: 10px 16px;
+    flex-wrap: wrap;
+    background: transparent !important;
+    text-align: center !important;
+  }
+
+  .profile-dialog :deep(.el-form-item) {
+    margin-bottom: 18px;
+  }
+
+  .profile-dialog :deep(.el-form-item__label) {
+    margin-bottom: 6px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .profile-dialog :deep(.el-input__wrapper) {
+    font-size: 14px;
+  }
+
+  .profile-dialog :deep(.dialog-footer) {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 15px !important;
+  }
+
+  .profile-dialog :deep(.dialog-footer .el-button) {
+    width: auto;
+    min-width: 80px;
+    margin: 0 !important;
+  }
+}
+

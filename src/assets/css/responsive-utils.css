@@ -1,0 +1,106 @@
+/* 响应式辅助工具类 */
+
+/* 图片响应式 */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 表格响应式 */
+@media (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* 文本截断 */
+.text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.text-truncate-multiline {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* 触摸友好的点击目标 */
+@media (max-width: 768px) {
+    button, 
+    a, 
+    input[type="button"], 
+    input[type="submit"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* 防止移动端文本缩放 */
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+/* 平滑滚动 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 移动端友好的间距 */
+@media (max-width: 768px) {
+    .mobile-spacing {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+}
+
+/* 隐藏工具类 */
+@media (max-width: 768px) {
+    .hide-mobile {
+        display: none !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .hide-desktop {
+        display: none !important;
+    }
+}
+
+/* 弹性容器 */
+.flex-mobile-column {
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .flex-mobile-column {
+        flex-direction: column;
+    }
+}
+
+/* 阻止页面缩放（可选） */
+* {
+    touch-action: manipulation;
+}
+
+/* 优化移动端字体 */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 移动端卡片优化 */
+@media (max-width: 768px) {
+    .card-mobile-optimized {
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+    }
+}
+

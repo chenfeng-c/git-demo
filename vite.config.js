@@ -10,8 +10,12 @@ export default defineConfig({
     }
   },
   server: {
+    host: '0.0.0.0', // 允许外部访问，包括局域网
     port: 3000,
+    strictPort: false, // 如果端口被占用，自动尝试下一个可用端口
     open: true,
+    // 允许 CORS
+    cors: true,
     // 热重载配置
     hmr: {
       overlay: true, // 显示错误覆盖层
@@ -22,7 +26,14 @@ export default defineConfig({
       ignored: ['**/node_modules/**', '**/.git/**', '**/dist/**']
     },
     // 代理配置（如果需要）
-    proxy: {}
+    proxy: {
+      // 示例：代理 API 请求
+      // '/api': {
+      //   target: 'http://localhost:8080',
+      //   changeOrigin: true,
+      //   rewrite: (path) => path.replace(/^\/api/, '')
+      // }
+    }
   },
   build: {
     outDir: 'dist',

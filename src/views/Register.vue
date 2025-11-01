@@ -1,107 +1,103 @@
 <template>
   <div class="register-container">
-    <div class="register-card">
-      <div class="register-header">
-        <h1>{{ companyInfo.name }}</h1>
-        <p>用户注册</p>
-      </div>
+    <el-card class="register-card" shadow="hover">
+      <template #header>
+        <div class="register-header">
+          <h1>{{ companyInfo.name }}</h1>
+          <p>用户注册</p>
+        </div>
+      </template>
       
-      <form @submit.prevent="handleRegister" class="register-form">
-        <div class="form-group">
-          <label for="username">用户名 <span class="required">*</span></label>
-          <input
-            id="username"
+      <el-form :model="formData" label-width="100px" @submit.prevent="handleRegister">
+        <el-form-item label="用户名" required :error="errors.username">
+          <el-input
             v-model="formData.username"
-            type="text"
             placeholder="请输入用户名（3-20个字符）"
-            required
-            minlength="3"
+            clearable
             maxlength="20"
             autocomplete="username"
-            :class="{ error: errors.username }"
             @blur="validateUsername"
           />
-          <span v-if="errors.username" class="field-error">{{ errors.username }}</span>
-        </div>
+        </el-form-item>
         
-        <div class="form-group">
-          <label for="email">邮箱 <span class="required">*</span></label>
-          <input
-            id="email"
+        <el-form-item label="邮箱" required :error="errors.email">
+          <el-input
             v-model="formData.email"
             type="email"
             placeholder="请输入邮箱地址"
-            required
+            clearable
             autocomplete="email"
-            :class="{ error: errors.email }"
             @blur="validateEmail"
           />
-          <span v-if="errors.email" class="field-error">{{ errors.email }}</span>
-        </div>
+        </el-form-item>
         
-        <div class="form-group">
-          <label for="name">姓名 <span class="required">*</span></label>
-          <input
-            id="name"
+        <el-form-item label="姓名" required :error="errors.name">
+          <el-input
             v-model="formData.name"
-            type="text"
             placeholder="请输入您的姓名"
-            required
+            clearable
             maxlength="50"
-            :class="{ error: errors.name }"
             @blur="validateName"
           />
-          <span v-if="errors.name" class="field-error">{{ errors.name }}</span>
-        </div>
+        </el-form-item>
         
-        <div class="form-group">
-          <label for="password">密码 <span class="required">*</span></label>
-          <input
-            id="password"
+        <el-form-item label="密码" required :error="errors.password">
+          <el-input
             v-model="formData.password"
             type="password"
             placeholder="请输入密码（至少6个字符）"
-            required
+            show-password
+            clearable
             minlength="6"
             autocomplete="new-password"
-            :class="{ error: errors.password }"
             @blur="validatePassword"
           />
-          <span v-if="errors.password" class="field-error">{{ errors.password }}</span>
-        </div>
+        </el-form-item>
         
-        <div class="form-group">
-          <label for="confirmPassword">确认密码 <span class="required">*</span></label>
-          <input
-            id="confirmPassword"
+        <el-form-item label="确认密码" required :error="errors.confirmPassword">
+          <el-input
             v-model="formData.confirmPassword"
             type="password"
             placeholder="请再次输入密码"
-            required
+            show-password
+            clearable
             autocomplete="new-password"
-            :class="{ error: errors.confirmPassword }"
             @blur="validateConfirmPassword"
           />
-          <span v-if="errors.confirmPassword" class="field-error">{{ errors.confirmPassword }}</span>
-        </div>
+        </el-form-item>
         
-        <div v-if="errorMessage" class="error-message">
-          {{ errorMessage }}
-        </div>
+        <el-alert
+          v-if="errorMessage"
+          :title="errorMessage"
+          type="error"
+          :closable="false"
+          style="margin-bottom: 20px;"
+        />
         
-        <div v-if="successMessage" class="success-message">
-          {{ successMessage }}
-        </div>
+        <el-alert
+          v-if="successMessage"
+          :title="successMessage"
+          type="success"
+          :closable="false"
+          style="margin-bottom: 20px;"
+        />
         
-        <button type="submit" class="register-btn" :disabled="isLoading">
-          {{ isLoading ? '注册中...' : '注册' }}
-        </button>
-      </form>
+        <el-form-item>
+          <el-button
+            type="primary"
+            native-type="submit"
+            :loading="isLoading"
+            style="width: 100%;"
+          >
+            {{ isLoading ? '注册中...' : '注册' }}
+          </el-button>
+        </el-form-item>
+      </el-form>
       
       <div class="register-footer">
-        <p>已有账号？ <router-link to="/login" class="login-link">立即登录</router-link></p>
+        <p>已有账号？ <el-link type="primary" @click="$router.push('/login')">立即登录</el-link></p>
       </div>
-    </div>
+    </el-card>
   </div>
 </template>
 
@@ -111,7 +107,6 @@ import { useRouter } from 'vue-router'
 import { companyInfo } from '../utils/data'
 import { register } from '../api/index'
 import { login } from '../store/auth'
-import '../assets/css/register.css'
 
 export default {
   name: 'Register',
@@ -274,5 +269,54 @@ export default {
 </script>
 
 <style scoped>
+.register-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+    padding: 20px;
+}
+
+.register-card {
+    width: 100%;
+    max-width: 480px;
+}
+
+.register-header {
+    text-align: center;
+}
+
+.register-header h1 {
+    color: #1a365d;
+    font-size: 2em;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.register-header p {
+    color: #718096;
+    font-size: 1.1em;
+    margin: 0;
+}
+
+.register-footer {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.register-footer p {
+    color: #718096;
+    font-size: 0.95em;
+    margin: 0;
+}
+
+.field-error {
+    color: #f56c6c;
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
+}
 </style>
 

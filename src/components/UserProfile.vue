@@ -19,6 +19,10 @@
       <div class="profile-divider"></div>
       
       <div class="profile-menu">
+        <a href="#" class="menu-item" @click.prevent="handleProfileClick">
+          <span class="menu-icon">👤</span>
+          <span>个人信息</span>
+        </a>
         <a href="#" class="menu-item" @click.prevent="handleLogout">
           <span class="menu-icon">🚪</span>
           <span>注销登录</span>
@@ -59,6 +63,13 @@ export default {
       isDropdownOpen.value = false
     }
     
+    const handleProfileClick = () => {
+      if (user.value) {
+        closeDropdown()
+        router.push('/profile')
+      }
+    }
+
     const handleLogout = async () => {
       await logout()
       closeDropdown()
@@ -87,6 +98,7 @@ export default {
       isDropdownOpen,
       toggleDropdown,
       closeDropdown,
+      handleProfileClick,
       handleLogout
     }
   }
@@ -258,14 +270,74 @@ export default {
 }
 
 @media (max-width: 992px) {
-  .profile-dropdown {
-    right: auto;
-    left: 0;
-    min-width: 200px;
+  .profile-trigger {
+    padding: 6px 12px;
+    gap: 6px;
+    min-width: 0;
+    max-width: 100%;
+  }
+  
+  .user-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
   }
   
   .user-name {
     display: none;
+  }
+  
+  .dropdown-icon {
+    font-size: 8px;
+  }
+  
+  .profile-dropdown {
+    right: 0;
+    left: auto;
+    min-width: 220px;
+    max-width: calc(100vw - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-trigger {
+    padding: 5px 10px;
+    gap: 4px;
+  }
+  
+  .user-avatar {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+  }
+  
+  .profile-dropdown {
+    right: 0;
+    left: auto;
+    min-width: 200px;
+    max-width: calc(100vw - 30px);
+  }
+  
+  .profile-header {
+    padding: 14px;
+  }
+  
+  .profile-avatar {
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+  }
+  
+  .profile-name {
+    font-size: 15px;
+  }
+  
+  .profile-username {
+    font-size: 12px;
+  }
+  
+  .profile-email {
+    font-size: 11px;
   }
 }
 </style>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>响应式测试页面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', Arial, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2.5em;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .viewport-info {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .device-info {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .test-card {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            background: #f8fafc;
+            transition: all 0.3s ease;
+        }
+        
+        .test-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+        
+        .test-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .test-card .status {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .status.success {
+            background: #10b981;
+            color: white;
+        }
+        
+        .status.warning {
+            background: #f59e0b;
+            color: white;
+        }
+        
+        .breakpoint-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+        
+        .breakpoint-list li {
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+            background: #f8fafc;
+            border-radius: 8px;
+            font-size: 1.1em;
+        }
+        
+        .breakpoint-list li.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .test-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .test-btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .test-btn.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .test-btn.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .test-btn.secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        .test-btn.secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        /* 响应式测试 */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2em;
+            }
+            .container {
+                padding: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .test-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .test-buttons {
+                flex-direction: column;
+            }
+            
+            .test-btn {
+                width: 100%;
+                min-width: auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            .viewport-info {
+                font-size: 1.2em;
+            }
+        }
+        
+        .feature-list {
+            margin: 20px 0;
+        }
+        
+        .feature-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+        
+        .check-icon {
+            color: #10b981;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📱 移动端适配测试页面</h1>
+        
+        <div class="info-box">
+            <div class="viewport-info">当前视口宽度: <span id="width">0</span>px</div>
+            <div class="device-info">设备类型: <span id="device">未知</span></div>
+        </div>
+        
+        <h2 style="color: #667eea; margin-bottom: 20px;">📊 响应式断点状态</h2>
+        <ul class="breakpoint-list">
+            <li id="desktop">🖥️ 桌面端 (&gt; 992px)</li>
+            <li id="tablet">📱 平板端 (768px - 992px)</li>
+            <li id="mobile">📱 手机端 (481px - 768px)</li>
+            <li id="small-mobile">📱 小屏手机 (&lt; 480px)</li>
+        </ul>
+        
+        <h2 style="color: #667eea; margin: 30px 0 20px;">✅ 已实现的优化功能</h2>
+        <div class="feature-list">
+            <div class="feature-item">
+                <span class="check-icon">✓</span>
+                <span>响应式视口配置（支持缩放）</span>
+            </div>
+            <div class="feature-item">
+                <span class="check-icon">✓</span>
+                <span>三层断点适配（桌面/平板/手机）</span>
+            </div>
+            <div class="feature-item">
+                <span class="check-icon">✓</span>
+                <span>移动端汉堡菜单</span>
+            </div>
+            <div class="feature-item">
+                <span class="check-icon">✓</span>
+                <span>触摸友好按钮（44x44px）</span>
+            </div>
+            <div class="feature-item">
+                <span class="check-icon">✓</span>
+                <span>文本可读性优化</span>
+            </div>
+            <div class="feature-item">
+                <span class="check-icon">✓</span>
+                <span>图片响应式处理</span>
+            </div>
+            <div class="feature-item">
+                <span class="check-icon">✓</span>
+                <span>表单自适应布局</span>
+            </div>
+            <div class="feature-item">
+                <span class="check-icon">✓</span>
+                <span>网格布局自动调整</span>
+            </div>
+        </div>
+        
+        <h2 style="color: #667eea; margin: 30px 0 20px;">🎨 页面适配状态</h2>
+        <div class="test-grid">
+            <div class="test-card">
+                <h3>🏠 首页</h3>
+                <p>Hero区域、特性展示、数据统计</p>
+                <div style="margin-top: 10px;">
+                    <span class="status success">✓ 已优化</span>
+                </div>
+            </div>
+            <div class="test-card">
+                <h3>📖 关于我们</h3>
+                <p>公司简介、时间轴</p>
+                <div style="margin-top: 10px;">
+                    <span class="status success">✓ 已优化</span>
+                </div>
+            </div>
+            <div class="test-card">
+                <h3>👥 师资力量</h3>
+                <p>团队展示、统计卡片</p>
+                <div style="margin-top: 10px;">
+                    <span class="status success">✓ 已优化</span>
+                </div>
+            </div>
+            <div class="test-card">
+                <h3>💼 招聘信息</h3>
+                <p>职位列表、申请按钮</p>
+                <div style="margin-top: 10px;">
+                    <span class="status success">✓ 已优化</span>
+                </div>
+            </div>
+            <div class="test-card">
+                <h3>🎯 策划活动</h3>
+                <p>活动卡片、状态标签</p>
+                <div style="margin-top: 10px;">
+                    <span class="status success">✓ 已优化</span>
+                </div>
+            </div>
+            <div class="test-card">
+                <h3>🔐 登录/注册</h3>
+                <p>表单布局、按钮适配</p>
+                <div style="margin-top: 10px;">
+                    <span class="status success">✓ 已优化</span>
+                </div>
+            </div>
+        </div>
+        
+        <h2 style="color: #667eea; margin: 30px 0 20px;">🧪 测试按钮</h2>
+        <div class="test-buttons">
+            <button class="test-btn primary" onclick="window.location.href='/'">
+                返回主站
+            </button>
+            <button class="test-btn secondary" onclick="window.open('/', '_blank')">
+                新窗口打开
+            </button>
+            <button class="test-btn secondary" onclick="location.reload()">
+                刷新页面
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        function updateViewportInfo() {
+            const width = window.innerWidth;
+            document.getElementById('width').textContent = width;
+            
+            // 更新设备类型
+            let device = '';
+            let activeBreakpoint = '';
+            
+            // 移除所有active类
+            document.querySelectorAll('.breakpoint-list li').forEach(li => {
+                li.classList.remove('active');
+            });
+            
+            if (width > 992) {
+                device = '桌面端 🖥️';
+                activeBreakpoint = 'desktop';
+            } else if (width > 768) {
+                device = '平板端 📱';
+                activeBreakpoint = 'tablet';
+            } else if (width > 480) {
+                device = '手机端 📱';
+                activeBreakpoint = 'mobile';
+            } else {
+                device = '小屏手机 📱';
+                activeBreakpoint = 'small-mobile';
+            }
+            
+            document.getElementById('device').textContent = device;
+            document.getElementById(activeBreakpoint).classList.add('active');
+        }
+        
+        // 初始化
+        updateViewportInfo();
+        
+        // 监听窗口大小变化
+        window.addEventListener('resize', updateViewportInfo);
+        
+        // 每秒更新一次（用于旋转屏幕的情况）
+        setInterval(updateViewportInfo, 1000);
+    </script>
+</body>
+</html>
+

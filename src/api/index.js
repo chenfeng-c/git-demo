@@ -17,6 +17,8 @@ export const getUserInfo = mockAPI.mockGetUserInfo
 export const verifyToken = mockAPI.mockVerifyToken
 export const logout = mockAPI.mockLogout
 export const register = mockAPI.mockRegister
+export const updateUserInfo = mockAPI.mockUpdateUserInfo
+export const changePassword = mockAPI.mockChangePassword
 
 // 如果以后需要切换到真实 API，可以在这里替换
 // export const login = USE_MOCK ? mockAPI.mockLogin : realAPI.login

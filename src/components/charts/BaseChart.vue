@@ -30,13 +30,21 @@ export default {
       if (!chartRef.value) return
       
       const container = chartRef.value
-      const width = container.offsetWidth || container.clientWidth
-      const height = container.offsetHeight || container.clientHeight || parseInt(props.height) || 400
+      let width = container.offsetWidth || container.clientWidth
+      let height = container.offsetHeight || container.clientHeight || parseInt(props.height) || 400
       
-      if (width === 0) {
-        // 如果容器还没有宽度，等待一下再试
+      // 如果容器还没有宽度，等待一下再试
+      if (width === 0 || height === 0) {
         setTimeout(initChart, 100)
         return
+      }
+      
+      // 如果高度是字符串（如 "280px"），解析它
+      if (typeof props.height === 'string' && props.height.includes('px')) {
+        const parsedHeight = parseInt(props.height)
+        if (!isNaN(parsedHeight)) {
+          height = parsedHeight
+        }
       }
       
       // 如果图表已经初始化，先销毁
@@ -47,25 +55,35 @@ export default {
       
       // 初始化图表
       chartInstance = echarts.init(chartRef.value, null, {
-        width: width,
-        height: height
+        width: width || undefined,
+        height: height || undefined,
+        renderer: 'canvas'
       })
-      chartInstance.setOption(props.options)
+      
+      // 确保 options 是响应式的值
+      const options = props.options?.value || props.options
+      if (options) {
+        chartInstance.setOption(options, true)
+      }
       
       // 监听窗口大小变化
-      window.addEventListener('resize', handleResize)
+      if (!window.__chartResizeHandlerAdded) {
+        window.addEventListener('resize', handleResize)
+      }
       
       // 延迟一次 resize 确保图表正确渲染
       setTimeout(() => {
         if (chartInstance && chartRef.value) {
-          const currentWidth = chartRef.value.offsetWidth || chartRef.value.clientWidth
+          const currentWidth = chartRef.value.offsetWidth || chartRef.value.clientWidth || width
           const currentHeight = chartRef.value.offsetHeight || chartRef.value.clientHeight || height
-          chartInstance.resize({
-            width: currentWidth,
-            height: currentHeight
-          })
+          if (currentWidth > 0 && currentHeight > 0) {
+            chartInstance.resize({
+              width: currentWidth,
+              height: currentHeight
+            })
+          }
         }
-      }, 200)
+      }, 300)
     }
     
     const handleResize = () => {
@@ -91,12 +109,15 @@ export default {
     // 监听配置变化
     watch(() => props.options, (newOptions) => {
       if (chartInstance) {
-        chartInstance.setOption(newOptions, true)
+        const options = newOptions?.value || newOptions
+        if (options) {
+          chartInstance.setOption(options, true)
+        }
       } else {
         // 如果图表还没初始化，尝试初始化
         initChart()
       }
-    }, { deep: true })
+    }, { deep: true, immediate: false })
     
     return {
       chartRef
