@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 
 export default defineConfig({
-  base: '/git-demo/', // GitHub Pages 子路径配置
+  base: '/', // 用户主页仓库使用根路径
   plugins: [vue()],
   resolve: {
     alias: {
