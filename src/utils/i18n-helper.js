@@ -15,6 +15,17 @@ export const getNestedValueSafe = (obj, path) => {
   }
   if (typeof value === 'string') return value
   if (value && typeof value === 'object') {
+    if (typeof value.s === 'string') return value.s
+    if (value.b && typeof value.b === 'object') {
+      if (typeof value.b.s === 'string') return value.b.s
+      if (Array.isArray(value.b.i)) {
+        for (const item of value.b.i) {
+          if (item && typeof item === 'object' && typeof item.s === 'string') {
+            return item.s
+          }
+        }
+      }
+    }
     if (value.loc && value.loc.source) return value.loc.source
     if (value.body && value.body.items && value.body.items.length > 0) {
       const firstItem = value.body.items[0]
@@ -36,14 +47,29 @@ export const safeTranslate = (key, localeOverride = null) => {
     return key
   }
   try {
-    const localeRef = i18n.global.locale
+    const composer = i18n.global
+    const localeRef = composer.locale
     const locale = localeOverride !== null ? localeOverride : localeRef.value
-    
+
+    if (composer?.t) {
+      try {
+        const translated = localeOverride !== null
+          ? composer.t(key, locale)
+          : composer.t(key)
+
+        if (translated !== null && translated !== undefined && translated !== key) {
+          return translated
+        }
+      } catch (_) {
+        // ignore and fallback to manual lookup
+      }
+    }
+
     let localeMessages = null
     try {
-      localeMessages = i18n.global.getLocaleMessage(locale)
+      localeMessages = composer.getLocaleMessage(locale)
     } catch (e) {
-      const messages = i18n.global.messages
+      const messages = composer.messages
       if (messages) {
         const msgs = messages.value || messages
         if (msgs && typeof msgs === 'object' && locale in msgs) {
@@ -51,24 +77,26 @@ export const safeTranslate = (key, localeOverride = null) => {
         }
       }
     }
-    
+
     if (localeMessages && typeof localeMessages === 'object') {
       const result = getNestedValueSafe(localeMessages, key)
       if (result) return result
     }
-    
+
     const fallbackLocale = 'zh-CN'
     try {
-      const fallbackMessages = i18n.global.getLocaleMessage(fallbackLocale)
+      const fallbackMessages = composer.getLocaleMessage(fallbackLocale)
       if (fallbackMessages && typeof fallbackMessages === 'object') {
         const result = getNestedValueSafe(fallbackMessages, key)
         if (result) return result
       }
     } catch (e) {}
-    
+
     return key
   } catch (err) {
     return key
   }
 }
+
+export default i18n
 
