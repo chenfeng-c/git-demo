@@ -19,6 +19,9 @@ export const useCompanyInfo = () => {
   return computed(() => getCompanyInfo(localeRef.value))
 }
 
+// Legacy default export (some components still expect `companyInfo`)
+export const companyInfo = useCompanyInfo()
+
 // 注意：以下数据已迁移到翻译文件（zh.json/en.json），这里保留仅为向后兼容
 // 新代码应直接从翻译文件获取数据，而不是使用这些导出
 // 

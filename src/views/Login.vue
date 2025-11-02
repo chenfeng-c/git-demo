@@ -97,6 +97,7 @@ import { ref, reactive, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import i18n from '../i18n'
 import { safeTranslate } from '../utils/i18n-helper'
+import { useCompanyInfo } from '../utils/data'
 import { login as authLogin, user as userState } from '../store/auth'
 
 export default {
@@ -106,6 +107,8 @@ export default {
     const isLoading = ref(false)
     const errorMessage = ref('')
     const localeRef = i18n.global.locale
+    const companyInfo = useCompanyInfo()
+    const companyName = computed(() => companyInfo.value?.name || '辰锋软件开发工作室')
     
     const formData = reactive({
       username: '',
@@ -289,6 +292,7 @@ export default {
     
     return {
       companyInfo,
+      companyName,
       formData,
       isLoading,
       errorMessage,

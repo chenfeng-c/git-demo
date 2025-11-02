@@ -53,14 +53,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          // 将 vue 相关依赖分离
-          if (id.includes('node_modules/vue') || id.includes('node_modules/@vue')) {
-            return 'vue-vendor'
-          }
-          // 将 vue-router 分离
-          if (id.includes('node_modules/vue-router')) {
-            return 'vue-router'
-          }
           // 将 echarts 分离（这是一个大库）
           if (id.includes('node_modules/echarts')) {
             return 'echarts'
