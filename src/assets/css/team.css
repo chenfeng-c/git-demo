@@ -1,17 +1,26 @@
 /* 师资力量页面样式 */
 
+/* ============ 统计卡片区域 ============ */
 .stats-row {
     margin: 35px 0;
 }
 
-.stats-row .el-col {
-    margin-bottom: 20px;
-    display: flex;
-    height: 100%;
+.stats-row.el-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    margin: 0 -10px !important;
 }
 
-.stats-row .el-col:last-child {
-    margin-bottom: 0;
+.stats-row .el-col {
+    display: flex !important;
+    align-items: stretch !important;
+    padding: 0 10px !important;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    /* 覆盖 Element Plus 的列宽 - 4 列等宽 */
+    flex: 0 0 calc(25% - 20px) !important;
+    max-width: calc(25% - 20px) !important;
+    width: calc(25% - 20px) !important;
 }
 
 .stat-value {
@@ -48,20 +57,31 @@
     justify-content: center;
     align-items: center;
     min-height: 150px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
+/* ============ 成员卡片区域 ============ */
 .members-row {
     margin-bottom: 0;
 }
 
-.members-row .el-col {
-    margin-bottom: 20px;
-    display: flex;
-    height: 100%;
+.members-row.el-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    margin: 0 -10px !important;
 }
 
-.members-row .el-col:last-child {
-    margin-bottom: 0;
+.members-row .el-col {
+    display: flex !important;
+    align-items: stretch !important;
+    padding: 0 10px !important;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    /* 覆盖 Element Plus 的列宽 - 3 列等宽 */
+    flex: 0 0 calc(33.333333% - 14px) !important;
+    max-width: calc(33.333333% - 14px) !important;
+    width: calc(33.333333% - 14px) !important;
 }
 
 .team-grid {
@@ -80,6 +100,8 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .member-card:hover {
@@ -135,6 +157,8 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    min-height: 0;
+    justify-content: space-between;
 }
 
 .member-info h3 {
@@ -151,11 +175,17 @@
 }
 
 .member-description {
-    flex: 1;
+    flex: 0 1 auto;
     margin: 0 0 18px;
     line-height: 1.9;
     color: #4a5568;
     font-size: 0.95em;
+    height: 95px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
 }
 
 .member-skills-wrapper {
@@ -165,7 +195,7 @@
     margin-top: auto;
 }
 
-/* 团队优势网格布局 */
+/* ============ 优势卡片区域 ============ */
 .advantages-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -185,6 +215,8 @@
     transition: all 0.3s ease;
     height: 100%;
     min-height: 100px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .advantage-card:hover {
@@ -197,14 +229,22 @@
     margin-bottom: 0;
 }
 
-.advantages-row .el-col {
-    margin-bottom: 20px;
-    display: flex;
-    height: 100%;
+.advantages-row.el-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    margin: 0 -10px !important;
 }
 
-.advantages-row .el-col:last-child {
-    margin-bottom: 0;
+.advantages-row .el-col {
+    display: flex !important;
+    align-items: stretch !important;
+    padding: 0 10px !important;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    /* 覆盖 Element Plus 的列宽 - 2 列等宽 */
+    flex: 0 0 calc(50% - 10px) !important;
+    max-width: calc(50% - 10px) !important;
+    width: calc(50% - 10px) !important;
 }
 
 .advantage-icon {
@@ -230,24 +270,57 @@
     padding-top: 4px;
 }
 
-/* 响应式设计 */
+/* ============ 响应式设计 ============ */
 @media (max-width: 992px) {
-    .stats-section {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+    .stats-row .el-col {
+        /* 2 列等宽 */
+        flex: 0 0 calc(50% - 10px) !important;
+        max-width: calc(50% - 10px) !important;
+        width: calc(50% - 10px) !important;
     }
     
-    .team-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 25px;
+    .members-row .el-col {
+        /* 2 列等宽 */
+        flex: 0 0 calc(50% - 10px) !important;
+        max-width: calc(50% - 10px) !important;
+        width: calc(50% - 10px) !important;
+    }
+    
+    .advantages-row .el-col {
+        /* 2 列等宽 */
+        flex: 0 0 calc(50% - 10px) !important;
+        max-width: calc(50% - 10px) !important;
+        width: calc(50% - 10px) !important;
+    }
+    
+    .member-avatar-wrapper {
+        height: 250px;
+        min-height: 250px;
     }
 }
 
 @media (max-width: 768px) {
-    .stats-section {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        margin: 25px 0;
+    .stats-row .el-col {
+        /* 2 列等宽 */
+        flex: 0 0 calc(50% - 10px) !important;
+        max-width: calc(50% - 10px) !important;
+        width: calc(50% - 10px) !important;
+    }
+    
+    .members-row .el-col {
+        /* 1 列全宽 */
+        flex: 0 0 calc(100% - 20px) !important;
+        max-width: calc(100% - 20px) !important;
+        width: calc(100% - 20px) !important;
+    }
+    
+    .member-avatar-wrapper {
+        height: 260px;
+        min-height: 260px;
+    }
+    
+    .member-info {
+        padding: 20px;
     }
     
     .stat-card {
@@ -258,36 +331,27 @@
         font-size: 2.2em;
     }
     
-    .team-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .advantages-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
     .advantage-card {
         padding: 20px;
+    }
+    
+    .advantages-row .el-col {
+        /* 1 列全宽 */
+        flex: 0 0 calc(100% - 20px) !important;
+        max-width: calc(100% - 20px) !important;
+        width: calc(100% - 20px) !important;
     }
 }
 
 @media (max-width: 480px) {
-    .stats-section {
-        grid-template-columns: 1fr;
+    .stats-row .el-col {
+        /* 1 列全宽 */
+        flex: 0 0 calc(100% - 20px) !important;
+        max-width: calc(100% - 20px) !important;
+        width: calc(100% - 20px) !important;
     }
     
     .stat-value {
         font-size: 2em;
-    }
-    
-    .member-avatar-wrapper {
-        height: 260px;
-        min-height: 260px;
-    }
-    
-    .member-info {
-        padding: 20px;
     }
 }

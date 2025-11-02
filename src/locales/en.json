@@ -1,0 +1,566 @@
+﻿{
+  "company": {
+    "name": "Chenfeng Software Development Studio",
+    "slogan": "Technology Leads the Future, Innovation Drives Development"
+  },
+  "language": {
+    "label": "Language",
+    "zh": "Chinese",
+    "en": "English"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "jobs": "Careers",
+    "events": "Events",
+    "team": "Team",
+    "admin": "Admin"
+  },
+  "auth": {
+    "login": {
+      "title": "Sign In",
+      "username": "Username",
+      "usernamePlaceholder": "Enter your username",
+      "password": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "submit": "Login",
+      "register": "Register",
+      "loading": "Signing in...",
+      "adminEntry": "Admin Portal",
+      "userEntry": "User Portal",
+      "adminDesc": "Visit the admin console to manage approvals and operations.",
+      "userDesc": "Browse public information and team updates through the portal.",
+      "testAccounts": "Test Accounts",
+      "adminAccount": "Admin",
+      "userAccount": "User",
+      "error": "Login failed, please try again later"
+    },
+    "register": {
+      "title": "Create Account",
+      "username": "Username",
+      "usernamePlaceholder": "Enter a username (3-20 characters)",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "name": "Full Name",
+      "namePlaceholder": "Enter your name",
+      "password": "Password",
+      "passwordPlaceholder": "Enter a password (min 6 characters)",
+      "confirmPassword": "Confirm Password",
+      "confirmPasswordPlaceholder": "Re-enter your password",
+      "submit": "Sign Up",
+      "loading": "Creating account...",
+      "hasAccount": "Already have an account?",
+      "loginNow": "Log in",
+      "errors": {
+        "usernameRequired": "Please enter a username",
+        "usernameMin": "Username must be at least 3 characters",
+        "usernameMax": "Username cannot exceed 20 characters",
+        "usernamePattern": "Username can only include letters, numbers, and underscores",
+        "emailRequired": "Please enter an email address",
+        "emailInvalid": "Please enter a valid email address",
+        "nameRequired": "Please enter your name",
+        "nameMax": "Name cannot exceed 50 characters",
+        "passwordRequired": "Please enter a password",
+        "passwordMin": "Password must be at least 6 characters",
+        "confirmPasswordRequired": "Please confirm your password",
+        "confirmPasswordMismatch": "Passwords do not match",
+        "fixForm": "Please fix the errors in the form"
+      }
+    }
+  },
+  "profile": {
+    "info": "Profile",
+    "logout": "Logout",
+    "title": "Profile",
+    "subtitle": "Manage your personal information",
+    "description": "View and edit your profile and account settings",
+    "badges": {
+      "0": "Personal Info",
+      "1": "Account Security",
+      "2": "Settings"
+    },
+    "personalInfo": "Personal Information",
+    "username": "Username",
+    "name": "Name",
+    "email": "Email",
+    "registerTime": "Registration Time",
+    "lastLogin": "Last Login",
+    "editProfile": "Edit Profile",
+    "changePassword": "Change Password",
+    "logoutBtn": "Logout",
+    "editProfileTitle": "Edit Profile",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "changePasswordTitle": "Change Password",
+    "oldPassword": "Old Password",
+    "oldPasswordPlaceholder": "Enter your old password",
+    "newPassword": "New Password",
+    "newPasswordPlaceholder": "Enter your new password",
+    "confirmNewPassword": "Confirm New Password",
+    "confirmNewPasswordPlaceholder": "Re-enter your new password",
+    "notSet": "Not Set",
+    "unknown": "Unknown"
+  },
+  "home": {
+    "slogan": "Technology Leads the Future, Innovation Drives Development",
+    "description": "Committed to providing innovative technology solutions for clients and driving digital transformation",
+    "badges": {
+      "innovation": "Innovation Technology",
+      "professional": "Professional Service",
+      "leading": "Industry Leading",
+      "quality": "Quality Assurance",
+      "trust": "Customer Trust",
+      "efficient": "Efficient Execution"
+    },
+    "learnMore": "Learn More",
+    "viewProducts": "View Products",
+    "scrollMore": "Scroll for more",
+    "title": "Welcome to Our Corporate Portal",
+    "paragraphs": [
+      "We are committed to providing our clients with the highest quality services and cutting-edge technology solutions. Through continuous innovation and effort, we have become a leading enterprise in the industry.",
+      "The company adheres to the philosophy of 'People First, Technology Innovation', gathering industry elites and building an efficient professional team. We focus on technology R&D and innovation, providing customized solutions for clients."
+    ],
+    "features": {
+      "innovation": {
+        "title": "Innovation Technology",
+        "description": "Adopting the latest technology stack to provide cutting-edge solutions"
+      },
+      "team": {
+        "title": "Professional Team",
+        "description": "Possessing an experienced professional technical team"
+      },
+      "service": {
+        "title": "Efficient Service",
+        "description": "Quick response, efficient project delivery"
+      },
+      "customer": {
+        "title": "Customer First",
+        "description": "Customer needs-oriented, providing quality services"
+      },
+      "quality": {
+        "title": "Quality Assurance",
+        "description": "Strict quality control system to ensure project delivery quality"
+      },
+      "optimization": {
+        "title": "Continuous Optimization",
+        "description": "Continuously track project effectiveness and continuously optimize and improve solutions"
+      }
+    },
+    "gallery": {
+      "title": "Company Showcase",
+      "description": "Professional team, modern office environment, innovative work atmosphere",
+      "images": {
+        "office": {
+          "title": "Modern Office Environment",
+          "description": "Spacious and bright office space, creating an efficient work atmosphere"
+        },
+        "teamwork": {
+          "title": "Team Collaboration",
+          "description": "Professional team working closely together to create excellent results"
+        },
+        "technology": {
+          "title": "Technology Innovation",
+          "description": "Cutting-edge technology equipment, promoting industry innovation and development"
+        },
+        "meeting": {
+          "title": "Meeting Room Discussion",
+          "description": "Brainstorming, wisdom collision, developing the best solutions"
+        },
+        "service": {
+          "title": "Customer Service",
+          "description": "Focus on customer needs, provide quality service experience"
+        },
+        "culture": {
+          "title": "Corporate Culture Building",
+          "description": "Rich and colorful team activities, gathering team strength"
+        }
+      }
+    },
+    "stats": {
+      "title": "Company Overview",
+      "items": {
+        "projects": "Successful Projects",
+        "team": "Professional Team",
+        "satisfaction": "Customer Satisfaction",
+        "experience": "Industry Experience"
+      },
+      "charts": {
+        "growth": {
+          "title": "Business Growth Trend",
+          "series": "Completed Projects",
+          "yAxis": "Number of Projects"
+        },
+        "industry": {
+          "title": "Customer Industry Distribution",
+          "items": {
+            "internet": "Internet",
+            "finance": "Finance",
+            "education": "Education",
+            "medical": "Medical",
+            "others": "Others"
+          }
+        }
+      }
+    },
+    "footer": "© 2024 Chenfeng Software Development Studio | Technology Leads the Future, Innovation Drives Development"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Explore Our Story and Mission",
+    "description": "Since our establishment in 2020, we have always adhered to the philosophy of innovation-driven and customer-first, creating卓越 value for clients",
+    "badges": {
+      "0": "9+ Years Industry Experience",
+      "1": "500+ Successful Projects",
+      "2": "100+ Professional Team"
+    },
+    "intro": {
+      "title": "About Us",
+      "text": "Chenfeng Software Development Studio was established in 2020, a high-tech enterprise focused on software distribution and technical services. Headquartered in China, the company serves hundreds of enterprises nationwide, providing quality software distribution services and solutions."
+    },
+    "culture": {
+      "title": "Corporate Culture",
+      "content": "We uphold the corporate values of 'Innovation, Collaboration, Professionalism, Win-Win', committed to creating a vibrant and creative work environment. The company encourages employees to continuously learn and innovate, providing broad development space and growth opportunities for employees."
+    },
+    "advantages": {
+      "title": "Core Advantages",
+      "items": {
+        "technology": {
+          "label": "Technical Strength",
+          "text": "Possessing an experienced R&D team, mastering multiple core technologies, and continuously investing in R&D innovation."
+        },
+        "service": {
+          "label": "Service Quality",
+          "text": "Customer needs-oriented, providing comprehensive, high-quality technical services and support."
+        },
+        "experience": {
+          "label": "Industry Experience",
+          "text": "Deeply engaged in the industry for many years, accumulating rich project experience and successful cases."
+        },
+        "innovation": {
+          "label": "Innovation Capability",
+          "text": "Following technology development trends, continuously exploring and applying new technologies and methods."
+        }
+      }
+    },
+    "timeline": {
+      "title": "Sixteen Years of Development",
+      "subtitle": "Every step focuses on the pursuit of technology, every year witnesses the共同 growth with customers",
+      "items": {
+        "2009": {
+          "year": "2009",
+          "title": "Company Founded",
+          "description": "Chenfeng Software Development Studio was officially established, specializing in software testing instruments, forming an innovative R&D team and starting the technology entrepreneurship journey."
+        },
+        "2012": {
+          "year": "2012",
+          "title": "Technology Breakthrough",
+          "description": "Launched the second-generation software testing instrument, achieving independent R&D of core technologies, obtaining multiple patent applications, and establishing technological leadership."
+        },
+        "2016": {
+          "year": "2016",
+          "title": "Capacity Upgrade",
+          "description": "Established standardized production lines, achieving daily production capacity of 500 units, 100% qualified rate, and technology level reaching international leading standards."
+        },
+        "2020": {
+          "year": "2020",
+          "title": "Business Expansion",
+          "description": "Business expanded to automated testing field, selected for National High-Tech Enterprise certification, becoming an industry benchmark enterprise."
+        },
+        "2025": {
+          "year": "2025",
+          "title": "Global Layout",
+          "description": "Established partnerships with multiple top international enterprises, achieving automated 24/7 remote testing, establishing global service centers, and exporting products to 30+ countries and regions."
+        }
+      }
+    }
+  },
+  "jobs": {
+    "title": "Join Us",
+    "subtitle": "Looking for Like-Minded Partners",
+    "description": "We are looking for passionate and talented people to join us in creating the future of technology and realizing career dreams",
+    "badges": {
+      "0": "Competitive Salary",
+      "1": "Broad Development",
+      "2": "Team Atmosphere"
+    },
+    "intro": "We are looking for passionate talents to join our team! If you love technology and pursue excellence, welcome to submit your resume.",
+    "applyNow": "Apply Now",
+    "applyTitle": "Application Notice",
+    "applyMessagePrefix": "Thank you for your interest in the",
+    "applyMessageSuffix": "position!",
+    "applyMessageEmail": "Please send your resume to: qq3484763071[AT]gmail.com",
+    "positions": {
+      "frontend": {
+        "title": "Frontend Engineer",
+        "location": "Location",
+        "salary": "Salary",
+        "experience": "Experience",
+        "requirements": "Requirements",
+        "locationValue": "Beijing/Shanghai/Shenzhen",
+        "salaryValue": "15K-30K",
+        "experienceValue": "2+ years",
+        "requirementsList": [
+          "Proficient in HTML5, CSS3, JavaScript (ES6+)",
+          "Skilled in Vue.js or React.js frameworks",
+          "Understand frontend engineering and modular development",
+          "Good code style and teamwork skills"
+        ]
+      },
+      "backend": {
+        "title": "Backend Engineer",
+        "location": "Location",
+        "salary": "Salary",
+        "experience": "Experience",
+        "requirements": "Requirements",
+        "locationValue": "Beijing/Shanghai",
+        "salaryValue": "18K-35K",
+        "experienceValue": "3+ years",
+        "requirementsList": [
+          "Proficient in backend languages such as Java/Python/Node.js",
+          "Familiar with databases like MySQL, Redis, MongoDB",
+          "Understand microservices architecture and distributed systems",
+          "Good system design and optimization capabilities"
+        ]
+      },
+      "product": {
+        "title": "Product Manager",
+        "location": "Location",
+        "salary": "Salary",
+        "experience": "Experience",
+        "requirements": "Requirements",
+        "locationValue": "Beijing/Shenzhen",
+        "salaryValue": "20K-40K",
+        "experienceValue": "3+ years",
+        "requirementsList": [
+          "3+ years of internet product experience",
+          "Excellent requirements analysis and product design capabilities",
+          "Skilled in tools like Axure, Sketch",
+          "Good communication coordination and project management skills"
+        ]
+      },
+      "designer": {
+        "title": "UI/UX Designer",
+        "location": "Location",
+        "salary": "Salary",
+        "experience": "Experience",
+        "requirements": "Requirements",
+        "locationValue": "Beijing/Shanghai/Shenzhen",
+        "salaryValue": "12K-25K",
+        "experienceValue": "2+ years",
+        "requirementsList": [
+          "Proficient in design tools like Photoshop, Figma, Sketch",
+          "Excellent visual design and user experience capabilities",
+          "Understand frontend development processes and design standards",
+          "Have a successful design portfolio"
+        ]
+      }
+    }
+  },
+  "events": {
+    "title": "Event Planning",
+    "subtitle": "Wonderful Events, Participate Together",
+    "description": "We regularly organize various technical exchanges and team building activities to promote learning and growth and team collaboration",
+    "badges": {
+      "0": "Technical Sharing",
+      "1": "Team Building",
+      "2": "Cultural Exchange"
+    },
+    "intro": "We regularly hold various technical sharing sessions, team building activities and industry exchanges. Through these activities, we promote team collaboration, improve technical capabilities, and provide employees with better work experience and growth opportunities.",
+    "valueTitle": "Event Value",
+    "values": [
+      "Improve professional skills and technical level",
+      "Enhance team collaboration and cohesion",
+      "Stimulate innovative thinking and creativity",
+      "Expand network and industry vision",
+      "Create a positive work atmosphere",
+      "Promote knowledge sharing and inheritance"
+    ],
+    "status": {
+      "upcoming": "Upcoming",
+      "ongoing": "Ongoing",
+      "completed": "Completed"
+    },
+    "events": {
+      "summit": {
+        "title": "Annual Technology Summit",
+        "date": "December 15, 2024",
+        "description": "Gathering industry technology experts to share the latest technology trends and practical experience, discussing future development directions. Inviting well-known lecturers in the industry for keynote speeches."
+      },
+      "frontend": {
+        "title": "Frontend Technology Sharing",
+        "date": "Every Friday Afternoon",
+        "description": "Team members share frontend development experience, new technology exploration and project practices, learning and growing together. Promoting knowledge exchange and inheritance."
+      },
+      "teamBuilding": {
+        "title": "Team Building Activity",
+        "date": "October 20, 2024",
+        "description": "Outdoor extension training to enhance team cohesion and promote communication and collaboration among members. Including team collaboration games and extension projects."
+      },
+      "training": {
+        "title": "New Employee Onboarding Training",
+        "date": "First Week of Each Month",
+        "description": "Provide comprehensive onboarding training for new employees, including company culture, technology stack, development processes, team collaboration standards, etc."
+      },
+      "competition": {
+        "title": "Internal Programming Competition",
+        "date": "November 10, 2024",
+        "description": "Internal programming competition to stimulate innovative thinking and improve programming skills. Multiple difficulty levels are set, and winners will receive generous prizes."
+      },
+      "lunch": {
+        "title": "Lunch Learning Exchange",
+        "date": "Every Wednesday Noon",
+        "description": "Relaxed lunch time, sharing work insights and learning resources. Promoting cross-departmental exchanges and enhancing understanding among team members."
+      }
+    }
+  },
+  "team": {
+    "title": "Our Team",
+    "subtitle": "Gathering Elites, Creating the Future Together",
+    "description": "We have an experienced and technically sophisticated professional team dedicated to providing the highest quality services to clients",
+    "badges": {
+      "0": "50+ Team Members",
+      "1": "10+ Years Average Experience",
+      "2": "Multi-Domain Experts"
+    },
+    "intro": {
+      "title": "Professional Team",
+      "text": "We have a team composed of industry senior experts. Team members have an average of more than 10 years of industry experience, having participated in the development and management of multiple large projects, with deep technical skills and rich practical experience."
+    },
+    "membersTitle": "Core Members",
+    "advantagesTitle": "Team Advantages",
+    "advantages": [
+      "Rich industry experience and project practical ability",
+      "Continuous learning and technology innovation team culture",
+      "Efficient collaboration and good communication skills",
+      "Perfect talent cultivation and growth system",
+      "Multiple industry certifications and technical patents",
+      "Focus on code quality and development standards"
+    ],
+    "stats": {
+      "teamSize": "Team Members",
+      "avgExperience": "Average Work Years",
+      "successProjects": "Successful Projects",
+      "satisfaction": "Customer Satisfaction"
+    },
+    "members": {
+      "zhangwei": {
+        "name": "Zhang Wei",
+        "position": "Technical Director / CTO",
+        "description": "15 years of software development experience, previously worked at well-known internet companies, led the architecture design and technology selection of multiple large projects.",
+        "skills": ["Architecture Design", "Team Management", "Technology Planning"]
+      },
+      "lina": {
+        "name": "Li Na",
+        "position": "Frontend Architect",
+        "description": "12 years of frontend development experience, proficient in various frontend frameworks and engineering practices, focusing on user experience and performance optimization.",
+        "skills": ["Vue.js", "React", "Frontend Engineering"]
+      },
+      "wangqiang": {
+        "name": "Wang Qiang",
+        "position": "Backend Architect",
+        "description": "13 years of backend development experience, good at microservices architecture, distributed system design and performance tuning, with deep technical skills.",
+        "skills": ["Java", "Microservices", "Distributed Systems"]
+      },
+      "liufang": {
+        "name": "Liu Fang",
+        "position": "UX/UI Design Director",
+        "description": "10 years of design experience, good at user experience research and interface design, works have won design awards multiple times, with unique design concepts.",
+        "skills": ["UI Design", "User Research", "Interaction Design"]
+      },
+      "chenjie": {
+        "name": "Chen Jie",
+        "position": "DevOps Engineer",
+        "description": "8 years of operations experience, proficient in containerized deployment, automated operations and cloud platform management, ensuring stable and efficient system operation.",
+        "skills": ["Docker", "Kubernetes", "CI/CD"]
+      },
+      "zhaomin": {
+        "name": "Zhao Min",
+        "position": "Product Director",
+        "description": "11 years of product experience, good at requirements analysis and product planning, successfully launched multiple user-loved products, with keen market insight.",
+        "skills": ["Product Planning", "Requirements Analysis", "Data Analysis"]
+      }
+    }
+  },
+  "admin": {
+    "title": "Admin Console",
+    "subtitle": "System Overview and Daily Operations",
+    "description": "Real-time grasp of enterprise operating status, quickly handle pending tasks, provide efficient support for teams.",
+    "badges": {
+      "0": "Access Control",
+      "1": "Approval Process",
+      "2": "System Health"
+    },
+    "metrics": {
+      "pendingTasks": "Pending Tasks",
+      "activeUsers": "Active Users",
+      "systemHealth": "System Health",
+      "weeklyGrowth": "This Week",
+      "activeProjects": "Active Projects",
+      "newPartners": "New Partners"
+    },
+    "pendingTasks": {
+      "title": "Pending Tasks",
+      "columns": {
+        "task": "Task",
+        "owner": "Owner",
+        "deadline": "Deadline",
+        "status": "Status"
+      }
+    },
+    "recentActivities": {
+      "title": "Recent Activities"
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "approve": "Approval Center",
+      "approveDesc": "Handle permission requests and profile updates",
+      "viewReports": "Partner Management",
+      "viewReportsDesc": "Maintain external personnel information",
+      "manageUsers": "Security Log",
+      "manageUsersDesc": "View system access and security audits",
+      "systemSettings": "System Settings"
+    },
+    "enter": "Enter",
+    "notificationsTitle": "System Notifications",
+    "adminRole": "Admin",
+    "taskStatus": {
+      "pending": "Pending",
+      "ongoing": "Ongoing",
+      "completed": "Completed"
+    },
+    "tasks": {
+      "task1": "Review external personnel access permissions",
+      "task2": "Update partner agreement template",
+      "task3": "Release new version deployment plan",
+      "task4": "Compile quarterly operations report"
+    },
+    "departments": {
+      "legal": "Legal Department",
+      "techOps": "Tech Operations",
+      "dataAnalysis": "Data Analysis"
+    },
+    "notifications": {
+      "1": {
+        "title": "Security Alert",
+        "content": "Detected 2 abnormal login behaviors, related accounts have been automatically locked.",
+        "time": "2 hours ago"
+      },
+      "2": {
+        "title": "System Update",
+        "content": "Version v2.3 has been deployed, with new data masking and two-factor authentication features.",
+        "time": "Yesterday"
+      },
+      "3": {
+        "title": "Ops Notice",
+        "content": "Scheduled database maintenance from 23:00 - 23:30 tonight, please complete backups in advance.",
+        "time": "November 1"
+      }
+    }
+  },
+  "accessDenied": {
+    "title": "Access Denied",
+    "message": "Your current account does not have permission to access this page. Please contact an administrator or log in with an account that has the corresponding permissions.",
+    "goHome": "Back to Home",
+    "relogin": "Log In Again"
+  }
+}

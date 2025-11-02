@@ -3,10 +3,10 @@ import App from './App.vue'
 import router from './router/index.js'
 import { initAuth } from './store/auth'
 import ElementPlus from 'element-plus'
-import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import 'element-plus/dist/index.css'
 import './assets/css/main.css'
 import './assets/css/navigation.css'
+import i18n from './i18n'
 
 // 初始化应用
 async function initApp() {
@@ -16,10 +16,8 @@ async function initApp() {
   const app = createApp(App)
   
   app.use(router)
-  app.use(ElementPlus, {
-    locale: zhCn,
-    size: 'default'
-  })
+  app.use(ElementPlus)
+  app.use(i18n)
   
   app.mount('#app')
 }

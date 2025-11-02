@@ -7,6 +7,9 @@ import Team from '../views/Team.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Profile from '../views/Profile.vue'
+import AdminDashboard from '../views/AdminDashboard.vue'
+import AccessDenied from '../views/AccessDenied.vue'
+import { user as userState, initAuth } from '../store/auth'
 
 const routes = [
   {
@@ -51,27 +54,61 @@ const routes = [
     name: 'Profile',
     component: Profile,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/admin',
+    name: 'AdminDashboard',
+    component: AdminDashboard,
+    meta: { requiresAuth: true, roles: ['admin'] }
+  },
+  {
+    path: '/unauthorized',
+    name: 'AccessDenied',
+    component: AccessDenied
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    }
+    return {
+      left: 0,
+      top: 0,
+      behavior: 'smooth'
+    }
+  }
 })
 
+let authChecked = false
+
 // 路由守卫
-router.beforeEach((to, from, next) => {
-  const user = JSON.parse(localStorage.getItem('user') || 'null')
-  
-  if (to.meta.requiresGuest && user) {
-    // 已登录用户访问登录页或注册页，重定向到首页
-    next('/')
-  } else if (to.meta.requiresAuth && !user) {
-    // 未登录用户访问需要认证的页面，重定向到登录页
-    next('/login')
-  } else {
-    next()
+router.beforeEach(async (to, from, next) => {
+  if (!authChecked) {
+    await initAuth()
+    authChecked = true
   }
+
+  const currentUser = userState.value || JSON.parse(localStorage.getItem('user') || 'null')
+
+  if (to.meta.requiresGuest && currentUser) {
+    return next('/')
+  }
+
+  if (to.meta.requiresAuth && !currentUser) {
+    return next({ name: 'Login', query: { redirect: to.fullPath } })
+  }
+
+  if (to.meta.roles && to.meta.roles.length) {
+    if (!currentUser || !to.meta.roles.includes(currentUser.role)) {
+      return next({ name: 'AccessDenied' })
+    }
+  }
+
+  next()
 })
 
 export default router

@@ -1,0 +1,566 @@
+﻿{
+  "company": {
+    "name": "辰锋软件开发工作室",
+    "slogan": "科技引领未来，创新驱动发展"
+  },
+  "language": {
+    "label": "语言",
+    "zh": "中文",
+    "en": "English"
+  },
+  "nav": {
+    "home": "首页信息",
+    "about": "公司简介",
+    "jobs": "招聘信息",
+    "events": "策划活动",
+    "team": "师资力量",
+    "admin": "管理后台"
+  },
+  "auth": {
+    "login": {
+      "title": "用户登录",
+      "username": "用户名",
+      "usernamePlaceholder": "请输入用户名",
+      "password": "密码",
+      "passwordPlaceholder": "请输入密码",
+      "submit": "登录",
+      "register": "注册",
+      "loading": "登录中...",
+      "adminEntry": "管理员入口",
+      "userEntry": "普通用户入口",
+      "adminDesc": "访问管理控制台，处理审批与系统运维任务。",
+      "userDesc": "进入企业门户浏览公开信息与团队动态。",
+      "testAccounts": "测试账号",
+      "adminAccount": "管理员",
+      "userAccount": "普通用户",
+      "error": "登录失败，请稍后重试"
+    },
+    "register": {
+      "title": "用户注册",
+      "username": "用户名",
+      "usernamePlaceholder": "请输入用户名（3-20个字符）",
+      "email": "邮箱",
+      "emailPlaceholder": "请输入邮箱地址",
+      "name": "姓名",
+      "namePlaceholder": "请输入您的姓名",
+      "password": "密码",
+      "passwordPlaceholder": "请输入密码（至少6个字符）",
+      "confirmPassword": "确认密码",
+      "confirmPasswordPlaceholder": "请再次输入密码",
+      "submit": "注册",
+      "loading": "注册中...",
+      "hasAccount": "已有账号？",
+      "loginNow": "立即登录",
+      "errors": {
+        "usernameRequired": "请输入用户名",
+        "usernameMin": "用户名至少需要3个字符",
+        "usernameMax": "用户名不能超过20个字符",
+        "usernamePattern": "用户名只能包含字母、数字和下划线",
+        "emailRequired": "请输入邮箱",
+        "emailInvalid": "请输入有效的邮箱地址",
+        "nameRequired": "请输入姓名",
+        "nameMax": "姓名不能超过50个字符",
+        "passwordRequired": "请输入密码",
+        "passwordMin": "密码至少需要6个字符",
+        "confirmPasswordRequired": "请再次输入密码",
+        "confirmPasswordMismatch": "两次输入的密码不一致",
+        "fixForm": "请修正表单中的错误"
+      }
+    }
+  },
+  "profile": {
+    "info": "个人信息",
+    "logout": "退出登录",
+    "title": "个人中心",
+    "subtitle": "管理您的个人信息",
+    "description": "查看和编辑您的个人资料、账户设置",
+    "badges": {
+      "0": "个人资料",
+      "1": "账户安全",
+      "2": "设置管理"
+    },
+    "personalInfo": "个人信息",
+    "username": "用户名",
+    "name": "姓名",
+    "email": "邮箱",
+    "registerTime": "注册时间",
+    "lastLogin": "最后登录",
+    "editProfile": "编辑资料",
+    "changePassword": "修改密码",
+    "logoutBtn": "退出登录",
+    "editProfileTitle": "编辑个人资料",
+    "cancel": "取消",
+    "confirm": "确定",
+    "changePasswordTitle": "修改密码",
+    "oldPassword": "原密码",
+    "oldPasswordPlaceholder": "请输入原密码",
+    "newPassword": "新密码",
+    "newPasswordPlaceholder": "请输入新密码",
+    "confirmNewPassword": "确认新密码",
+    "confirmNewPasswordPlaceholder": "请再次输入新密码",
+    "notSet": "未设置",
+    "unknown": "未知"
+  },
+  "home": {
+    "slogan": "科技引领未来，创新驱动发展",
+    "description": "致力于为客户提供创新的技术解决方案，推动数字化转型",
+    "badges": {
+      "innovation": "创新技术",
+      "professional": "专业服务",
+      "leading": "行业领先",
+      "quality": "品质保证",
+      "trust": "客户信赖",
+      "efficient": "高效执行"
+    },
+    "learnMore": "了解更多",
+    "viewProducts": "查看产品",
+    "scrollMore": "滚动查看更多",
+    "title": "欢迎来到我们的企业门户",
+    "paragraphs": [
+      "我们致力于为客户提供最优质的服务和最前沿的技术解决方案。通过不断创新和努力，我们已经成为行业内的领军企业。",
+      "公司秉承\"以人为本、科技创新\"的理念，汇聚了一批行业精英，打造了一支高效专业的团队。我们专注于技术研发与创新，为客户提供定制化的解决方案。"
+    ],
+    "features": {
+      "innovation": {
+        "title": "创新技术",
+        "description": "采用最新的技术栈，提供前沿的解决方案"
+      },
+      "team": {
+        "title": "专业团队",
+        "description": "拥有经验丰富的专业技术团队"
+      },
+      "service": {
+        "title": "高效服务",
+        "description": "快速响应，高效完成项目交付"
+      },
+      "customer": {
+        "title": "客户至上",
+        "description": "以客户需求为导向，提供优质服务"
+      },
+      "quality": {
+        "title": "品质保证",
+        "description": "严格的质量控制体系，确保项目交付质量"
+      },
+      "optimization": {
+        "title": "持续优化",
+        "description": "持续跟踪项目效果，不断优化改进方案"
+      }
+    },
+    "gallery": {
+      "title": "公司风采",
+      "description": "专业的团队、现代化的办公环境、创新的工作氛围",
+      "images": {
+        "office": {
+          "title": "现代化办公环境",
+          "description": "宽敞明亮的办公空间，营造高效工作氛围"
+        },
+        "teamwork": {
+          "title": "团队协作",
+          "description": "专业团队紧密合作，共同创造卓越成果"
+        },
+        "technology": {
+          "title": "技术创新",
+          "description": "前沿技术设备，推动行业创新发展"
+        },
+        "meeting": {
+          "title": "会议室讨论",
+          "description": "集思广益，智慧碰撞，制定最佳方案"
+        },
+        "service": {
+          "title": "客户服务",
+          "description": "专注客户需求，提供优质服务体验"
+        },
+        "culture": {
+          "title": "企业文化建设",
+          "description": "丰富多彩的团队活动，凝聚团队力量"
+        }
+      }
+    },
+    "stats": {
+      "title": "公司数据一览",
+      "items": {
+        "projects": "成功项目",
+        "team": "专业团队",
+        "satisfaction": "客户满意度",
+        "experience": "行业经验"
+      },
+      "charts": {
+        "growth": {
+          "title": "业务增长趋势",
+          "series": "完成项目",
+          "yAxis": "项目数量"
+        },
+        "industry": {
+          "title": "客户行业分布",
+          "items": {
+            "internet": "互联网",
+            "finance": "金融",
+            "education": "教育",
+            "medical": "医疗",
+            "others": "其他"
+          }
+        }
+      }
+    },
+    "footer": "© 2024 辰锋软件开发工作室 | 科技引领未来，创新驱动发展"
+  },
+  "about": {
+    "title": "关于我们",
+    "subtitle": "探索我们的故事与使命",
+    "description": "自2020年成立以来，我们始终坚持创新驱动、客户至上的理念，为客户创造卓越价值",
+    "badges": {
+      "0": "9年+ 行业经验",
+      "1": "500+ 成功项目",
+      "2": "100+ 专业团队"
+    },
+    "intro": {
+      "title": "关于我们",
+      "text": "辰锋软件开发工作室成立于2020年，是一家专注于软件分发和技术服务的高科技企业。公司总部位于中国，业务遍及全国各地，为数百家企业提供优质的软件分发服务和解决方案。"
+    },
+    "culture": {
+      "title": "企业文化",
+      "content": "我们秉承\"创新、协作、专业、共赢\"的企业价值观，致力于打造一个充满活力和创造力的工作环境。公司鼓励员工持续学习和创新，为员工提供广阔的发展空间和成长机会。"
+    },
+    "advantages": {
+      "title": "核心优势",
+      "items": {
+        "technology": {
+          "label": "技术实力",
+          "text": "拥有一支经验丰富的研发团队，掌握多项核心技术，持续投入研发创新。"
+        },
+        "service": {
+          "label": "服务质量",
+          "text": "以客户需求为导向，提供全方位、高质量的技术服务和支持。"
+        },
+        "experience": {
+          "label": "行业经验",
+          "text": "深耕行业多年，积累了丰富的项目经验和成功案例。"
+        },
+        "innovation": {
+          "label": "创新能力",
+          "text": "紧跟技术发展趋势，不断探索和应用新技术、新方法。"
+        }
+      }
+    },
+    "timeline": {
+      "title": "十六年发展历程",
+      "subtitle": "每一步都聚焦着对技术的追求,每一年都见证着与客户的共同成长",
+      "items": {
+        "2009": {
+          "year": "2009",
+          "title": "公司成立",
+          "description": "辰锋软件开发工作室正式成立，专业于软件检测仪领域，组建创新研发团队，开启技术创业之路。"
+        },
+        "2012": {
+          "year": "2012",
+          "title": "技术突破",
+          "description": "推出第二代软件检测仪，实现核心技术自主研发，获得多项专利申请，奠定技术领先地位。"
+        },
+        "2016": {
+          "year": "2016",
+          "title": "产能升级",
+          "description": "建立标准化生产线，实现日产500件产能，良品率达到100%，技术水平达到国际领先水平。"
+        },
+        "2020": {
+          "year": "2020",
+          "title": "业务拓展",
+          "description": "业务拓展至自动化检测领域，入选国家高新技术企业认证，成为行业标杆企业。"
+        },
+        "2025": {
+          "year": "2025",
+          "title": "全球布局",
+          "description": "与多家国际顶尖企业建立合作关系，实现自动化24/7远程检测，建立全球服务中心，产品出口30+国家和地区。"
+        }
+      }
+    }
+  },
+  "jobs": {
+    "title": "加入我们",
+    "subtitle": "寻找志同道合的伙伴",
+    "description": "我们正在寻找有激情、有才华的你，一起创造技术的未来，实现职业梦想",
+    "badges": {
+      "0": "丰厚薪酬",
+      "1": "广阔发展",
+      "2": "团队氛围"
+    },
+    "intro": "我们正在寻找充满激情的人才加入我们的团队！如果你热爱技术、追求卓越，欢迎投递简历。",
+    "applyNow": "立即应聘",
+    "applyTitle": "应聘提示",
+    "applyMessagePrefix": "感谢您对",
+    "applyMessageSuffix": "职位的关注！",
+    "applyMessageEmail": "请将简历发送至：qq3484763071[AT]gmail.com",
+    "positions": {
+      "frontend": {
+        "title": "前端工程师",
+        "location": "工作地点",
+        "salary": "薪资待遇",
+        "experience": "工作经验",
+        "requirements": "岗位要求",
+        "locationValue": "北京/上海/深圳",
+        "salaryValue": "15K-30K",
+        "experienceValue": "2年以上",
+        "requirementsList": [
+          "精通 HTML5、CSS3、JavaScript (ES6+)",
+          "熟练使用 Vue.js 或 React.js 框架",
+          "了解前端工程化和模块化开发",
+          "良好的代码风格和团队协作能力"
+        ]
+      },
+      "backend": {
+        "title": "后端工程师",
+        "location": "工作地点",
+        "salary": "薪资待遇",
+        "experience": "工作经验",
+        "requirements": "岗位要求",
+        "locationValue": "北京/上海",
+        "salaryValue": "18K-35K",
+        "experienceValue": "3年以上",
+        "requirementsList": [
+          "精通 Java/Python/Node.js 等后端语言",
+          "熟悉 MySQL、Redis、MongoDB 等数据库",
+          "了解微服务架构和分布式系统",
+          "具备良好的系统设计和优化能力"
+        ]
+      },
+      "product": {
+        "title": "产品经理",
+        "location": "工作地点",
+        "salary": "薪资待遇",
+        "experience": "工作经验",
+        "requirements": "岗位要求",
+        "locationValue": "北京/深圳",
+        "salaryValue": "20K-40K",
+        "experienceValue": "3年以上",
+        "requirementsList": [
+          "3年以上互联网产品经验",
+          "优秀的需求分析和产品设计能力",
+          "熟练使用 Axure、Sketch 等工具",
+          "良好的沟通协调和项目管理能力"
+        ]
+      },
+      "designer": {
+        "title": "UI/UX 设计师",
+        "location": "工作地点",
+        "salary": "薪资待遇",
+        "experience": "工作经验",
+        "requirements": "岗位要求",
+        "locationValue": "北京/上海/深圳",
+        "salaryValue": "12K-25K",
+        "experienceValue": "2年以上",
+        "requirementsList": [
+          "精通 Photoshop、Figma、Sketch 等设计工具",
+          "具备优秀的视觉设计和用户体验能力",
+          "了解前端开发流程和设计规范",
+          "有成功的设计作品集"
+        ]
+      }
+    }
+  },
+  "events": {
+    "title": "活动策划",
+    "subtitle": "精彩活动，共同参与",
+    "description": "我们定期组织各种技术交流、团队建设活动，促进学习成长和团队协作",
+    "badges": {
+      "0": "技术分享",
+      "1": "团队建设",
+      "2": "文化交流"
+    },
+    "intro": "我们定期举办各种技术分享会、团建活动和行业交流会。通过这些活动，促进团队协作，提升技术能力，同时也为员工提供更好的工作体验和成长机会。",
+    "valueTitle": "活动价值",
+    "values": [
+      "提升专业技能和技术水平",
+      "增强团队协作和凝聚力",
+      "激发创新思维和创造力",
+      "拓展人脉和行业视野",
+      "营造积极向上的工作氛围",
+      "促进知识分享与传承"
+    ],
+    "status": {
+      "upcoming": "即将开始",
+      "ongoing": "进行中",
+      "completed": "已结束"
+    },
+    "events": {
+      "summit": {
+        "title": "年度技术峰会",
+        "date": "2024年12月15日",
+        "description": "汇聚行业技术专家，分享最新技术趋势和实践经验，探讨未来发展方向。邀请业内知名讲师进行主题演讲。"
+      },
+      "frontend": {
+        "title": "前端技术分享会",
+        "date": "每周五下午",
+        "description": "团队成员分享前端开发经验、新技术探索和项目实践，共同学习成长。促进知识交流与传承。"
+      },
+      "teamBuilding": {
+        "title": "团队建设活动",
+        "date": "2024年10月20日",
+        "description": "户外拓展训练，增强团队凝聚力，促进成员之间的沟通与协作。包括团队协作游戏和拓展项目。"
+      },
+      "training": {
+        "title": "新员工入职培训",
+        "date": "每月第一周",
+        "description": "为新员工提供全面的入职培训，包括公司文化、技术栈、开发流程、团队协作规范等内容。"
+      },
+      "competition": {
+        "title": "内部编程竞赛",
+        "date": "2024年11月10日",
+        "description": "内部编程竞赛，激发创新思维，提升编程能力。设置多个难度等级，优胜者将获得丰厚奖品。"
+      },
+      "lunch": {
+        "title": "午餐学习交流会",
+        "date": "每周三中午",
+        "description": "轻松的午餐时光，分享工作心得和学习资源。促进跨部门交流，增进团队成员之间的了解。"
+      }
+    }
+  },
+  "team": {
+    "title": "我们的团队",
+    "subtitle": "汇聚精英，共创未来",
+    "description": "我们拥有一支经验丰富、技术精湛的专业团队，致力于为客户提供最优质的服务",
+    "badges": {
+      "0": "50+ 团队成员",
+      "1": "10+ 年平均经验",
+      "2": "多领域专家"
+    },
+    "intro": {
+      "title": "专业团队",
+      "text": "我们拥有一支由行业资深专家组成的团队。团队成员平均拥有10年以上的行业经验，曾参与多个大型项目的开发和管理，具备深厚的技术功底和丰富的实战经验。"
+    },
+    "membersTitle": "核心成员",
+    "advantagesTitle": "团队优势",
+    "advantages": [
+      "丰富的行业经验和项目实战能力",
+      "持续学习和技术创新的团队文化",
+      "高效协作和良好的沟通能力",
+      "完善的人才培养和成长体系",
+      "多个行业认证和技术专利",
+      "注重代码质量和开发规范"
+    ],
+    "stats": {
+      "teamSize": "团队成员",
+      "avgExperience": "平均工作年限",
+      "successProjects": "成功项目",
+      "satisfaction": "客户满意度"
+    },
+    "members": {
+      "zhangwei": {
+        "name": "张伟",
+        "position": "技术总监 / CTO",
+        "description": "15年软件开发经验，曾任职于知名互联网公司，主导过多个大型项目的架构设计与技术选型。",
+        "skills": ["架构设计", "团队管理", "技术规划"]
+      },
+      "lina": {
+        "name": "李娜",
+        "position": "前端架构师",
+        "description": "12年前端开发经验，精通各类前端框架和工程化实践，注重用户体验和性能优化。",
+        "skills": ["Vue.js", "React", "前端工程化"]
+      },
+      "wangqiang": {
+        "name": "王强",
+        "position": "后端架构师",
+        "description": "13年后端开发经验，擅长微服务架构、分布式系统设计和性能调优，具备深厚的技术功底。",
+        "skills": ["Java", "微服务", "分布式系统"]
+      },
+      "liufang": {
+        "name": "刘芳",
+        "position": "UX/UI 设计总监",
+        "description": "10年设计经验，擅长用户体验研究和界面设计，作品多次获得设计奖项，具有独特的设计理念。",
+        "skills": ["UI设计", "用户研究", "交互设计"]
+      },
+      "chenjie": {
+        "name": "陈杰",
+        "position": "DevOps 工程师",
+        "description": "8年运维经验，精通容器化部署、自动化运维和云平台管理，确保系统稳定高效运行。",
+        "skills": ["Docker", "Kubernetes", "CI/CD"]
+      },
+      "zhaomin": {
+        "name": "赵敏",
+        "position": "产品总监",
+        "description": "11年产品经验，擅长需求分析和产品规划，成功推出多款用户喜爱的产品，具备敏锐的市场洞察力。",
+        "skills": ["产品规划", "需求分析", "数据分析"]
+      }
+    }
+  },
+  "admin": {
+    "title": "管理控制台",
+    "subtitle": "系统概览与日常运维",
+    "description": "实时掌握企业运营状态，快速处理待办事项，为团队提供高效支持。",
+    "badges": {
+      "0": "访问控制",
+      "1": "审核流程",
+      "2": "系统健康"
+    },
+    "metrics": {
+      "pendingTasks": "待处理事项",
+      "activeUsers": "活跃用户",
+      "systemHealth": "系统健康度",
+      "weeklyGrowth": "本周",
+      "activeProjects": "活跃项目",
+      "newPartners": "新合作伙伴"
+    },
+    "pendingTasks": {
+      "title": "待处理事项",
+      "columns": {
+        "task": "事项",
+        "owner": "负责人",
+        "deadline": "截止时间",
+        "status": "状态"
+      }
+    },
+    "recentActivities": {
+      "title": "最近活动"
+    },
+    "quickActions": {
+      "title": "快速操作",
+      "approve": "审批中心",
+      "approveDesc": "处理权限申请与资料更新",
+      "viewReports": "合作伙伴管理",
+      "viewReportsDesc": "维护企业外部人员信息",
+      "manageUsers": "安全日志",
+      "manageUsersDesc": "查看系统访问与安全审计",
+      "systemSettings": "系统设置"
+    },
+    "enter": "进入",
+    "notificationsTitle": "系统通知",
+    "adminRole": "管理员",
+    "taskStatus": {
+      "pending": "待处理",
+      "ongoing": "进行中",
+      "completed": "已完成"
+    },
+    "tasks": {
+      "task1": "审核外部人员访问权限",
+      "task2": "更新合作伙伴协议模板",
+      "task3": "发布新版本部署计划",
+      "task4": "整理季度运营报告"
+    },
+    "departments": {
+      "legal": "法务部",
+      "techOps": "技术运营",
+      "dataAnalysis": "数据分析"
+    },
+    "notifications": {
+      "1": {
+        "title": "安全提醒",
+        "content": "检测到 2 条异常登录行为，已自动锁定相关账号。",
+        "time": "2 小时前"
+      },
+      "2": {
+        "title": "系统更新",
+        "content": "版本 v2.3 已部署，新增数据脱敏与二次验证功能。",
+        "time": "昨天"
+      },
+      "3": {
+        "title": "运维提示",
+        "content": "夜间计划于 23:00 - 23:30 进行数据库维护，请提前完成备份。",
+        "time": "11 月 1 日"
+      }
+    }
+  },
+  "accessDenied": {
+    "title": "访问受限",
+    "message": "当前账户没有访问该页面的权限，请联系管理员或使用拥有对应权限的账号登录。",
+    "goHome": "回到首页",
+    "relogin": "重新登录"
+  }
+}

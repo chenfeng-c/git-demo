@@ -4,65 +4,65 @@
       <template #header>
         <div class="register-header">
           <h1>{{ companyInfo.name }}</h1>
-          <p>用户注册</p>
+          <p>{{ translations.title }}</p>
         </div>
       </template>
       
-      <el-form :model="formData" label-width="100px" @submit.prevent="handleRegister">
-        <el-form-item label="用户名" required :error="errors.username">
+      <el-form
+        :model="formData"
+        label-width="100px"
+        class="register-form"
+        @submit.prevent="handleRegister"
+      >
+        <el-form-item :label="translations.username" :error="getErrorMessage('username')" required>
           <el-input
             v-model="formData.username"
-            placeholder="请输入用户名（3-20个字符）"
+            :placeholder="translations.usernamePlaceholder"
             clearable
             maxlength="20"
             autocomplete="username"
-            @blur="validateUsername"
           />
         </el-form-item>
         
-        <el-form-item label="邮箱" required :error="errors.email">
+        <el-form-item :label="translations.email" :error="getErrorMessage('email')" required>
           <el-input
             v-model="formData.email"
             type="email"
-            placeholder="请输入邮箱地址"
+            :placeholder="translations.emailPlaceholder"
             clearable
             autocomplete="email"
-            @blur="validateEmail"
           />
         </el-form-item>
         
-        <el-form-item label="姓名" required :error="errors.name">
+        <el-form-item :label="translations.name" :error="getErrorMessage('name')" required>
           <el-input
             v-model="formData.name"
-            placeholder="请输入您的姓名"
+            :placeholder="translations.namePlaceholder"
             clearable
             maxlength="50"
-            @blur="validateName"
           />
         </el-form-item>
         
-        <el-form-item label="密码" required :error="errors.password">
+        <el-form-item :label="translations.password" :error="getErrorMessage('password')" required>
           <el-input
             v-model="formData.password"
             type="password"
-            placeholder="请输入密码（至少6个字符）"
+            :placeholder="translations.passwordPlaceholder"
             show-password
             clearable
             minlength="6"
             autocomplete="new-password"
-            @blur="validatePassword"
           />
         </el-form-item>
         
-        <el-form-item label="确认密码" required :error="errors.confirmPassword">
+        <el-form-item :label="translations.confirmPassword" :error="getErrorMessage('confirmPassword')" required>
           <el-input
             v-model="formData.confirmPassword"
             type="password"
-            placeholder="请再次输入密码"
+            :placeholder="translations.confirmPasswordPlaceholder"
             show-password
             clearable
             autocomplete="new-password"
-            @blur="validateConfirmPassword"
           />
         </el-form-item>
         
@@ -82,31 +82,32 @@
           style="margin-bottom: 20px;"
         />
         
-        <el-form-item>
+        <el-form-item class="register-actions" label-width="0">
           <el-button
             type="primary"
             native-type="submit"
             :loading="isLoading"
-            style="width: 100%;"
+            class="register-submit"
           >
-            {{ isLoading ? '注册中...' : '注册' }}
+            {{ isLoading ? translations.loading : translations.submit }}
           </el-button>
         </el-form-item>
       </el-form>
       
       <div class="register-footer">
-        <p>已有账号？ <el-link type="primary" @click="$router.push('/login')">立即登录</el-link></p>
+        <p>{{ translations.hasAccount }} <el-link type="primary" @click="$router.push('/login')">{{ translations.loginNow }}</el-link></p>
       </div>
     </el-card>
   </div>
 </template>
 
 <script>
-import { ref, reactive } from 'vue'
+import { ref, reactive, watch, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { companyInfo } from '../utils/data'
+import i18n from '../i18n'
+import { useCompanyInfo } from '../utils/data'
 import { register } from '../api/index'
-import { login } from '../store/auth'
+import { login, user as userState } from '../store/auth'
 
 export default {
   name: 'Register',
@@ -115,6 +116,7 @@ export default {
     const isLoading = ref(false)
     const errorMessage = ref('')
     const successMessage = ref('')
+    const localeRef = i18n.global.locale
     
     const formData = reactive({
       username: '',
@@ -131,89 +133,208 @@ export default {
       password: '',
       confirmPassword: ''
     })
+
+    // 处理 AST 格式的辅助函数
+    const getNestedValueSafe = (obj, path) => {
+      if (!obj || typeof obj !== 'object') return null
+      const keys = path.split('.')
+      let value = obj
+      for (const k of keys) {
+        if (value && typeof value === 'object' && k in value) {
+          value = value[k]
+        } else {
+          return null
+        }
+      }
+      if (typeof value === 'string') return value
+      if (value && typeof value === 'object') {
+        if (value.loc && value.loc.source) return value.loc.source
+        if (value.body && value.body.items && value.body.items.length > 0) {
+          const firstItem = value.body.items[0]
+          if (typeof firstItem === 'string') return firstItem
+          if (firstItem && typeof firstItem === 'object' && firstItem.loc && firstItem.loc.source) {
+            return firstItem.loc.source
+          }
+        }
+      }
+      return null
+    }
+
+    // 安全翻译函数 - 直接访问 messages，避免 composer 检查
+    const safeTranslate = (key, localeOverride = null) => {
+      if (typeof key !== 'string' || !key.trim()) {
+        return String(key ?? '')
+      }
+      if (!i18n?.global) {
+        return key
+      }
+      try {
+        const locale = localeOverride !== null ? localeOverride : localeRef.value
+        
+        let localeMessages = null
+        try {
+          localeMessages = i18n.global.getLocaleMessage(locale)
+        } catch (e) {
+          const messages = i18n.global.messages
+          if (messages) {
+            const msgs = messages.value || messages
+            if (msgs && typeof msgs === 'object' && locale in msgs) {
+              localeMessages = msgs[locale]
+            }
+          }
+        }
+        
+        if (localeMessages && typeof localeMessages === 'object') {
+          const result = getNestedValueSafe(localeMessages, key)
+          if (result) return result
+        }
+        
+        const fallbackLocale = 'zh-CN'
+        try {
+          const fallbackMessages = i18n.global.getLocaleMessage(fallbackLocale)
+          if (fallbackMessages && typeof fallbackMessages === 'object') {
+            const result = getNestedValueSafe(fallbackMessages, key)
+            if (result) return result
+          }
+        } catch (e) {}
+        
+        return key
+      } catch (err) {
+        return key
+      }
+    }
+
+    const setError = (field, key = '') => {
+      errors[field] = key
+    }
+
+    const getErrorMessage = (field) => {
+      // 在 computed 外部调用，需要读取当前 locale
+      const currentLocale = localeRef.value
+      return errors[field] ? safeTranslate(`auth.register.errors.${errors[field]}`, currentLocale) : ''
+    }
     
-    // 验证用户名
     const validateUsername = () => {
       if (!formData.username) {
-        errors.username = '请输入用户名'
+        setError('username', 'usernameRequired')
       } else if (formData.username.length < 3) {
-        errors.username = '用户名至少需要3个字符'
+        setError('username', 'usernameMin')
       } else if (formData.username.length > 20) {
-        errors.username = '用户名不能超过20个字符'
+        setError('username', 'usernameMax')
       } else if (!/^[a-zA-Z0-9_]+$/.test(formData.username)) {
-        errors.username = '用户名只能包含字母、数字和下划线'
+        setError('username', 'usernamePattern')
       } else {
-        errors.username = ''
+        setError('username')
       }
     }
     
-    // 验证邮箱
     const validateEmail = () => {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
       if (!formData.email) {
-        errors.email = '请输入邮箱'
+        setError('email', 'emailRequired')
       } else if (!emailRegex.test(formData.email)) {
-        errors.email = '请输入有效的邮箱地址'
+        setError('email', 'emailInvalid')
       } else {
-        errors.email = ''
+        setError('email')
       }
     }
     
-    // 验证姓名
     const validateName = () => {
       if (!formData.name) {
-        errors.name = '请输入姓名'
+        setError('name', 'nameRequired')
       } else if (formData.name.length > 50) {
-        errors.name = '姓名不能超过50个字符'
+        setError('name', 'nameMax')
       } else {
-        errors.name = ''
+        setError('name')
       }
     }
     
-    // 验证密码
     const validatePassword = () => {
       if (!formData.password) {
-        errors.password = '请输入密码'
+        setError('password', 'passwordRequired')
       } else if (formData.password.length < 6) {
-        errors.password = '密码至少需要6个字符'
+        setError('password', 'passwordMin')
       } else {
-        errors.password = ''
+        setError('password')
       }
-      // 如果已填写确认密码，重新验证确认密码
       if (formData.confirmPassword) {
         validateConfirmPassword()
       }
     }
     
-    // 验证确认密码
     const validateConfirmPassword = () => {
       if (!formData.confirmPassword) {
-        errors.confirmPassword = '请再次输入密码'
+        setError('confirmPassword', 'confirmPasswordRequired')
       } else if (formData.password !== formData.confirmPassword) {
-        errors.confirmPassword = '两次输入的密码不一致'
+        setError('confirmPassword', 'confirmPasswordMismatch')
       } else {
-        errors.confirmPassword = ''
+        setError('confirmPassword')
       }
     }
     
-    // 验证所有字段
     const validateAll = () => {
       validateUsername()
       validateEmail()
       validateName()
       validatePassword()
       validateConfirmPassword()
-      
-      return !Object.values(errors).some(error => error !== '')
+      return !Object.values(errors).some(Boolean)
     }
+    
+    watch(() => formData.username, () => {
+      if (errors.username) validateUsername()
+    })
+    watch(() => formData.email, () => {
+      if (errors.email) validateEmail()
+    })
+    watch(() => formData.name, () => {
+      if (errors.name) validateName()
+    })
+    watch(() => formData.password, () => {
+      if (errors.password) validatePassword()
+    })
+    watch(() => formData.confirmPassword, () => {
+      if (errors.confirmPassword) validateConfirmPassword()
+    })
+    watch(localeRef, () => {
+      Object.keys(errors).forEach(field => {
+        if (errors[field]) {
+          // reassign to trigger translation update
+          setError(field, errors[field])
+        }
+      })
+    })
+    
+    // 预翻译所有模板中使用的文本
+    const translations = computed(() => {
+      // 显式访问 localeRef.value 以确保响应式追踪
+      const locale = localeRef.value
+      return {
+        title: safeTranslate('auth.register.title', locale),
+        username: safeTranslate('auth.register.username', locale),
+        usernamePlaceholder: safeTranslate('auth.register.usernamePlaceholder', locale),
+        email: safeTranslate('auth.register.email', locale),
+        emailPlaceholder: safeTranslate('auth.register.emailPlaceholder', locale),
+        name: safeTranslate('auth.register.name', locale),
+        namePlaceholder: safeTranslate('auth.register.namePlaceholder', locale),
+        password: safeTranslate('auth.register.password', locale),
+        passwordPlaceholder: safeTranslate('auth.register.passwordPlaceholder', locale),
+        confirmPassword: safeTranslate('auth.register.confirmPassword', locale),
+        confirmPasswordPlaceholder: safeTranslate('auth.register.confirmPasswordPlaceholder', locale),
+        submit: safeTranslate('auth.register.submit', locale),
+        loading: safeTranslate('auth.register.loading', locale),
+        hasAccount: safeTranslate('auth.register.hasAccount', locale),
+        loginNow: safeTranslate('auth.register.loginNow', locale),
+        fixForm: safeTranslate('auth.register.errors.fixForm', locale)
+      }
+    })
     
     const handleRegister = async () => {
       errorMessage.value = ''
       successMessage.value = ''
       
-      // 验证所有字段
       if (!validateAll()) {
-        errorMessage.value = '请修正表单中的错误'
+        errorMessage.value = translations.value.fixForm
         return
       }
       
@@ -230,21 +351,26 @@ export default {
         if (response.success) {
           successMessage.value = response.message
           
-          // 注册成功后自动登录
           setTimeout(async () => {
             const loginResult = await login(formData.username, formData.password)
             if (loginResult.success) {
-              router.push('/')
+              const currentUser = userState.value
+              const roleRedirectMap = {
+                admin: '/admin',
+                user: '/'
+              }
+              const roleTarget = currentUser?.role ? (roleRedirectMap[currentUser.role] || '/') : '/'
+              router.push(roleTarget)
             } else {
               router.push('/login')
             }
-          }, 1500)
+          }, 1000)
         } else {
           errorMessage.value = response.message
         }
       } catch (error) {
         console.error('Register error:', error)
-        errorMessage.value = '注册失败，请稍后重试'
+        errorMessage.value = translations.value.fixForm
       } finally {
         isLoading.value = false
       }
@@ -262,7 +388,9 @@ export default {
       validateName,
       validatePassword,
       validateConfirmPassword,
-      handleRegister
+      handleRegister,
+      getErrorMessage,
+      translations
     }
   }
 }
@@ -300,6 +428,30 @@ export default {
     margin: 0;
 }
 
+.register-form {
+    max-width: 440px;
+    margin: 0 auto;
+}
+
+.register-form :deep(.el-form-item) {
+    width: 100%;
+}
+
+.register-form :deep(.el-form-item__label) {
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.register-form :deep(.el-form-item__content) {
+    width: 100%;
+}
+
+.register-form :deep(.el-input),
+.register-form :deep(.el-input__wrapper),
+.register-form :deep(.el-input__inner) {
+    width: 100%;
+}
+
 .register-footer {
     text-align: center;
     padding-top: 20px;
@@ -312,11 +464,14 @@ export default {
     margin: 0;
 }
 
-.field-error {
-    color: #f56c6c;
-    font-size: 12px;
-    margin-top: 4px;
-    display: block;
+.register-actions {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+}
+
+.register-submit {
+    min-width: 160px;
 }
 </style>
 

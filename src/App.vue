@@ -1,17 +1,34 @@
 <template>
-  <div id="app">
-    <Navigation />
-    <router-view />
-  </div>
+  <el-config-provider :locale="elementLocale">
+    <div id="app">
+      <Navigation />
+      <router-view />
+    </div>
+  </el-config-provider>
 </template>
 
 <script>
+import { computed } from 'vue'
+import i18n from './i18n'
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+import enUs from 'element-plus/dist/locale/en.mjs'
 import Navigation from './components/Navigation.vue'
 
 export default {
   name: 'App',
   components: {
     Navigation
+  },
+  setup() {
+    const localeRef = i18n.global.locale
+
+    const elementLocale = computed(() => {
+      return localeRef.value === 'en-US' ? enUs : zhCn
+    })
+
+    return {
+      elementLocale
+    }
   }
 }
 </script>

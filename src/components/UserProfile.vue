@@ -21,11 +21,11 @@
       <div class="profile-menu">
         <a href="#" class="menu-item" @click.prevent="handleProfileClick">
           <span class="menu-icon">👤</span>
-          <span>个人信息</span>
+          <span>{{ translations.profileInfo }}</span>
         </a>
         <a href="#" class="menu-item" @click.prevent="handleLogout">
           <span class="menu-icon">🚪</span>
-          <span>注销登录</span>
+          <span>{{ translations.logout }}</span>
         </a>
       </div>
     </div>
@@ -38,6 +38,7 @@
 <script>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
+import i18n from '../i18n'
 import { user as userState, logout } from '../store/auth'
 
 export default {
@@ -45,13 +46,93 @@ export default {
   setup() {
     const router = useRouter()
     const isDropdownOpen = ref(false)
+    const localeRef = i18n.global.locale
     
     const user = computed(() => userState.value)
     
-    // 计算用户名字首字母（用于头像）
     const userInitial = computed(() => {
       if (!user.value || !user.value.name) return 'U'
       return user.value.name.charAt(0).toUpperCase()
+    })
+    
+    // 处理 AST 格式的辅助函数
+    const getNestedValueSafe = (obj, path) => {
+      if (!obj || typeof obj !== 'object') return null
+      const keys = path.split('.')
+      let value = obj
+      for (const k of keys) {
+        if (value && typeof value === 'object' && k in value) {
+          value = value[k]
+        } else {
+          return null
+        }
+      }
+      if (typeof value === 'string') return value
+      if (value && typeof value === 'object') {
+        if (value.loc && value.loc.source) return value.loc.source
+        if (value.body && value.body.items && value.body.items.length > 0) {
+          const firstItem = value.body.items[0]
+          if (typeof firstItem === 'string') return firstItem
+          if (firstItem && typeof firstItem === 'object' && firstItem.loc && firstItem.loc.source) {
+            return firstItem.loc.source
+          }
+        }
+      }
+      return null
+    }
+
+    // 安全翻译函数 - 直接访问 messages，避免 composer 检查
+    const safeTranslate = (key, localeOverride = null) => {
+      if (typeof key !== 'string' || !key.trim()) {
+        return String(key ?? '')
+      }
+      if (!i18n?.global) {
+        return key
+      }
+      try {
+        const locale = localeOverride !== null ? localeOverride : localeRef.value
+        
+        let localeMessages = null
+        try {
+          localeMessages = i18n.global.getLocaleMessage(locale)
+        } catch (e) {
+          const messages = i18n.global.messages
+          if (messages) {
+            const msgs = messages.value || messages
+            if (msgs && typeof msgs === 'object' && locale in msgs) {
+              localeMessages = msgs[locale]
+            }
+          }
+        }
+        
+        if (localeMessages && typeof localeMessages === 'object') {
+          const result = getNestedValueSafe(localeMessages, key)
+          if (result) return result
+        }
+        
+        const fallbackLocale = 'zh-CN'
+        try {
+          const fallbackMessages = i18n.global.getLocaleMessage(fallbackLocale)
+          if (fallbackMessages && typeof fallbackMessages === 'object') {
+            const result = getNestedValueSafe(fallbackMessages, key)
+            if (result) return result
+          }
+        } catch (e) {}
+        
+        return key
+      } catch (err) {
+        return key
+      }
+    }
+    
+    // 预翻译的文本
+    const translations = computed(() => {
+      // 显式访问 localeRef.value 以确保响应式追踪
+      const locale = localeRef.value
+      return {
+        profileInfo: safeTranslate('profile.info', locale),
+        logout: safeTranslate('profile.logout', locale)
+      }
     })
     
     const toggleDropdown = (event) => {
@@ -76,7 +157,6 @@ export default {
       router.push('/')
     }
     
-    // 点击页面其他地方关闭下拉菜单
     const handleClickOutside = (event) => {
       const profile = event.target.closest('.user-profile')
       if (!profile && isDropdownOpen.value) {
@@ -99,7 +179,8 @@ export default {
       toggleDropdown,
       closeDropdown,
       handleProfileClick,
-      handleLogout
+      handleLogout,
+      translations
     }
   }
 }

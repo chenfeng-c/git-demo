@@ -1,10 +1,18 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import vueI18n from '@intlify/unplugin-vue-i18n/vite'
 import { resolve } from 'path'
 
 export default defineConfig({
   base: '/', // 用户主页仓库使用根路径
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    vueI18n({
+      include: resolve(__dirname, 'src/locales/**'),
+      runtimeOnly: false,
+      compositionOnly: false
+    })
+  ],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src')

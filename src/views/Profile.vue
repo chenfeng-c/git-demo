@@ -2,10 +2,10 @@
   <div class="profile-page">
     <PageHeader
       type="profile"
-      title="个人中心"
-      subtitle="管理您的个人信息"
-      description="查看和编辑您的个人资料、账户设置"
-      :badges="['个人资料', '账户安全', '设置管理']"
+      :title="translations.title"
+      :subtitle="translations.subtitle"
+      :description="translations.description"
+      :badges="translations.badges"
       icon="👤"
     />
     
@@ -20,7 +20,7 @@
                   <span class="avatar-text">{{ userInitial }}</span>
                 </div>
                 <div class="profile-basic-info">
-                  <h2 class="profile-name-large">{{ user?.name || '未设置' }}</h2>
+                  <h2 class="profile-name-large">{{ user?.name || translations.notSet }}</h2>
                   <p class="profile-username-large">@{{ user?.username || 'unknown' }}</p>
                   <p v-if="user?.email" class="profile-email-large">{{ user?.email }}</p>
                 </div>
@@ -32,23 +32,23 @@
           <section class="details-section">
             <el-card class="details-card" shadow="hover" :body-style="{ padding: '40px' }">
               <div class="section-header-title">
-                <h3 class="section-title">个人信息</h3>
+                <h3 class="section-title">{{ translations.personalInfo }}</h3>
               </div>
               <el-descriptions :column="1" border class="user-descriptions">
-                <el-descriptions-item label="用户名">
-                  {{ user?.username || '未设置' }}
+                <el-descriptions-item :label="translations.username">
+                  {{ user?.username || translations.notSet }}
                 </el-descriptions-item>
-                <el-descriptions-item label="姓名">
-                  {{ user?.name || '未设置' }}
+                <el-descriptions-item :label="translations.name">
+                  {{ user?.name || translations.notSet }}
                 </el-descriptions-item>
-                <el-descriptions-item label="邮箱">
-                  {{ user?.email || '未设置' }}
+                <el-descriptions-item :label="translations.email">
+                  {{ user?.email || translations.notSet }}
                 </el-descriptions-item>
-                <el-descriptions-item label="注册时间">
-                  {{ formatDate(user?.createdAt) || '未知' }}
+                <el-descriptions-item :label="translations.registerTime">
+                  {{ formatDate(user?.createdAt) || translations.unknown }}
                 </el-descriptions-item>
-                <el-descriptions-item label="最后登录">
-                  {{ formatDate(user?.lastLogin) || '未知' }}
+                <el-descriptions-item :label="translations.lastLogin">
+                  {{ formatDate(user?.lastLogin) || translations.unknown }}
                 </el-descriptions-item>
               </el-descriptions>
             </el-card>
@@ -60,21 +60,21 @@
               <el-col :xs="24" :sm="24" :md="8">
                 <div class="action-button-wrapper">
                   <el-button type="primary" size="large" @click="handleEditProfile" class="action-button">
-                    编辑资料
+                    {{ translations.editProfile }}
                   </el-button>
                 </div>
               </el-col>
               <el-col :xs="24" :sm="24" :md="8">
                 <div class="action-button-wrapper">
                   <el-button type="warning" size="large" @click="handleChangePassword" class="action-button">
-                    修改密码
+                    {{ translations.changePassword }}
                   </el-button>
                 </div>
               </el-col>
               <el-col :xs="24" :sm="24" :md="8">
                 <div class="action-button-wrapper">
                   <el-button type="danger" size="large" @click="handleLogout" class="action-button">
-                    退出登录
+                    {{ translations.logoutBtn }}
                   </el-button>
                 </div>
               </el-col>
@@ -87,7 +87,7 @@
     <!-- 编辑资料对话框 -->
     <el-dialog
       v-model="editDialogVisible"
-      title="编辑资料"
+      :title="translations.editProfileTitle"
       :width="dialogWidth"
       :before-close="handleEditDialogClose"
       class="profile-dialog"
@@ -99,21 +99,21 @@
         :label-width="formLabelWidth"
         :label-position="formLabelPosition"
       >
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="editForm.username" placeholder="请输入用户名" />
+        <el-form-item :label="translations.username" prop="username">
+          <el-input v-model="editForm.username" :placeholder="translations.usernamePlaceholder" />
         </el-form-item>
-        <el-form-item label="姓名" prop="name">
-          <el-input v-model="editForm.name" placeholder="请输入姓名" />
+        <el-form-item :label="translations.name" prop="name">
+          <el-input v-model="editForm.name" :placeholder="translations.namePlaceholder" />
         </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="editForm.email" type="email" placeholder="请输入邮箱" />
+        <el-form-item :label="translations.email" prop="email">
+          <el-input v-model="editForm.email" type="email" :placeholder="translations.emailPlaceholder" />
         </el-form-item>
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="handleEditDialogClose">取消</el-button>
+          <el-button @click="handleEditDialogClose">{{ translations.cancel }}</el-button>
           <el-button type="primary" @click="handleEditSubmit" :loading="editLoading">
-            保存
+            {{ translations.confirm }}
           </el-button>
         </span>
       </template>
@@ -122,7 +122,7 @@
     <!-- 修改密码对话框 -->
     <el-dialog
       v-model="passwordDialogVisible"
-      title="修改密码"
+      :title="translations.changePasswordTitle"
       :width="dialogWidth"
       :before-close="handlePasswordDialogClose"
       class="profile-dialog"
@@ -134,36 +134,36 @@
         :label-width="formLabelWidth"
         :label-position="formLabelPosition"
       >
-        <el-form-item label="原密码" prop="oldPassword">
+        <el-form-item :label="translations.oldPassword" prop="oldPassword">
           <el-input
             v-model="passwordForm.oldPassword"
             type="password"
-            placeholder="请输入原密码"
+            :placeholder="translations.oldPasswordPlaceholder"
             show-password
           />
         </el-form-item>
-        <el-form-item label="新密码" prop="newPassword">
+        <el-form-item :label="translations.newPassword" prop="newPassword">
           <el-input
             v-model="passwordForm.newPassword"
             type="password"
-            placeholder="请输入新密码"
+            :placeholder="translations.newPasswordPlaceholder"
             show-password
           />
         </el-form-item>
-        <el-form-item label="确认密码" prop="confirmPassword">
+        <el-form-item :label="translations.confirmNewPassword" prop="confirmPassword">
           <el-input
             v-model="passwordForm.confirmPassword"
             type="password"
-            placeholder="请再次输入新密码"
+            :placeholder="translations.confirmNewPasswordPlaceholder"
             show-password
           />
         </el-form-item>
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="handlePasswordDialogClose">取消</el-button>
+          <el-button @click="handlePasswordDialogClose">{{ translations.cancel }}</el-button>
           <el-button type="primary" @click="handlePasswordSubmit" :loading="passwordLoading">
-            确认修改
+            {{ translations.confirm }}
           </el-button>
         </span>
       </template>
@@ -171,7 +171,7 @@
     
     <footer>
       <div class="container">
-        <p>{{ footerText }}</p>
+        <p>{{ footerTextComputed }}</p>
       </div>
     </footer>
   </div>
@@ -183,8 +183,9 @@ import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { user as userState, token, logout, updateUser } from '../store/auth'
 import { updateUserInfo, changePassword } from '../api/index'
-import { footerText } from '../utils/data'
 import PageHeader from '../components/PageHeader.vue'
+import { safeTranslate } from '../utils/i18n-helper'
+import i18n from '../i18n'
 import '../assets/css/profile.css'
 
 export default {
@@ -196,6 +197,52 @@ export default {
     const router = useRouter()
     const user = computed(() => userState.value)
     const userToken = computed(() => token.value)
+    const localeRef = i18n.global.locale
+
+    // 翻译
+    const translations = computed(() => {
+      const locale = localeRef.value
+      return {
+        title: safeTranslate('profile.title', locale),
+        subtitle: safeTranslate('profile.subtitle', locale),
+        description: safeTranslate('profile.description', locale),
+        badges: [
+          safeTranslate('profile.badges.0', locale),
+          safeTranslate('profile.badges.1', locale),
+          safeTranslate('profile.badges.2', locale)
+        ],
+        personalInfo: safeTranslate('profile.personalInfo', locale),
+        username: safeTranslate('profile.username', locale),
+        name: safeTranslate('profile.name', locale),
+        email: safeTranslate('profile.email', locale),
+        registerTime: safeTranslate('profile.registerTime', locale),
+        lastLogin: safeTranslate('profile.lastLogin', locale),
+        editProfile: safeTranslate('profile.editProfile', locale),
+        changePassword: safeTranslate('profile.changePassword', locale),
+        logoutBtn: safeTranslate('profile.logoutBtn', locale),
+        editProfileTitle: safeTranslate('profile.editProfileTitle', locale),
+        cancel: safeTranslate('profile.cancel', locale),
+        confirm: safeTranslate('profile.confirm', locale),
+        changePasswordTitle: safeTranslate('profile.changePasswordTitle', locale),
+        oldPassword: safeTranslate('profile.oldPassword', locale),
+        oldPasswordPlaceholder: safeTranslate('profile.oldPasswordPlaceholder', locale),
+        newPassword: safeTranslate('profile.newPassword', locale),
+        newPasswordPlaceholder: safeTranslate('profile.newPasswordPlaceholder', locale),
+        confirmNewPassword: safeTranslate('profile.confirmNewPassword', locale),
+        confirmNewPasswordPlaceholder: safeTranslate('profile.confirmNewPasswordPlaceholder', locale),
+        usernamePlaceholder: safeTranslate('auth.register.usernamePlaceholder', locale),
+        namePlaceholder: safeTranslate('auth.register.namePlaceholder', locale),
+        emailPlaceholder: safeTranslate('auth.register.emailPlaceholder', locale),
+        notSet: safeTranslate('profile.notSet', locale),
+        unknown: safeTranslate('profile.unknown', locale)
+      }
+    })
+
+    // Footer 文本
+    const footerTextComputed = computed(() => {
+      const locale = localeRef.value
+      return safeTranslate('footer.text', locale) || '© 2024 Chenfeng Software Development Studio. All rights reserved.'
+    })
 
     // 响应式宽度
     const windowWidth = ref(window.innerWidth)
@@ -263,44 +310,50 @@ export default {
       confirmPassword: ''
     })
 
-    // 编辑资料表单验证规则
-    const editFormRules = {
-      username: [
-        { required: true, message: '请输入用户名', trigger: 'blur' },
-        { min: 3, max: 20, message: '用户名长度在 3 到 20 个字符', trigger: 'blur' }
-      ],
-      name: [
-        { required: true, message: '请输入姓名', trigger: 'blur' },
-        { min: 2, max: 20, message: '姓名长度在 2 到 20 个字符', trigger: 'blur' }
-      ],
-      email: [
-        { required: true, message: '请输入邮箱', trigger: 'blur' },
-        { type: 'email', message: '请输入正确的邮箱格式', trigger: 'blur' }
-      ]
-    }
+    // 编辑资料表单验证规则（动态，基于翻译）
+    const editFormRules = computed(() => {
+      const t = translations.value
+      return {
+        username: [
+          { required: true, message: safeTranslate('auth.register.errors.usernameRequired', localeRef.value), trigger: 'blur' },
+          { min: 3, max: 20, message: safeTranslate('auth.register.errors.usernameMax', localeRef.value), trigger: 'blur' }
+        ],
+        name: [
+          { required: true, message: safeTranslate('auth.register.errors.nameRequired', localeRef.value), trigger: 'blur' },
+          { max: 50, message: safeTranslate('auth.register.errors.nameMax', localeRef.value), trigger: 'blur' }
+        ],
+        email: [
+          { required: true, message: safeTranslate('auth.register.errors.emailRequired', localeRef.value), trigger: 'blur' },
+          { type: 'email', message: safeTranslate('auth.register.errors.emailInvalid', localeRef.value), trigger: 'blur' }
+        ]
+      }
+    })
 
-    // 修改密码表单验证规则
+    // 修改密码表单验证规则（动态，基于翻译）
     const validateConfirmPassword = (rule, value, callback) => {
       if (value !== passwordForm.newPassword) {
-        callback(new Error('两次输入的密码不一致'))
+        callback(new Error(safeTranslate('auth.register.errors.confirmPasswordMismatch', localeRef.value)))
       } else {
         callback()
       }
     }
 
-    const passwordFormRules = {
-      oldPassword: [
-        { required: true, message: '请输入原密码', trigger: 'blur' }
-      ],
-      newPassword: [
-        { required: true, message: '请输入新密码', trigger: 'blur' },
-        { min: 6, max: 20, message: '密码长度在 6 到 20 个字符', trigger: 'blur' }
-      ],
-      confirmPassword: [
-        { required: true, message: '请再次输入新密码', trigger: 'blur' },
-        { validator: validateConfirmPassword, trigger: 'blur' }
-      ]
-    }
+    const passwordFormRules = computed(() => {
+      const t = translations.value
+      return {
+        oldPassword: [
+          { required: true, message: t.oldPasswordPlaceholder, trigger: 'blur' }
+        ],
+        newPassword: [
+          { required: true, message: safeTranslate('auth.register.errors.passwordRequired', localeRef.value), trigger: 'blur' },
+          { min: 6, message: safeTranslate('auth.register.errors.passwordMin', localeRef.value), trigger: 'blur' }
+        ],
+        confirmPassword: [
+          { required: true, message: t.confirmNewPasswordPlaceholder, trigger: 'blur' },
+          { validator: validateConfirmPassword, trigger: 'blur' }
+        ]
+      }
+    })
 
     // 计算用户名字首字母（用于头像）
     const userInitial = computed(() => {
@@ -328,7 +381,7 @@ export default {
     // 检查登录状态
     onMounted(() => {
       if (!user.value) {
-        ElMessage.warning('请先登录')
+        ElMessage.warning(safeTranslate('auth.login.title', localeRef.value))
         router.push('/login')
       }
     })
@@ -336,7 +389,7 @@ export default {
     // 打开编辑资料对话框
     const handleEditProfile = () => {
       if (!user.value) {
-        ElMessage.warning('请先登录')
+        ElMessage.warning(safeTranslate('auth.login.title', localeRef.value))
         return
       }
       
@@ -371,15 +424,15 @@ export default {
           // 更新用户信息到 store
           updateUser(response.data.user)
           
-          ElMessage.success('资料更新成功')
+          ElMessage.success(safeTranslate('profile.editProfile', localeRef.value) + ' ' + translations.value.confirm)
           handleEditDialogClose()
         } else {
-          ElMessage.error(response.message || '更新失败')
+          ElMessage.error(response.message || safeTranslate('auth.register.errors.fixForm', localeRef.value))
         }
       } catch (error) {
         if (error !== false) {
           console.error('Update profile error:', error)
-          ElMessage.error('更新失败，请稍后重试')
+          ElMessage.error(safeTranslate('auth.register.errors.fixForm', localeRef.value))
         }
       } finally {
         editLoading.value = false
@@ -389,7 +442,7 @@ export default {
     // 打开修改密码对话框
     const handleChangePassword = () => {
       if (!user.value) {
-        ElMessage.warning('请先登录')
+        ElMessage.warning(safeTranslate('auth.login.title', localeRef.value))
         return
       }
       
@@ -421,7 +474,7 @@ export default {
         )
 
         if (response.success) {
-          ElMessage.success('密码修改成功，请重新登录')
+          ElMessage.success(translations.value.changePassword + ' ' + translations.value.confirm)
           handlePasswordDialogClose()
           
           // 延迟退出登录，让用户看到成功提示
@@ -430,12 +483,12 @@ export default {
             router.push('/login')
           }, 1500)
         } else {
-          ElMessage.error(response.message || '密码修改失败')
+          ElMessage.error(response.message || safeTranslate('auth.register.errors.fixForm', localeRef.value))
         }
       } catch (error) {
         if (error !== false) {
           console.error('Change password error:', error)
-          ElMessage.error('修改失败，请稍后重试')
+          ElMessage.error(safeTranslate('auth.register.errors.fixForm', localeRef.value))
         }
       } finally {
         passwordLoading.value = false
@@ -445,14 +498,18 @@ export default {
     // 退出登录
     const handleLogout = async () => {
       try {
-        await ElMessageBox.confirm('确定要退出登录吗？', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        })
+        await ElMessageBox.confirm(
+          safeTranslate('profile.logoutBtn', localeRef.value) + '?',
+          safeTranslate('profile.title', localeRef.value),
+          {
+            confirmButtonText: translations.value.confirm,
+            cancelButtonText: translations.value.cancel,
+            type: 'warning'
+          }
+        )
         
         await logout()
-        ElMessage.success('已退出登录')
+        ElMessage.success(translations.value.logoutBtn)
         router.push('/')
       } catch (error) {
         // 用户取消
@@ -462,7 +519,7 @@ export default {
     return {
       user,
       userInitial,
-      footerText,
+      translations,
       formatDate,
       handleEditProfile,
       handleChangePassword,
@@ -483,7 +540,8 @@ export default {
       handlePasswordSubmit,
       dialogWidth,
       formLabelWidth,
-      formLabelPosition
+      formLabelPosition,
+      footerTextComputed
     }
   }
 }

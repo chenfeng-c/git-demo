@@ -2,10 +2,10 @@
   <div>
     <PageHeader
         type="events"
-        title="活动策划"
-        subtitle="精彩活动，共同参与"
-        description="我们定期组织各种技术交流、团队建设活动，促进学习成长和团队协作"
-        :badges="['技术分享', '团队建设', '文化交流']"
+        :title="translations.title"
+        :subtitle="translations.subtitle"
+        :description="translations.description"
+        :badges="translations.badges"
         icon="🎉"
       />
     
@@ -14,14 +14,14 @@
         <div class="content-inner">
           <section class="intro-section">
             <div class="section-header">
-              <h2 class="section-title-main">{{ eventsData.title }}</h2>
+              <h2 class="section-title-main">{{ translations.title }}</h2>
             </div>
-            <p class="intro-text">{{ eventsData.intro }}</p>
+            <p class="intro-text">{{ translations.intro }}</p>
           </section>
 
           <section class="events-section">
             <el-row :gutter="20">
-              <el-col :xs="24" :sm="24" :md="12" :lg="8" :xl="8" v-for="(event, index) in eventsData.events" :key="index" style="margin-bottom: 20px;">
+              <el-col :xs="24" :sm="24" :md="12" :lg="8" :xl="8" v-for="(event, index) in eventsList" :key="index" style="margin-bottom: 20px;">
                 <el-card class="event-card" shadow="hover" :body-style="{ padding: '0' }">
                   <div class="event-image-wrapper">
                     <img :src="event.image" :alt="event.title" class="event-image" />
@@ -49,9 +49,9 @@
 
           <section class="values-section">
             <el-card style="margin-top: 45px;" shadow="never">
-              <h3 style="margin: 0 0 18px 0; color: #1e40af;">{{ eventsData.valueTitle }}</h3>
+              <h3 style="margin: 0 0 18px 0; color: #1e40af;">{{ translations.valueTitle }}</h3>
               <ul style="line-height: 2; color: #4a5568; margin: 0; padding-left: 20px;">
-                <li v-for="(value, index) in eventsData.values" :key="index">{{ value }}</li>
+                <li v-for="(value, index) in translations.values" :key="index">{{ value }}</li>
               </ul>
             </el-card>
           </section>
@@ -61,15 +61,18 @@
     
     <footer>
       <div class="container">
-        <p>{{ footerText }}</p>
+        <p>{{ footerTextComputed }}</p>
       </div>
     </footer>
   </div>
 </template>
 
 <script>
-import { companyInfo, footerText, eventsData } from '../utils/data'
+import { computed } from 'vue'
+import { useCompanyInfo } from '../utils/data'
 import PageHeader from '../components/PageHeader.vue'
+import { safeTranslate } from '../utils/i18n-helper'
+import i18n from '../i18n'
 import '../assets/css/events.css'
 
 export default {
@@ -78,19 +81,84 @@ export default {
     PageHeader
   },
   setup() {
-    const getStatusText = (status) => {
-      const statusMap = {
-        'upcoming': '即将开始',
-        'ongoing': '进行中',
-        'completed': '已完成'
+    const localeRef = i18n.global.locale
+    const companyInfo = useCompanyInfo()
+
+    // 翻译
+    const translations = computed(() => {
+      const locale = localeRef.value
+      return {
+        title: safeTranslate('events.title', locale),
+        subtitle: safeTranslate('events.subtitle', locale),
+        description: safeTranslate('events.description', locale),
+        badges: [
+          safeTranslate('events.badges.0', locale) || '技术分享',
+          safeTranslate('events.badges.1', locale) || '团队建设',
+          safeTranslate('events.badges.2', locale) || '文化交流'
+        ],
+        intro: safeTranslate('events.intro', locale),
+        valueTitle: safeTranslate('events.valueTitle', locale),
+        values: (() => {
+          const values = []
+          for (let i = 0; i < 6; i++) {
+            const val = safeTranslate(`events.values.${i}`, locale)
+            if (val && !val.startsWith('events.values')) {
+              values.push(val)
+            }
+          }
+          return values
+        })()
       }
-      return statusMap[status] || '未知'
+    })
+
+    // 活动列表
+    const eventsList = computed(() => {
+      const locale = localeRef.value
+      const eventKeys = ['summit', 'frontend', 'teamBuilding', 'training', 'competition', 'lunch']
+      const icons = {
+        summit: '🎤',
+        frontend: '💡',
+        teamBuilding: '🎯',
+        training: '📚',
+        competition: '🏆',
+        lunch: '☕'
+      }
+      const images = {
+        summit: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&h=600&fit=crop&auto=format',
+        frontend: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&h=600&fit=crop&auto=format',
+        teamBuilding: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&h=600&fit=crop&auto=format',
+        training: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop&auto=format',
+        competition: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&h=600&fit=crop&auto=format',
+        lunch: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&h=600&fit=crop&auto=format'
+      }
+      const statuses = ['upcoming', 'ongoing', 'completed', 'ongoing', 'upcoming', 'ongoing']
+      
+      return eventKeys.map((key, index) => ({
+        icon: icons[key],
+        title: safeTranslate(`events.events.${key}.title`, locale),
+        date: safeTranslate(`events.events.${key}.date`, locale),
+        description: safeTranslate(`events.events.${key}.description`, locale),
+        status: statuses[index],
+        image: images[key]
+      }))
+    })
+
+    const getStatusText = (status) => {
+      const locale = localeRef.value
+      const statusKey = `events.status.${status}`
+      return safeTranslate(statusKey, locale) || status
     }
+
+    // Footer text with translation
+    const footerTextComputed = computed(() => {
+      return safeTranslate('home.footer', localeRef.value)
+    })
 
     return {
       companyInfo,
-      footerText,
-      eventsData,
+      translations,
+      eventsList,
+      footerTextComputed,
       getStatusText
     }
   }

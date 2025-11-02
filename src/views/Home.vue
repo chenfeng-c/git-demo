@@ -9,16 +9,9 @@
         <div class="hero-text">
           <h1 class="hero-title">{{ companyInfo.name }}</h1>
           <p class="hero-subtitle">{{ companyInfo.slogan }}</p>
-          <p class="hero-description">致力于为客户提供创新的技术解决方案，推动数字化转型</p>
+          <p class="hero-description">{{ translations.description }}</p>
           <div class="hero-badges">
-            <div class="badge-item" v-for="(badge, index) in [
-              { icon: '💡', text: '创新技术' },
-              { icon: '🎯', text: '专业服务' },
-              { icon: '🏆', text: '行业领先' },
-              { icon: '✨', text: '品质保证' },
-              { icon: '❤️', text: '客户信赖' },
-              { icon: '⚡', text: '高效执行' }
-            ]" :key="index">
+            <div class="badge-item" v-for="(badge, index) in heroBadges" :key="index">
               <span class="badge-icon">{{ badge.icon }}</span>
               <span class="badge-text">{{ badge.text }}</span>
             </div>
@@ -30,7 +23,7 @@
               @click="scrollToContent"
               class="cta-primary-btn"
             >
-              <span class="btn-text">了解更多</span>
+              <span class="btn-text">{{ translations.learnMore }}</span>
               <span class="btn-icon">→</span>
             </el-button>
             <el-button 
@@ -38,7 +31,7 @@
               @click="scrollToFeatures"
               class="cta-secondary-btn"
             >
-              <span class="btn-text">查看产品</span>
+              <span class="btn-text">{{ translations.viewProducts }}</span>
               <span class="btn-icon">→</span>
             </el-button>
           </div>
@@ -48,7 +41,7 @@
         <div class="mouse">
           <div class="wheel"></div>
         </div>
-        <span>滚动查看更多</span>
+        <span>{{ translations.scrollMore }}</span>
       </div>
     </section>
 
@@ -56,8 +49,8 @@
     <section class="content-section" id="content">
       <div class="container">
         <div class="content-inner">
-          <h2>{{ homeContent.title }}</h2>
-          <p v-for="(para, index) in homeContent.paragraphs" :key="index">{{ para }}</p>
+          <h2>{{ translations.title }}</h2>
+          <p v-for="(para, index) in translations.paragraphs" :key="index">{{ para }}</p>
         </div>
       </div>
     </section>
@@ -66,7 +59,7 @@
     <section class="features-section" id="features">
       <div class="container">
         <el-row :gutter="35">
-          <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="8" v-for="(feature, index) in homeContent.features" :key="index" style="margin-bottom: 35px;">
+            <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="8" v-for="(feature, index) in featuresList" :key="index" style="margin-bottom: 35px;">
             <el-card class="feature-card" shadow="hover" :body-style="{ padding: '50px 40px', textAlign: 'center' }">
               <div class="feature-icon">
                 <span class="feature-icon-emoji">{{ feature.icon }}</span>
@@ -83,8 +76,8 @@
     <section class="gallery-section">
       <div class="container">
         <div class="gallery-content">
-          <h2>公司风采</h2>
-          <p class="gallery-description">专业的团队、现代化的办公环境、创新的工作氛围</p>
+          <h2>{{ translations.galleryTitle }}</h2>
+          <p class="gallery-description">{{ translations.galleryDescription }}</p>
           <el-row :gutter="20" class="gallery-grid">
             <el-col :xs="24" :sm="12" :md="8" :lg="8" :xl="8" v-for="(image, index) in companyImages" :key="index">
               <div class="gallery-item" @mouseenter="handleImageHover(index)" @mouseleave="handleImageLeave(index)">
@@ -106,14 +99,9 @@
     <section class="stats-section">
       <div class="container">
         <div class="stats-content">
-          <h2>公司数据一览</h2>
+          <h2>{{ translations.statsTitle }}</h2>
           <el-row :gutter="35" style="margin-bottom: 70px;">
-            <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6" v-for="(stat, index) in [
-              { icon: '📈', value: '500+', label: '成功项目' },
-              { icon: '👥', value: '100+', label: '专业团队' },
-              { icon: '🎯', value: '95%', label: '客户满意度' },
-              { icon: '🏆', value: '9年+', label: '行业经验' }
-            ]" :key="index">
+            <el-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6" v-for="(stat, index) in statsData" :key="index">
               <el-card class="stat-item" shadow="hover" :body-style="{ textAlign: 'center', padding: '35px 25px' }">
                 <div style="font-size: 3em; margin-bottom: 15px; display: block;">{{ stat.icon }}</div>
                 <div style="font-size: 2.5em; font-weight: 800; color: #1a365d; margin-bottom: 10px;">{{ stat.value }}</div>
@@ -125,7 +113,7 @@
           <el-row :gutter="40">
             <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" style="margin-bottom: 40px;">
               <el-card class="chart-card-new" shadow="hover" :body-style="{ padding: '40px 35px' }">
-                <h3 style="color: #1a365d; font-size: 1.5em; margin-bottom: 30px; font-weight: 700; text-align: center;">业务增长趋势</h3>
+                <h3 style="color: #1a365d; font-size: 1.5em; margin-bottom: 30px; font-weight: 700; text-align: center;">{{ translations.growthChartTitle }}</h3>
                 <div class="chart-placeholder">
                   <BaseChart :options="growthChartOptions" height="280px" />
                 </div>
@@ -133,7 +121,7 @@
             </el-col>
             <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" style="margin-bottom: 40px;">
               <el-card class="chart-card-new" shadow="hover" :body-style="{ padding: '40px 35px' }">
-                <h3 style="color: #1a365d; font-size: 1.5em; margin-bottom: 30px; font-weight: 700; text-align: center;">客户行业分布</h3>
+                <h3 style="color: #1a365d; font-size: 1.5em; margin-bottom: 30px; font-weight: 700; text-align: center;">{{ translations.industryChartTitle }}</h3>
                 <div class="chart-placeholder">
                   <BaseChart :options="industryChartOptions" height="280px" />
                 </div>
@@ -146,15 +134,15 @@
     
     <footer>
       <div class="container">
-        <p>{{ footerText }}</p>
+        <p>{{ footerTextComputed }}</p>
       </div>
     </footer>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
-import { companyInfo, footerText, homeContent } from '../utils/data'
+import { ref, computed } from 'vue'
+import { useCompanyInfo } from '../utils/data'
 import IconInnovation from '../components/icons/IconInnovation.vue'
 import IconTeam from '../components/icons/IconTeam.vue'
 import IconService from '../components/icons/IconService.vue'
@@ -164,6 +152,8 @@ import IconOptimization from '../components/icons/IconOptimization.vue'
 import HeaderBanner from '../components/HeaderBanner.vue'
 import BaseChart from '../components/charts/BaseChart.vue'
 import PageHeader from '../components/PageHeader.vue'
+import { safeTranslate } from '../utils/i18n-helper'
+import i18n from '../i18n'
 import '../assets/css/home.css'
 
 export default {
@@ -181,39 +171,129 @@ export default {
   },
   setup() {
     const hoveredIndex = ref(-1)
+    const localeRef = i18n.global.locale
+    const companyInfo = useCompanyInfo()
 
-    const companyImages = ref([
-      {
-        url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop&auto=format',
-        title: '现代化办公环境',
-        description: '宽敞明亮的办公空间，营造高效工作氛围'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop&auto=format',
-        title: '团队协作',
-        description: '专业团队紧密合作，共同创造卓越成果'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop&auto=format',
-        title: '技术创新',
-        description: '前沿技术设备，推动行业创新发展'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=600&fit=crop&auto=format',
-        title: '会议室讨论',
-        description: '集思广益，智慧碰撞，制定最佳方案'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&h=600&fit=crop&auto=format',
-        title: '客户服务',
-        description: '专注客户需求，提供优质服务体验'
-      },
-      {
-        url: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=600&fit=crop&auto=format',
-        title: '企业文化建设',
-        description: '丰富多彩的团队活动，凝聚团队力量'
+    // 翻译
+    const translations = computed(() => {
+      const locale = localeRef.value
+      return {
+        description: safeTranslate('home.description', locale),
+        learnMore: safeTranslate('home.learnMore', locale),
+        viewProducts: safeTranslate('home.viewProducts', locale),
+        scrollMore: safeTranslate('home.scrollMore', locale),
+        title: safeTranslate('home.title', locale),
+        paragraphs: [
+          safeTranslate('home.paragraphs.0', locale),
+          safeTranslate('home.paragraphs.1', locale)
+        ],
+        galleryTitle: safeTranslate('home.gallery.title', locale),
+        galleryDescription: safeTranslate('home.gallery.description', locale),
+        statsTitle: safeTranslate('home.stats.title', locale),
+        growthChartTitle: safeTranslate('home.stats.charts.growth.title', locale),
+        industryChartTitle: safeTranslate('home.stats.charts.industry.title', locale),
+        growthChartSeries: safeTranslate('home.stats.charts.growth.series', locale),
+        growthChartYAxis: safeTranslate('home.stats.charts.growth.yAxis', locale)
       }
-    ])
+    })
+
+    // Hero badges
+    const heroBadges = computed(() => {
+      const locale = localeRef.value
+      return [
+        { icon: '💡', text: safeTranslate('home.badges.innovation', locale) },
+        { icon: '🎯', text: safeTranslate('home.badges.professional', locale) },
+        { icon: '🏆', text: safeTranslate('home.badges.leading', locale) },
+        { icon: '✨', text: safeTranslate('home.badges.quality', locale) },
+        { icon: '❤️', text: safeTranslate('home.badges.trust', locale) },
+        { icon: '⚡', text: safeTranslate('home.badges.efficient', locale) }
+      ]
+    })
+
+    // Stats data
+    const statsData = computed(() => {
+      const locale = localeRef.value
+      return [
+        { icon: '📈', value: '500+', label: safeTranslate('home.stats.items.projects', locale) },
+        { icon: '👥', value: '100+', label: safeTranslate('home.stats.items.team', locale) },
+        { icon: '🎯', value: '95%', label: safeTranslate('home.stats.items.satisfaction', locale) },
+        { icon: '🏆', value: '9年+', label: safeTranslate('home.stats.items.experience', locale) }
+      ]
+    })
+
+    // Features (computed from homeContent but with translations)
+    const featuresList = computed(() => {
+      const locale = localeRef.value
+      return [
+        {
+          icon: '💡',
+          title: safeTranslate('home.features.innovation.title', locale),
+          description: safeTranslate('home.features.innovation.description', locale)
+        },
+        {
+          icon: '👥',
+          title: safeTranslate('home.features.team.title', locale),
+          description: safeTranslate('home.features.team.description', locale)
+        },
+        {
+          icon: '⚡',
+          title: safeTranslate('home.features.service.title', locale),
+          description: safeTranslate('home.features.service.description', locale)
+        },
+        {
+          icon: '🎯',
+          title: safeTranslate('home.features.customer.title', locale),
+          description: safeTranslate('home.features.customer.description', locale)
+        },
+        {
+          icon: '✨',
+          title: safeTranslate('home.features.quality.title', locale),
+          description: safeTranslate('home.features.quality.description', locale)
+        },
+        {
+          icon: '🔄',
+          title: safeTranslate('home.features.optimization.title', locale),
+          description: safeTranslate('home.features.optimization.description', locale)
+        }
+      ]
+    })
+
+    // Company images with translations
+    const companyImages = computed(() => {
+      const locale = localeRef.value
+      return [
+        {
+          url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop&auto=format',
+          title: safeTranslate('home.gallery.images.office.title', locale),
+          description: safeTranslate('home.gallery.images.office.description', locale)
+        },
+        {
+          url: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop&auto=format',
+          title: safeTranslate('home.gallery.images.teamwork.title', locale),
+          description: safeTranslate('home.gallery.images.teamwork.description', locale)
+        },
+        {
+          url: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop&auto=format',
+          title: safeTranslate('home.gallery.images.technology.title', locale),
+          description: safeTranslate('home.gallery.images.technology.description', locale)
+        },
+        {
+          url: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=600&fit=crop&auto=format',
+          title: safeTranslate('home.gallery.images.meeting.title', locale),
+          description: safeTranslate('home.gallery.images.meeting.description', locale)
+        },
+        {
+          url: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&h=600&fit=crop&auto=format',
+          title: safeTranslate('home.gallery.images.service.title', locale),
+          description: safeTranslate('home.gallery.images.service.description', locale)
+        },
+        {
+          url: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=600&fit=crop&auto=format',
+          title: safeTranslate('home.gallery.images.culture.title', locale),
+          description: safeTranslate('home.gallery.images.culture.description', locale)
+        }
+      ]
+    })
 
     const handleImageHover = (index) => {
       hoveredIndex.value = index
@@ -242,8 +322,8 @@ export default {
       }
     }
 
-    // 业务增长趋势图表配置
-    const growthChartOptions = ref({
+    // 业务增长趋势图表配置（使用 computed 以响应语言切换）
+    const growthChartOptions = computed(() => ({
       tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -276,7 +356,7 @@ export default {
       },
       yAxis: {
         type: 'value',
-        name: '项目数量',
+        name: translations.value.growthChartYAxis,
         nameTextStyle: {
           color: '#718096',
           padding: [0, 0, 0, 10]
@@ -299,7 +379,7 @@ export default {
       },
       series: [
         {
-          name: '完成项目',
+          name: translations.value.growthChartSeries,
           type: 'bar',
           data: [15, 28, 45, 68, 92],
           barWidth: '50%',
@@ -325,10 +405,10 @@ export default {
           }
         }
       ]
-    })
+    }))
     
-    // 客户行业分布图表配置
-    const industryChartOptions = ref({
+    // 客户行业分布图表配置（使用 computed 以响应语言切换）
+    const industryChartOptions = computed(() => ({
       tooltip: {
         trigger: 'item',
         formatter: '{b}: {c} ({d}%)'
@@ -347,7 +427,7 @@ export default {
       },
       series: [
         {
-          name: '行业分布',
+          name: translations.value.industryChartTitle,
           type: 'pie',
           radius: ['40%', '70%'],
           center: ['35%', '50%'],
@@ -376,27 +456,38 @@ export default {
           labelLine: {
             show: false
           },
-          data: [
-            { value: 35, name: '互联网', itemStyle: { color: '#4299e1' } },
-            { value: 25, name: '金融', itemStyle: { color: '#2c5282' } },
-            { value: 20, name: '教育', itemStyle: { color: '#63b3ed' } },
-            { value: 12, name: '医疗', itemStyle: { color: '#1a365d' } },
-            { value: 8, name: '其他', itemStyle: { color: '#90cdf4' } }
-          ]
+          data: (() => {
+            const locale = localeRef.value
+            return [
+              { value: 35, name: safeTranslate('home.stats.charts.industry.items.internet', locale) || '互联网', itemStyle: { color: '#4299e1' } },
+              { value: 25, name: safeTranslate('home.stats.charts.industry.items.finance', locale) || '金融', itemStyle: { color: '#2c5282' } },
+              { value: 20, name: safeTranslate('home.stats.charts.industry.items.education', locale) || '教育', itemStyle: { color: '#63b3ed' } },
+              { value: 12, name: safeTranslate('home.stats.charts.industry.items.medical', locale) || '医疗', itemStyle: { color: '#1a365d' } },
+              { value: 8, name: safeTranslate('home.stats.charts.industry.items.others', locale) || '其他', itemStyle: { color: '#90cdf4' } }
+            ]
+          })()
         }
       ]
+    }))
+
+    // Footer text with translation
+    const footerTextComputed = computed(() => {
+      return safeTranslate('home.footer', localeRef.value)
     })
 
     return {
       companyInfo,
-      footerText,
-      homeContent,
+      translations,
+      heroBadges,
+      statsData,
+      featuresList,
+      companyImages,
+      footerTextComputed,
       getIconComponent,
       scrollToContent,
       scrollToFeatures,
       growthChartOptions,
       industryChartOptions,
-      companyImages,
       hoveredIndex,
       handleImageHover,
       handleImageLeave
