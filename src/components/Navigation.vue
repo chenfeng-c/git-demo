@@ -60,6 +60,7 @@ import i18n, { SUPPORTED_LOCALES } from '../i18n'
 import { user as userState, initAuth } from '../store/auth'
 import UserProfile from './UserProfile.vue'
 import { useCompanyInfo } from '../utils/data'
+import { safeTranslate } from '../utils/i18n-helper'
 
 export default {
   name: 'Navigation',
@@ -73,7 +74,7 @@ export default {
     const isScrolled = ref(false)
     const localeRef = i18n.global.locale
     const companyInfo = useCompanyInfo()
-    
+
     // 公司名称（响应式）
     const companyName = computed(() => {
       return companyInfo.value?.name || '辰锋软件开发工作室'
@@ -131,7 +132,7 @@ export default {
       // 传递 currentLocale 确保在 computed 中追踪
       return items.map(item => ({
         ...item,
-        label: translate(item.labelKey, currentLocale)
+        label: safeTranslate(item.labelKey, currentLocale)
       }))
     })
     
@@ -194,7 +195,7 @@ export default {
       return Object.entries(SUPPORTED_LOCALES).map(([value, meta]) => ({
         value,
         labelKey: meta.labelKey,
-        label: translate(meta.labelKey, currentLocale)
+        label: safeTranslate(meta.labelKey, currentLocale)
       }))
     })
 
@@ -204,13 +205,13 @@ export default {
     const languageLabel = computed(() => {
       // 显式访问 localeRef.value 以确保响应式追踪
       const currentLocale = localeRef.value
-      return translate('language.label', currentLocale)
+      return safeTranslate('language.label', currentLocale)
     })
 
     const loginLabel = computed(() => {
       // 显式访问 localeRef.value 以确保响应式追踪
       const currentLocale = localeRef.value
-      return translate('auth.login.submit', currentLocale)
+      return safeTranslate('auth.login.submit', currentLocale)
     })
 
     const handleLocaleChange = () => {
@@ -225,113 +226,6 @@ export default {
     
     const baseUrl = import.meta.env.BASE_URL
 
-    // 创建一个简单的翻译查找函数，并处理 AST 格式
-    const getNestedValue = (obj, path) => {
-      if (!obj || typeof obj !== 'object') {
-        return null
-      }
-      const keys = path.split('.')
-      let value = obj
-      for (let i = 0; i < keys.length; i++) {
-        const k = keys[i]
-        if (value && typeof value === 'object' && k in value) {
-          value = value[k]
-        } else {
-          return null
-        }
-      }
-      
-      // 如果值是字符串，直接返回
-      if (typeof value === 'string') {
-        return value
-      }
-      
-      // 如果值是 AST 对象（vue-i18n 编译后的格式），提取字符串
-      if (value && typeof value === 'object') {
-        // 方法1：从 loc.source 获取（最常见）
-        if (value.loc && value.loc.source) {
-          return value.loc.source
-        }
-        // 方法2：从 body.items[0] 获取
-        if (value.body && value.body.items && value.body.items.length > 0) {
-          const firstItem = value.body.items[0]
-          if (typeof firstItem === 'string') {
-            return firstItem
-          }
-          // 如果 items[0] 也是对象，尝试递归
-          if (firstItem && typeof firstItem === 'object' && firstItem.loc && firstItem.loc.source) {
-            return firstItem.loc.source
-          }
-        }
-      }
-      
-      return null
-    }
-
-    const translate = (key, localeOverride = null) => {
-      // 输入验证
-      if (typeof key !== 'string' || !key.trim()) {
-        return String(key ?? '')
-      }
-      
-      try {
-        // 如果传入了 localeOverride，使用它；否则使用当前 localeRef.value（确保响应式追踪）
-        const locale = localeOverride !== null ? localeOverride : localeRef.value
-        
-        // 使用 i18n 的 getLocaleMessage API，它会返回已处理的翻译对象
-        let localeMessages = null
-        
-        // 方法1：尝试使用 getLocaleMessage（应该返回已处理的 JSON）
-        try {
-          localeMessages = i18n.global.getLocaleMessage(locale)
-        } catch (e) {
-          console.warn('[translate] getLocaleMessage failed:', e)
-        }
-        
-        // 方法2：如果 getLocaleMessage 失败，直接从 messages 中获取
-        if (!localeMessages || typeof localeMessages !== 'object') {
-          const messages = i18n.global.messages
-          if (messages) {
-            // messages 可能是 Ref
-            const msgs = messages.value || messages
-            if (msgs && typeof msgs === 'object' && locale in msgs) {
-              localeMessages = msgs[locale]
-            }
-          }
-        }
-        
-        // 如果找到了消息对象，尝试解析（getNestedValue 已经处理了 AST 格式）
-        if (localeMessages && typeof localeMessages === 'object') {
-          const result = getNestedValue(localeMessages, key)
-          if (result) {
-            return result
-          }
-        }
-        
-        // 尝试 fallback locale
-        const fallbackLocale = 'zh-CN'
-        try {
-          const fallbackMessages = i18n.global.getLocaleMessage(fallbackLocale)
-          if (fallbackMessages && typeof fallbackMessages === 'object') {
-            const result = getNestedValue(fallbackMessages, key)
-            if (result) {
-              return result
-            }
-          }
-        } catch (e) {
-          // fallback 也失败
-        }
-        
-        // 都找不到，返回 key
-        console.warn('[translate] Translation not found for key:', key, 'locale:', locale)
-        return key
-      } catch (err) {
-        // 任何错误都返回 key
-        console.error('[translate] Error translating key:', key, err)
-        return key
-      }
-    }
-    
     onUnmounted(() => {
       document.removeEventListener('click', handleClickOutside)
       stopWatcher()
@@ -348,7 +242,6 @@ export default {
       toggleMenu,
       closeMenu,
       handleMenuItemClick,
-      translate,
       localeOptions,
       currentLocale,
       languageLabel,
