@@ -24,7 +24,8 @@
 
       <el-form
         :model="formData"
-        label-width="80px"
+        :label-width="formLabelWidth"
+        :label-position="formLabelPosition"
         class="login-form"
         @submit.prevent="handleLogin"
       >
@@ -93,7 +94,7 @@
 </template>
 
 <script>
-import { ref, reactive, computed, watch } from 'vue'
+import { ref, reactive, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import i18n from '../i18n'
 import { safeTranslate } from '../utils/i18n-helper'
@@ -109,6 +110,30 @@ export default {
     const localeRef = i18n.global.locale
     const companyInfo = useCompanyInfo()
     const companyName = computed(() => companyInfo.value?.name || '辰锋软件开发工作室')
+
+    const isMobile = ref(false)
+
+    const updateIsMobile = () => {
+      if (typeof window !== 'undefined') {
+        isMobile.value = window.innerWidth <= 640
+      }
+    }
+
+    onMounted(() => {
+      updateIsMobile()
+      if (typeof window !== 'undefined') {
+        window.addEventListener('resize', updateIsMobile)
+      }
+    })
+
+    onBeforeUnmount(() => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', updateIsMobile)
+      }
+    })
+
+    const formLabelPosition = computed(() => (isMobile.value ? 'top' : 'left'))
+    const formLabelWidth = computed(() => (isMobile.value ? 'auto' : '80px'))
     
     const formData = reactive({
       username: '',
@@ -228,7 +253,9 @@ export default {
       loginEntries,
       selectedEntry,
       activeEntry,
-      translations
+      translations,
+      formLabelPosition,
+      formLabelWidth
     }
   }
 }
@@ -390,6 +417,38 @@ export default {
 
 .action-button {
     min-width: 120px;
+}
+
+@media (max-width: 640px) {
+    .login-container {
+        padding: 16px;
+    }
+
+    .login-card {
+        width: 100%;
+        max-width: 360px;
+    }
+
+    .login-card :deep(.el-card__body) {
+        padding: 20px 16px;
+    }
+
+    .login-header h1 {
+        font-size: 1.5em;
+    }
+
+    .role-switch :deep(.el-radio-button) {
+        min-width: 120px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .action-button {
+        width: 100%;
+    }
 }
 </style>
 

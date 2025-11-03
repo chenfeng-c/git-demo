@@ -11,6 +11,7 @@
       <el-form
         :model="formData"
         :label-width="formLabelWidth"
+        :label-position="formLabelPosition"
         class="register-form"
         @submit.prevent="handleRegister"
       >
@@ -102,7 +103,7 @@
 </template>
 
 <script>
-import { ref, reactive, watch, computed } from 'vue'
+import { ref, reactive, watch, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import i18n from '../i18n'
 import { useCompanyInfo } from '../utils/data'
@@ -120,7 +121,33 @@ export default {
     const localeRef = i18n.global.locale
     const companyInfo = useCompanyInfo()
     const companyName = computed(() => companyInfo.value?.name || '辰锋软件开发工作室')
-    const formLabelWidth = computed(() => (localeRef.value === 'en-US' ? '140px' : '100px'))
+
+    const isMobile = ref(false)
+
+    const updateIsMobile = () => {
+      if (typeof window !== 'undefined') {
+        isMobile.value = window.innerWidth <= 640
+      }
+    }
+
+    onMounted(() => {
+      updateIsMobile()
+      if (typeof window !== 'undefined') {
+        window.addEventListener('resize', updateIsMobile)
+      }
+    })
+
+    onBeforeUnmount(() => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', updateIsMobile)
+      }
+    })
+
+    const formLabelPosition = computed(() => (isMobile.value ? 'top' : 'left'))
+    const formLabelWidth = computed(() => {
+      if (isMobile.value) return 'auto'
+      return localeRef.value === 'en-US' ? '140px' : '100px'
+    })
     
     const formData = reactive({
       username: '',
@@ -326,7 +353,8 @@ export default {
       handleRegister,
       getErrorMessage,
       translations,
-      formLabelWidth
+      formLabelWidth,
+      formLabelPosition
     }
   }
 }
@@ -412,6 +440,35 @@ export default {
     width: 100%;
     max-width: 200px;
     margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+    .register-container {
+        padding: 16px;
+        align-items: flex-start;
+    }
+
+    .register-card {
+        max-width: 360px;
+        width: 100%;
+    }
+
+    .register-card :deep(.el-card__body) {
+        padding: 20px 16px;
+    }
+
+    .register-header h1 {
+        font-size: 1.5em;
+    }
+
+    .register-actions :deep(.el-form-item__content) {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .register-submit {
+        max-width: none;
+    }
 }
 </style>
 
