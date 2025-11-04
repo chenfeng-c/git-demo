@@ -32,6 +32,24 @@
             </el-card>
           </section>
 
+          <!-- 使命与愿景 -->
+          <section class="mission-vision-section">
+            <div class="mission-vision-grid">
+              <div class="mission-media">
+                <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=900&h=600&fit=crop&auto=format" alt="Mission and Vision" />
+              </div>
+              <div class="mission-content">
+                <h3 class="mission-title">{{ translations.missionTitle }}</h3>
+                <p class="mission-description">{{ translations.missionDescription }}</p>
+                <el-divider />
+                <h4 class="vision-title">{{ translations.visionTitle }}</h4>
+                <ul class="vision-list">
+                  <li v-for="(point, index) in translations.visionPoints" :key="index">{{ point }}</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
           <!-- 核心优势 -->
           <section class="advantages-section">
             <div class="section-header">
@@ -58,6 +76,28 @@
                 </el-card>
               </el-col>
             </el-row>
+          </section>
+
+          <!-- 荣誉资质 -->
+          <section class="awards-section">
+            <div class="section-header">
+              <h3 class="section-title">{{ translations.awardsTitle }}</h3>
+              <p class="awards-subtitle">{{ translations.awardsSubtitle }}</p>
+            </div>
+            <el-carousel indicator-position="outside" height="280px" class="awards-carousel" :interval="6000">
+              <el-carousel-item v-for="(award, index) in awardsList" :key="index">
+                <el-card class="award-card" shadow="hover" :body-style="{ padding: '35px 40px' }">
+                  <div class="award-content">
+                    <div class="award-icon">{{ award.icon }}</div>
+                    <div class="award-info">
+                      <div class="award-year">{{ award.year }}</div>
+                      <h4 class="award-title">{{ award.title }}</h4>
+                      <p class="award-description">{{ award.description }}</p>
+                    </div>
+                  </div>
+                </el-card>
+              </el-carousel-item>
+            </el-carousel>
           </section>
 
           <!-- 发展历程 -->
@@ -131,6 +171,21 @@ export default {
         cultureTitle: safeTranslate('about.culture.title', locale),
         cultureContent: safeTranslate('about.culture.content', locale),
         advantagesTitle: safeTranslate('about.advantages.title', locale),
+        missionTitle: safeTranslate('about.mission.title', locale),
+        missionDescription: safeTranslate('about.mission.description', locale),
+        visionTitle: safeTranslate('about.vision.title', locale),
+        visionPoints: (() => {
+          const points = []
+          for (let i = 0; i < 4; i++) {
+            const value = safeTranslate(`about.vision.points.${i}`, locale)
+            if (value && !value.startsWith('about.vision.points')) {
+              points.push(value)
+            }
+          }
+          return points
+        })(),
+        awardsTitle: safeTranslate('about.awards.title', locale),
+        awardsSubtitle: safeTranslate('about.awards.subtitle', locale),
         timelineTitle: safeTranslate('about.timeline.title', locale),
         timelineSubtitle: safeTranslate('about.timeline.subtitle', locale)
       }
@@ -158,6 +213,23 @@ export default {
       return images[key] || images.technology
     }
 
+    const awardsList = computed(() => {
+      const locale = localeRef.value
+      const items = ['national', 'innovation', 'service', 'quality']
+      const icons = {
+        national: '🏅',
+        innovation: '💡',
+        service: '🤝',
+        quality: '🛡️'
+      }
+      return items.map(key => ({
+        icon: icons[key],
+        year: safeTranslate(`about.awards.items.${key}.year`, locale),
+        title: safeTranslate(`about.awards.items.${key}.title`, locale),
+        description: safeTranslate(`about.awards.items.${key}.description`, locale)
+      }))
+    })
+
     // 发展历程时间线
     const timelineItems = computed(() => {
       const locale = localeRef.value
@@ -178,6 +250,7 @@ export default {
       companyInfo,
       translations,
       advantagesList,
+      awardsList,
       timelineItems,
       footerTextComputed
     }

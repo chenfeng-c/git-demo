@@ -176,6 +176,52 @@
         }
       }
     },
+    "stories": {
+      "title": "Success Stories & Customer Voices",
+      "subtitle": "Explore how our solutions accelerate digital transformation for clients across multiple industries.",
+      "items": {
+        "digitalTwin": {
+          "title": "Digital Twin Platform",
+          "quote": "The digital twin solution significantly shortened our product iteration cycles and improved on-site monitoring efficiency.",
+          "client": "Aerospace Systems Group",
+          "role": "VP of Engineering"
+        },
+        "smartCity": {
+          "title": "Smart City Command Center",
+          "quote": "We now have real-time insights across urban operations, helping us resolve incidents in minutes instead of hours.",
+          "client": "Shenzhen Municipal Operations",
+          "role": "Chief Data Officer"
+        },
+        "aiRetail": {
+          "title": "AI Retail Analytics",
+          "quote": "The AI recommendation engine increased our omni-channel conversion rate by more than 28% within the first quarter.",
+          "client": "Nova Retail Holdings",
+          "role": "Digital Transformation Director"
+        }
+      }
+    },
+    "partners": {
+      "title": "Trusted Strategic Partners",
+      "subtitle": "We collaborate with global leaders to deliver secure, scalable, and future-proof solutions.",
+      "items": {
+        "nebula": {
+          "name": "Nebula Cloud",
+          "description": "Strategic cloud infrastructure partner providing secure multi-region deployments."
+        },
+        "aurora": {
+          "name": "Aurora Finance",
+          "description": "FinTech partner co-creating intelligent risk control and payment innovations."
+        },
+        "zenith": {
+          "name": "Zenith Robotics",
+          "description": "Hardware alliance enabling edge computing for industrial automation scenarios."
+        },
+        "polaris": {
+          "name": "Polaris Labs",
+          "description": "AI research partner jointly building next-generation data science platforms."
+        }
+      }
+    },
     "stats": {
       "title": "Company Overview",
       "items": {
@@ -221,6 +267,19 @@
       "title": "Corporate Culture",
       "content": "We uphold the corporate values of 'Innovation, Collaboration, Professionalism, Win-Win', committed to creating a vibrant and creative work environment. The company encourages employees to continuously learn and innovate, providing broad development space and growth opportunities for employees."
     },
+    "mission": {
+      "title": "Our Mission",
+      "description": "Empower organizations with reliable digital infrastructure and long-term technology partnerships that unlock sustainable growth."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "points": [
+        "Lead digital transformation with human-centered technology.",
+        "Build an open ecosystem for co-innovation with partners.",
+        "Continuously deliver measurable value for every customer.",
+        "Cultivate a learning organization that inspires talent to shine."
+      ]
+    },
     "advantages": {
       "title": "Core Advantages",
       "items": {
@@ -239,6 +298,32 @@
         "innovation": {
           "label": "Innovation Capability",
           "text": "Following technology development trends, continuously exploring and applying new technologies and methods."
+        }
+      }
+    },
+    "awards": {
+      "title": "Certifications & Honors",
+      "subtitle": "Industry-wide recognition for our relentless pursuit of excellence and innovation.",
+      "items": {
+        "national": {
+          "year": "2022",
+          "title": "National High-Tech Enterprise",
+          "description": "Recognized by the Ministry of Science and Technology for outstanding R&D capabilities and intellectual property portfolio."
+        },
+        "innovation": {
+          "year": "2023",
+          "title": "Innovation Pioneer Award",
+          "description": "Awarded by the China Software Industry Association for breakthroughs in automated testing platforms."
+        },
+        "service": {
+          "year": "2023",
+          "title": "Customer Success Benchmark",
+          "description": "Honored by the Shanghai Software Association for exemplary delivery quality and long-term service satisfaction."
+        },
+        "quality": {
+          "year": "2024",
+          "title": "ISO/IEC 27001 Certification",
+          "description": "Achieved internationally recognized information security management certification ensuring enterprise-grade protection."
         }
       }
     },
@@ -284,6 +369,76 @@
       "2": "Team Atmosphere"
     },
     "intro": "We are looking for passionate talents to join our team! If you love technology and pursue excellence, welcome to submit your resume.",
+    "benefits": {
+      "title": "Why You'll Love Working With Us",
+      "subtitle": "Comprehensive benefits, growth opportunities, and a vibrant culture that supports your career journey.",
+      "items": {
+        "growth": {
+          "title": "Career Acceleration",
+          "description": "Dual-career ladder, mentorship program, and tailored learning roadmap for every talent."
+        },
+        "health": {
+          "title": "Health & Wellness",
+          "description": "Premium medical insurance, annual health checks, and mental wellness workshops."
+        },
+        "culture": {
+          "title": "Inclusive Culture",
+          "description": "Open communication, flexible collaboration, and regular team-building activities."
+        },
+        "bonus": {
+          "title": "Rewards & Recognition",
+          "description": "Competitive compensation, project bonuses, and stock incentive plans aligned with impact."
+        }
+      }
+    },
+    "life": {
+      "title": "Life at Chenfeng",
+      "subtitle": "A dynamic environment where we learn, create, and celebrate together.",
+      "items": {
+        "brainstorm": {
+          "tag": "Co-create",
+          "title": "Cross-Functional Brainstorm",
+          "description": "Weekly design-thinking sessions that turn bold ideas into actionable prototypes."
+        },
+        "wellness": {
+          "tag": "Wellness",
+          "title": "Wellness Afternoon",
+          "description": "Yoga, mindfulness, and health coaching to recharge body and mind."
+        },
+        "learning": {
+          "tag": "Learning",
+          "title": "Tech Learning Lab",
+          "description": "Hands-on workshops covering AI, DevOps, and product strategy led by internal experts."
+        },
+        "community": {
+          "tag": "Community",
+          "title": "CSR Community Day",
+          "description": "Volunteer with NGOs to deliver digital literacy and inclusive technology programs."
+        }
+      }
+    },
+    "process": {
+      "title": "Application Process",
+      "subtitle": "Transparent steps to help you understand what happens after submitting your resume.",
+      "steps": {
+        "submit": {
+          "title": "Submit Resume",
+          "description": "Share your resume and portfolio so we can get to know your strengths."
+        },
+        "review": {
+          "title": "Profile Review",
+          "description": "Talent partners evaluate experience, skills, and cultural fit within 3 working days."
+        },
+        "interview": {
+          "title": "Interviews",
+          "description": "Meet future teammates through technical, product, and culture-fit conversations."
+        },
+        "offer": {
+          "title": "Offer & Onboarding",
+          "description": "Receive a tailored offer and onboarding plan designed for long-term success."
+        }
+      }
+    },
     "applyNow": "Apply Now",
     "applyTitle": "Application Notice",
     "applyMessagePrefix": "Thank you for your interest in the",
@@ -366,6 +521,80 @@
       "2": "Cultural Exchange"
     },
     "intro": "We regularly hold various technical sharing sessions, team building activities and industry exchanges. Through these activities, we promote team collaboration, improve technical capabilities, and provide employees with better work experience and growth opportunities.",
+    "highlights": {
+      "title": "Experience Highlights",
+      "subtitle": "Signature activities that combine learning, collaboration, and community impact.",
+      "items": {
+        "futureLab": {
+          "title": "Future Lab Demo",
+          "description": "Showcase breakthrough prototypes from our internal R&D lab and partner ecosystem."
+        },
+        "cultureDay": {
+          "title": "Culture Day",
+          "description": "Celebrate diversity through global cuisine, storytelling, and cross-cultural workshops."
+        },
+        "mentorProgram": {
+          "title": "Mentor Connect",
+          "description": "1:1 mentoring between senior experts and rising talents to accelerate professional growth."
+        },
+        "openHack": {
+          "title": "Open Innovation Hack",
+          "description": "Joint hackathon with clients and universities solving real-world business challenges."
+        }
+      }
+    },
+    "gallery": {
+      "title": "Event Moments",
+      "subtitle": "Relive energizing workshops, summits, and community experiences.",
+      "items": {
+        "kickoff": {
+          "tag": "Kick-off",
+          "title": "Quarterly Strategy Kick-off",
+          "description": "Leaders align priorities and inspire teams with the latest market insights."
+        },
+        "summit": {
+          "tag": "Summit",
+          "title": "Developer Summit",
+          "description": "Global speakers share best practices on cloud-native, AI, and DevOps tooling."
+        },
+        "volunteer": {
+          "tag": "Volunteer",
+          "title": "Community Coding Camp",
+          "description": "Volunteers coach students through full-day coding challenges and design thinking."
+        },
+        "demoDay": {
+          "tag": "Demo Day",
+          "title": "Innovation Demo Day",
+          "description": "Project squads present outcomes, metrics, and lessons learned to the entire company."
+        }
+      }
+    },
+    "schedule": {
+      "title": "2025 Activity Roadmap",
+      "subtitle": "Stay tuned for upcoming flagship events planned throughout the year.",
+      "items": {
+        "spring": {
+          "date": "March 2025",
+          "title": "Spring Innovation Week",
+          "description": "Workshops and labs focusing on AI engineering, design systems, and product analytics."
+        },
+        "summer": {
+          "date": "June 2025",
+          "title": "Summer Leadership Retreat",
+          "description": "Leadership academy plus outdoor challenges to elevate collaboration and decision-making."
+        },
+        "autumn": {
+          "date": "September 2025",
+          "title": "Autumn Tech Forum",
+          "description": "Invite-only conference with clients to exchange insights on digital transformation roadmaps."
+        },
+        "winter": {
+          "date": "December 2025",
+          "title": "Winter Community Impact Day",
+          "description": "Large-scale CSR initiative building inclusive tech solutions with NGO partners."
+        }
+      }
+    },
     "valueTitle": "Event Value",
     "values": [
       "Improve professional skills and technical level",
@@ -428,6 +657,53 @@
     },
     "membersTitle": "Core Members",
     "advantagesTitle": "Team Advantages",
+    "leadership": {
+      "title": "Leadership Spotlight",
+      "subtitle": "Experienced leaders steering strategy, delivery, and operations with vision and empathy.",
+      "members": {
+        "ceo": {
+          "name": "Zhou Ming",
+          "role": "Founder & CEO",
+          "quote": "We empower every teammate to innovate boldly, iterate quickly, and deliver tangible value to customers."
+        },
+        "cto": {
+          "name": "Wang Yu",
+          "role": "Chief Technology Officer",
+          "quote": "Our engineering culture is built on craftsmanship, automation, and relentless pursuit of technical excellence."
+        },
+        "coo": {
+          "name": "Li Mei",
+          "role": "Chief Operating Officer",
+          "quote": "We create cross-functional synergy, ensuring each project milestone is predictable, transparent, and customer-centric."
+        }
+      }
+    },
+    "moments": {
+      "title": "Team Moments",
+      "subtitle": "Snapshots from our daily collaboration, innovation workshops, and community engagements.",
+      "items": {
+        "hackathon": {
+          "tag": "Hackathon",
+          "title": "48-Hour Innovation Sprint",
+          "description": "Product, design, and engineering teams co-create prototypes that solve real user challenges."
+        },
+        "retreat": {
+          "tag": "Retreat",
+          "title": "Mountain Team Retreat",
+          "description": "Yearly offsite blending leadership workshops, outdoor exploration, and mindful reflection."
+        },
+        "volunteer": {
+          "tag": "Community",
+          "title": "STEM Volunteer Day",
+          "description": "Partnering with local schools to mentor students on coding, robotics, and creative problem-solving."
+        },
+        "innovation": {
+          "tag": "Learning",
+          "title": "Knowledge Sharing Week",
+          "description": "Internal tech talks and lightning demos highlighting best practices and emerging trends."
+        }
+      }
+    },
     "advantages": [
       "Rich industry experience and project practical ability",
       "Continuous learning and technology innovation team culture",

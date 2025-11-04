@@ -19,6 +19,26 @@
             <p class="intro-text">{{ translations.intro }}</p>
           </section>
 
+          <section class="highlights-section">
+            <div class="section-header">
+              <h3 class="section-title">{{ translations.highlightsTitle }}</h3>
+              <p class="section-subtitle">{{ translations.highlightsSubtitle }}</p>
+            </div>
+            <el-row :gutter="24">
+              <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" v-for="(highlight, index) in eventHighlights" :key="index">
+                <div class="highlight-card">
+                  <div class="highlight-image-wrapper">
+                    <img :src="highlight.image" :alt="highlight.title" />
+                  </div>
+                  <div class="highlight-content">
+                    <h4 class="highlight-title">{{ highlight.title }}</h4>
+                    <p class="highlight-description">{{ highlight.description }}</p>
+                  </div>
+                </div>
+              </el-col>
+            </el-row>
+          </section>
+
           <section class="events-section">
             <el-row :gutter="20">
               <el-col :xs="24" :sm="24" :md="12" :lg="8" :xl="8" v-for="(event, index) in eventsList" :key="index" style="margin-bottom: 20px;">
@@ -45,6 +65,46 @@
                 </el-card>
               </el-col>
             </el-row>
+          </section>
+
+          <section class="gallery-section">
+            <div class="section-header">
+              <h3 class="section-title">{{ translations.galleryTitle }}</h3>
+              <p class="section-subtitle">{{ translations.gallerySubtitle }}</p>
+            </div>
+            <el-carousel indicator-position="outside" height="300px" class="events-gallery" :interval="6500">
+              <el-carousel-item v-for="(slide, index) in gallerySlides" :key="index">
+                <div class="gallery-slide">
+                  <img :src="slide.image" :alt="slide.title" class="gallery-image" />
+                  <div class="gallery-overlay"></div>
+                  <div class="gallery-content">
+                    <div class="gallery-tag">{{ slide.tag }}</div>
+                    <h4 class="gallery-title">{{ slide.title }}</h4>
+                    <p class="gallery-description">{{ slide.description }}</p>
+                  </div>
+                </div>
+              </el-carousel-item>
+            </el-carousel>
+          </section>
+
+          <section class="schedule-section">
+            <div class="section-header">
+              <h3 class="section-title">{{ translations.scheduleTitle }}</h3>
+              <p class="section-subtitle">{{ translations.scheduleSubtitle }}</p>
+            </div>
+            <el-timeline class="events-schedule">
+              <el-timeline-item
+                v-for="(item, index) in scheduleList"
+                :key="index"
+                :timestamp="item.date"
+                placement="top"
+              >
+                <div class="schedule-item">
+                  <h4 class="schedule-title">{{ item.title }}</h4>
+                  <p class="schedule-description">{{ item.description }}</p>
+                </div>
+              </el-timeline-item>
+            </el-timeline>
           </section>
 
           <section class="values-section">
@@ -97,6 +157,12 @@ export default {
           safeTranslate('events.badges.2', locale) || '文化交流'
         ],
         intro: safeTranslate('events.intro', locale),
+        highlightsTitle: safeTranslate('events.highlights.title', locale),
+        highlightsSubtitle: safeTranslate('events.highlights.subtitle', locale),
+        galleryTitle: safeTranslate('events.gallery.title', locale),
+        gallerySubtitle: safeTranslate('events.gallery.subtitle', locale),
+        scheduleTitle: safeTranslate('events.schedule.title', locale),
+        scheduleSubtitle: safeTranslate('events.schedule.subtitle', locale),
         valueTitle: safeTranslate('events.valueTitle', locale),
         values: (() => {
           const values = []
@@ -143,6 +209,51 @@ export default {
       }))
     })
 
+    const eventHighlights = computed(() => {
+      const locale = localeRef.value
+      const keys = ['futureLab', 'cultureDay', 'mentorProgram', 'openHack']
+      const images = {
+        futureLab: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=700&fit=crop&auto=format',
+        cultureDay: 'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=1200&h=700&fit=crop&auto=format',
+        mentorProgram: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1200&h=700&fit=crop&auto=format',
+        openHack: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&h=700&fit=crop&auto=format'
+      }
+
+      return keys.map(key => ({
+        image: images[key],
+        title: safeTranslate(`events.highlights.items.${key}.title`, locale),
+        description: safeTranslate(`events.highlights.items.${key}.description`, locale)
+      }))
+    })
+
+    const gallerySlides = computed(() => {
+      const locale = localeRef.value
+      const keys = ['kickoff', 'summit', 'volunteer', 'demoDay']
+      const images = {
+        kickoff: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1400&h=780&fit=crop&auto=format',
+        summit: 'https://images.unsplash.com/photo-1485217988980-11786ced9454?w=1400&h=780&fit=crop&auto=format',
+        volunteer: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1400&h=780&fit=crop&auto=format',
+        demoDay: 'https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=1400&h=780&fit=crop&auto=format'
+      }
+
+      return keys.map(key => ({
+        image: images[key],
+        tag: safeTranslate(`events.gallery.items.${key}.tag`, locale),
+        title: safeTranslate(`events.gallery.items.${key}.title`, locale),
+        description: safeTranslate(`events.gallery.items.${key}.description`, locale)
+      }))
+    })
+
+    const scheduleList = computed(() => {
+      const locale = localeRef.value
+      const keys = ['spring', 'summer', 'autumn', 'winter']
+      return keys.map(key => ({
+        date: safeTranslate(`events.schedule.items.${key}.date`, locale),
+        title: safeTranslate(`events.schedule.items.${key}.title`, locale),
+        description: safeTranslate(`events.schedule.items.${key}.description`, locale)
+      }))
+    })
+
     const getStatusText = (status) => {
       const locale = localeRef.value
       const statusKey = `events.status.${status}`
@@ -158,6 +269,9 @@ export default {
       companyInfo,
       translations,
       eventsList,
+      eventHighlights,
+      gallerySlides,
+      scheduleList,
       footerTextComputed,
       getStatusText
     }

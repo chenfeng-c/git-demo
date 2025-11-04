@@ -19,6 +19,22 @@
             <p class="intro-text">{{ translations.intro }}</p>
           </section>
 
+          <section class="benefits-section">
+            <div class="section-header">
+              <h3 class="section-title">{{ translations.benefitsTitle }}</h3>
+              <p class="section-subtitle">{{ translations.benefitsSubtitle }}</p>
+            </div>
+            <el-row :gutter="24">
+              <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="6" v-for="(benefit, index) in benefitsList" :key="index">
+                <el-card class="benefit-card" shadow="hover" :body-style="{ padding: '28px', height: '100%', display: 'flex', flexDirection: 'column', gap: '16px' }">
+                  <div class="benefit-icon">{{ benefit.icon }}</div>
+                  <h4 class="benefit-title">{{ benefit.title }}</h4>
+                  <p class="benefit-description">{{ benefit.description }}</p>
+                </el-card>
+              </el-col>
+            </el-row>
+          </section>
+
           <section class="jobs-section">
             <el-row :gutter="20">
               <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" v-for="(job, index) in jobsList" :key="index" style="margin-bottom: 20px;">
@@ -56,6 +72,41 @@
                 </el-card>
               </el-col>
             </el-row>
+          </section>
+
+          <section class="life-section">
+            <div class="section-header">
+              <h3 class="section-title">{{ translations.lifeTitle }}</h3>
+              <p class="section-subtitle">{{ translations.lifeSubtitle }}</p>
+            </div>
+            <el-carousel indicator-position="outside" height="320px" class="life-carousel" :interval="6000">
+              <el-carousel-item v-for="(slide, index) in lifeAtCompany" :key="index">
+                <div class="life-slide">
+                  <img :src="slide.image" :alt="slide.title" class="life-image" />
+                  <div class="life-overlay"></div>
+                  <div class="life-content">
+                    <div class="life-tag">{{ slide.tag }}</div>
+                    <h4 class="life-title">{{ slide.title }}</h4>
+                    <p class="life-description">{{ slide.description }}</p>
+                  </div>
+                </div>
+              </el-carousel-item>
+            </el-carousel>
+          </section>
+
+          <section class="process-section">
+            <div class="section-header">
+              <h3 class="section-title">{{ translations.processTitle }}</h3>
+              <p class="section-subtitle">{{ translations.processSubtitle }}</p>
+            </div>
+            <el-steps :active="processSteps.length" finish-status="success" align-center class="process-steps">
+              <el-step
+                v-for="(step, index) in processSteps"
+                :key="index"
+                :title="step.title"
+                :description="step.description"
+              />
+            </el-steps>
           </section>
         </div>
       </div>
@@ -100,6 +151,8 @@ export default {
           safeTranslate('jobs.badges.2', locale) || '团队氛围'
         ],
         intro: safeTranslate('jobs.intro', locale),
+        benefitsTitle: safeTranslate('jobs.benefits.title', locale),
+        benefitsSubtitle: safeTranslate('jobs.benefits.subtitle', locale),
         location: safeTranslate('jobs.positions.frontend.location', locale),
         salary: safeTranslate('jobs.positions.frontend.salary', locale),
         experience: safeTranslate('jobs.positions.frontend.experience', locale),
@@ -109,7 +162,11 @@ export default {
         applyMessagePrefix: safeTranslate('jobs.applyMessagePrefix', locale) || '感谢您对',
         applyMessageSuffix: safeTranslate('jobs.applyMessageSuffix', locale) || '职位的关注！',
         applyMessageEmail: safeTranslate('jobs.applyMessageEmail', locale) || '请将简历发送至：qq3484763071@gmail.com',
-        confirm: safeTranslate('profile.confirm', locale) || '确定'
+        confirm: safeTranslate('profile.confirm', locale) || '确定',
+        lifeTitle: safeTranslate('jobs.life.title', locale),
+        lifeSubtitle: safeTranslate('jobs.life.subtitle', locale),
+        processTitle: safeTranslate('jobs.process.title', locale),
+        processSubtitle: safeTranslate('jobs.process.subtitle', locale)
       }
     })
 
@@ -143,6 +200,50 @@ export default {
       }))
     })
 
+    const benefitsList = computed(() => {
+      const locale = localeRef.value
+      const keys = ['growth', 'health', 'culture', 'bonus']
+      const icons = {
+        growth: '🚀',
+        health: '🩺',
+        culture: '🎉',
+        bonus: '💰'
+      }
+
+      return keys.map(key => ({
+        icon: icons[key],
+        title: safeTranslate(`jobs.benefits.items.${key}.title`, locale),
+        description: safeTranslate(`jobs.benefits.items.${key}.description`, locale)
+      }))
+    })
+
+    const lifeAtCompany = computed(() => {
+      const locale = localeRef.value
+      const keys = ['brainstorm', 'wellness', 'learning', 'community']
+      const images = {
+        brainstorm: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=1200&h=700&fit=crop&auto=format',
+        wellness: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1200&h=700&fit=crop&auto=format',
+        learning: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&h=700&fit=crop&auto=format',
+        community: 'https://images.unsplash.com/photo-1485217988980-11786ced9454?w=1200&h=700&fit=crop&auto=format'
+      }
+
+      return keys.map(key => ({
+        image: images[key],
+        tag: safeTranslate(`jobs.life.items.${key}.tag`, locale),
+        title: safeTranslate(`jobs.life.items.${key}.title`, locale),
+        description: safeTranslate(`jobs.life.items.${key}.description`, locale)
+      }))
+    })
+
+    const processSteps = computed(() => {
+      const locale = localeRef.value
+      const keys = ['submit', 'review', 'interview', 'offer']
+      return keys.map(key => ({
+        title: safeTranslate(`jobs.process.steps.${key}.title`, locale),
+        description: safeTranslate(`jobs.process.steps.${key}.description`, locale)
+      }))
+    })
+
     const applyJob = (jobTitle) => {
       const emailText = translations.value.applyMessageEmail.replace('[AT]', '@')
       const message = `${translations.value.applyMessagePrefix} ${jobTitle} ${translations.value.applyMessageSuffix}\n${emailText}`
@@ -161,6 +262,9 @@ export default {
       companyInfo,
       translations,
       jobsList,
+      benefitsList,
+      lifeAtCompany,
+      processSteps,
       footerTextComputed,
       applyJob
     }

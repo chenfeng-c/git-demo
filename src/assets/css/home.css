@@ -1788,3 +1788,251 @@
   }
 }
 
+/* 成功案例轮播 */
+.stories-section {
+  padding: 100px 0;
+  background: linear-gradient(180deg, #f5f9ff 0%, #ffffff 100%);
+}
+
+.stories-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 50px;
+}
+
+.stories-title {
+  font-size: 2.4em;
+  color: #1a365d;
+  margin-bottom: 12px;
+  font-weight: 800;
+}
+
+.stories-subtitle {
+  font-size: 1.1em;
+  color: #4a5568;
+  margin: 0;
+  line-height: 1.8;
+}
+
+.stories-carousel {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(26, 54, 93, 0.15);
+}
+
+.story-slide {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  height: 100%;
+  background: #ffffff;
+}
+
+.story-media {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.story-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(26, 54, 93, 0.1) 0%, rgba(66, 153, 225, 0.2) 100%);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.story-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.story-slide:hover .story-image {
+  transform: scale(1.05);
+}
+
+.story-content {
+  padding: 50px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(135deg, #ffffff 0%, #f7fbff 100%);
+}
+
+.story-label {
+  font-size: 0.9em;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: #2563eb;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.story-quote {
+  font-size: 1.3em;
+  line-height: 1.9;
+  color: #1a365d;
+  margin: 0 0 30px;
+  position: relative;
+}
+
+.story-quote::before {
+  content: '“';
+  font-size: 3em;
+  color: rgba(37, 99, 235, 0.2);
+  position: absolute;
+  top: -25px;
+  left: -18px;
+}
+
+.story-client {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #4a5568;
+}
+
+.story-client-name {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #1a365d;
+}
+
+.story-client-role {
+  font-size: 0.95em;
+  letter-spacing: 0.4px;
+}
+
+/* 合作伙伴展示 */
+.partners-section {
+  padding: 100px 0;
+  background: #ffffff;
+}
+
+.partners-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 50px;
+}
+
+.partners-title {
+  font-size: 2.2em;
+  color: #1a365d;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.partners-subtitle {
+  font-size: 1.1em;
+  color: #4a5568;
+  margin: 0;
+}
+
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.partner-card {
+  padding: 30px 28px;
+  border-radius: 20px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  box-shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.partner-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 60px rgba(37, 99, 235, 0.15);
+}
+
+.partner-logo-wrapper {
+  width: 120px;
+  height: 80px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(191, 219, 254, 0.3) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.partner-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.9);
+}
+
+.partner-name {
+  font-size: 1.2em;
+  color: #1a365d;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.partner-description {
+  font-size: 0.98em;
+  color: #4a5568;
+  line-height: 1.8;
+  margin: 0;
+}
+
+@media (max-width: 1200px) {
+  .stories-section {
+    padding: 80px 0;
+  }
+
+  .story-slide {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .story-content {
+    padding: 40px;
+  }
+
+  .partners-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .stories-carousel {
+    height: auto !important;
+  }
+
+  .story-slide {
+    grid-template-columns: 1fr;
+  }
+
+  .story-media {
+    height: 220px;
+  }
+
+  .story-content {
+    padding: 30px 24px 40px;
+  }
+
+  .story-quote {
+    font-size: 1.15em;
+  }
+
+  .partners-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .partner-card {
+    padding: 24px;
+  }
+}
+

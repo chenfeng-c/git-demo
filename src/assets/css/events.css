@@ -147,10 +147,245 @@
     color: #4a5568;
 }
 
+/* 活动亮点 */
+.highlights-section {
+    margin: 70px 0;
+}
+
+.highlights-section .section-title {
+    font-size: 2.1em;
+    color: #1a365d;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.highlights-section .section-subtitle {
+    font-size: 1.05em;
+    color: #475569;
+    margin: 0 0 30px;
+    line-height: 1.8;
+}
+
+.highlight-card {
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.highlight-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 28px 50px rgba(37, 99, 235, 0.2);
+}
+
+.highlight-image-wrapper {
+    height: 220px;
+    overflow: hidden;
+}
+
+.highlight-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.highlight-card:hover .highlight-image-wrapper img {
+    transform: scale(1.06);
+}
+
+.highlight-content {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    flex: 1;
+}
+
+.highlight-title {
+    margin: 0;
+    font-size: 1.35em;
+    color: #1a365d;
+    font-weight: 700;
+}
+
+.highlight-description {
+    margin: 0;
+    font-size: 1.05em;
+    color: #4a5568;
+    line-height: 1.85;
+}
+
+/* 活动画廊 */
+.gallery-section {
+    margin: 80px 0;
+}
+
+.gallery-section .section-title {
+    font-size: 2.1em;
+    color: #1a365d;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.gallery-section .section-subtitle {
+    font-size: 1.05em;
+    color: #475569;
+    margin: 0 0 30px;
+    line-height: 1.8;
+}
+
+.events-gallery {
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(15, 23, 42, 0.15);
+}
+
+.gallery-slide {
+    position: relative;
+    height: 100%;
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.85);
+    transition: transform 0.6s ease;
+}
+
+.gallery-slide:hover .gallery-image {
+    transform: scale(1.05);
+}
+
+.gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.2) 0%, rgba(37, 99, 235, 0.45) 100%);
+    mix-blend-mode: multiply;
+}
+
+.gallery-content {
+    position: absolute;
+    bottom: 45px;
+    left: 45px;
+    right: 45px;
+    padding: 26px;
+    border-radius: 20px;
+    background: rgba(15, 23, 42, 0.55);
+    color: #ffffff;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.gallery-tag {
+    align-self: flex-start;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(96, 165, 250, 0.3);
+    color: #dbeafe;
+    font-size: 0.85em;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.gallery-title {
+    margin: 0;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.gallery-description {
+    margin: 0;
+    font-size: 1.05em;
+    line-height: 1.8;
+    color: #e2e8f0;
+}
+
+/* 活动日程 */
+.schedule-section {
+    margin: 80px 0 40px;
+}
+
+.schedule-section .section-title {
+    font-size: 2em;
+    color: #1a365d;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.schedule-section .section-subtitle {
+    font-size: 1em;
+    color: #475569;
+    margin: 0 0 30px;
+}
+
+.events-schedule {
+    max-width: 840px;
+    margin: 0 auto;
+}
+
+.events-schedule :deep(.el-timeline-item__timestamp) {
+    color: #2563eb;
+    font-weight: 600;
+}
+
+.events-schedule :deep(.el-timeline-item__node--normal) {
+    border-color: #3b82f6;
+    background: #3b82f6;
+}
+
+.events-schedule :deep(.el-timeline-item__tail) {
+    border-color: rgba(59, 130, 246, 0.25);
+}
+
+.schedule-item {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    padding: 24px 28px;
+    box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+}
+
+.schedule-title {
+    margin: 0 0 12px;
+    font-size: 1.25em;
+    color: #1a365d;
+    font-weight: 700;
+}
+
+.schedule-description {
+    margin: 0;
+    font-size: 1em;
+    line-height: 1.8;
+    color: #4a5568;
+}
+
 @media (max-width: 992px) {
     .events-grid {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 25px;
+    }
+
+    .gallery-content {
+        left: 30px;
+        right: 30px;
+        bottom: 30px;
+        padding: 22px;
+    }
+
+    .events-schedule {
+        padding: 0 20px;
     }
 }
 
@@ -179,6 +414,43 @@
     .activity-value {
         padding: 25px;
         margin-top: 35px;
+    }
+
+    .highlights-section {
+        margin: 50px 0;
+    }
+
+    .highlight-image-wrapper {
+        height: 200px;
+    }
+
+    .highlight-content {
+        padding: 24px;
+    }
+
+    .gallery-section {
+        margin: 60px 0;
+    }
+
+    .events-gallery {
+        border-radius: 20px;
+        height: auto !important;
+    }
+
+    .gallery-image {
+        height: 280px;
+    }
+
+    .gallery-content {
+        position: relative;
+        bottom: unset;
+        left: unset;
+        right: unset;
+        margin: -50px 20px 20px;
+    }
+
+    .schedule-section {
+        margin: 60px 0 30px;
     }
 }
 
@@ -227,5 +499,26 @@
     .activity-value ul {
         font-size: 0.95em;
         line-height: 1.8;
+    }
+
+    .highlight-content {
+        padding: 20px;
+    }
+
+    .gallery-content {
+        margin: -35px 15px 15px;
+        padding: 18px;
+    }
+
+    .gallery-title {
+        font-size: 1.3em;
+    }
+
+    .gallery-description {
+        font-size: 0.95em;
+    }
+
+    .schedule-item {
+        padding: 20px;
     }
 }

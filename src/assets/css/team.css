@@ -270,6 +270,187 @@
     padding-top: 4px;
 }
 
+/* ============ 领导团队区域 ============ */
+.leadership-section {
+    margin: 70px 0;
+}
+
+.leadership-section .section-title {
+    font-size: 2.1em;
+    margin-bottom: 12px;
+    color: #1a365d;
+    font-weight: 800;
+}
+
+.leadership-section .section-subtitle {
+    font-size: 1.05em;
+    color: #475569;
+    margin: 0 0 35px;
+    line-height: 1.8;
+}
+
+.leader-card {
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(203, 213, 225, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.leader-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+}
+
+.leader-image-wrapper {
+    position: relative;
+    height: 260px;
+    overflow: hidden;
+}
+
+.leader-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.leader-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(37, 99, 235, 0.2) 0%, rgba(17, 24, 39, 0.55) 100%);
+    opacity: 0.65;
+    transition: opacity 0.3s ease;
+}
+
+.leader-card:hover .leader-image {
+    transform: scale(1.08);
+}
+
+.leader-card:hover .leader-overlay {
+    opacity: 0.45;
+}
+
+.leader-content {
+    padding: 28px 26px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+}
+
+.leader-name {
+    margin: 0;
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #1a365d;
+    letter-spacing: 0.5px;
+}
+
+.leader-role {
+    font-size: 0.95em;
+    color: #2563eb;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.leader-quote {
+    font-size: 1em;
+    line-height: 1.8;
+    color: #475569;
+    margin: 0;
+    flex: 1;
+}
+
+/* ============ 团队瞬间轮播 ============ */
+.moments-section {
+    margin: 80px 0;
+}
+
+.moments-section .section-title {
+    font-size: 2.1em;
+    margin-bottom: 12px;
+    color: #1a365d;
+    font-weight: 800;
+}
+
+.moments-section .section-subtitle {
+    font-size: 1.05em;
+    color: #475569;
+    margin: 0 0 35px;
+    line-height: 1.8;
+}
+
+.moments-carousel {
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 25px 45px rgba(15, 23, 42, 0.12);
+}
+
+.moment-slide {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    height: 100%;
+    background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+}
+
+.moment-media {
+    position: relative;
+    overflow: hidden;
+}
+
+.moment-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.moment-slide:hover .moment-media img {
+    transform: scale(1.05);
+}
+
+.moment-content {
+    padding: 45px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+}
+
+.moment-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(37, 99, 235, 0.12);
+    color: #1d4ed8;
+    font-size: 0.85em;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.moment-title {
+    font-size: 1.5em;
+    color: #1a365d;
+    margin: 0;
+    font-weight: 700;
+}
+
+.moment-description {
+    font-size: 1.05em;
+    color: #475569;
+    margin: 0;
+    line-height: 1.9;
+}
+
 /* ============ 响应式设计 ============ */
 @media (max-width: 992px) {
     .stats-row .el-col {
@@ -296,6 +477,18 @@
     .member-avatar-wrapper {
         height: 250px;
         min-height: 250px;
+    }
+
+    .leader-image-wrapper {
+        height: 230px;
+    }
+
+    .moment-slide {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .moment-content {
+        padding: 35px 32px;
     }
 }
 
@@ -341,6 +534,26 @@
         max-width: calc(100% - 20px) !important;
         width: calc(100% - 20px) !important;
     }
+
+    .leadership-section {
+        margin: 50px 0;
+    }
+
+    .leader-content {
+        padding: 24px;
+    }
+
+    .moment-slide {
+        grid-template-columns: 1fr;
+    }
+
+    .moment-media {
+        height: 220px;
+    }
+
+    .moment-content {
+        padding: 28px 22px 36px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -353,5 +566,17 @@
     
     .stat-value {
         font-size: 2em;
+    }
+
+    .leader-content {
+        padding: 20px 18px 28px;
+    }
+
+    .moment-content {
+        padding: 24px 18px 32px;
+    }
+
+    .moment-title {
+        font-size: 1.3em;
     }
 }

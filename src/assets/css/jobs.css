@@ -202,10 +202,216 @@
     transform: translateY(0);
 }
 
+/* 福利亮点区域 */
+.benefits-section {
+    margin: 70px 0 60px;
+}
+
+.benefits-section .section-title {
+    font-size: 2.2em;
+    color: #1a365d;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.benefits-section .section-subtitle {
+    font-size: 1.05em;
+    color: #475569;
+    margin: 0 0 35px;
+    line-height: 1.8;
+}
+
+.benefit-card {
+    border-radius: 18px;
+    border: 1px solid rgba(226, 232, 240, 0.7);
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 50px rgba(37, 99, 235, 0.15);
+}
+
+.benefit-icon {
+    font-size: 2.3em;
+    width: 60px;
+    height: 60px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.18) 0%, rgba(191, 219, 254, 0.3) 100%);
+    color: #1d4ed8;
+}
+
+.benefit-title {
+    margin: 0;
+    font-size: 1.25em;
+    color: #1a365d;
+    font-weight: 700;
+}
+
+.benefit-description {
+    font-size: 1em;
+    color: #475569;
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* 团队生活轮播 */
+.life-section {
+    margin: 80px 0;
+}
+
+.life-section .section-title {
+    font-size: 2.2em;
+    color: #1a365d;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.life-section .section-subtitle {
+    font-size: 1.05em;
+    color: #475569;
+    margin: 0 0 40px;
+    line-height: 1.8;
+}
+
+.life-carousel {
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(15, 23, 42, 0.15);
+}
+
+.life-slide {
+    position: relative;
+    height: 100%;
+}
+
+.life-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.85);
+    transition: transform 0.6s ease;
+}
+
+.life-slide:hover .life-image {
+    transform: scale(1.05);
+}
+
+.life-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.25) 0%, rgba(37, 99, 235, 0.5) 100%);
+    mix-blend-mode: multiply;
+}
+
+.life-content {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    right: 40px;
+    padding: 28px;
+    border-radius: 18px;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(10px);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.life-tag {
+    align-self: flex-start;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(96, 165, 250, 0.2);
+    color: #bfdbfe;
+    font-size: 0.85em;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.life-title {
+    margin: 0;
+    font-size: 1.5em;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.life-description {
+    margin: 0;
+    font-size: 1.05em;
+    line-height: 1.8;
+    color: #e2e8f0;
+}
+
+/* 应聘流程 */
+.process-section {
+    margin: 70px 0 40px;
+}
+
+.process-section .section-title {
+    font-size: 2em;
+    color: #1a365d;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.process-section .section-subtitle {
+    font-size: 1em;
+    color: #475569;
+    margin: 0 0 30px;
+}
+
+.process-steps {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.process-steps :deep(.el-step__head) {
+    border-color: #3b82f6;
+}
+
+.process-steps :deep(.el-step__title) {
+    font-weight: 700;
+    color: #1a365d;
+}
+
+.process-steps :deep(.el-step__description) {
+    color: #475569;
+    line-height: 1.7;
+}
+
+.process-steps :deep(.is-success .el-step__head) {
+    border-color: #22c55e;
+    color: #22c55e;
+}
+
+.process-steps :deep(.is-success .el-step__title) {
+    color: #16a34a;
+}
+
 @media (max-width: 992px) {
     .jobs-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 25px;
+    }
+
+    .life-content {
+        left: 30px;
+        right: 30px;
+        bottom: 30px;
+        padding: 24px;
+    }
+
+    .process-steps {
+        max-width: 100%;
     }
 }
 
@@ -225,6 +431,31 @@
     
     .job-content {
         padding: 25px;
+    }
+
+    .benefits-section {
+        margin: 60px 0 40px;
+    }
+
+    .life-carousel {
+        border-radius: 20px;
+        height: auto !important;
+    }
+
+    .life-image {
+        height: 280px;
+    }
+
+    .life-content {
+        position: relative;
+        bottom: unset;
+        left: unset;
+        right: unset;
+        margin: -60px 20px 20px;
+    }
+
+    .process-steps {
+        padding: 0 10px;
     }
 }
 
@@ -248,6 +479,23 @@
     
     .job-content {
         padding: 20px;
+    }
+
+    .benefit-card {
+        padding: 24px !important;
+    }
+
+    .life-content {
+        margin: -40px 15px 15px;
+        padding: 20px;
+    }
+
+    .life-title {
+        font-size: 1.3em;
+    }
+
+    .life-description {
+        font-size: 0.95em;
     }
     
     .job-header {

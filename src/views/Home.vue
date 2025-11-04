@@ -72,6 +72,40 @@
       </div>
     </section>
 
+    <!-- 成功案例轮播 -->
+    <section class="stories-section" id="stories">
+      <div class="container">
+        <div class="stories-header">
+          <h2 class="stories-title">{{ translations.storiesTitle }}</h2>
+          <p class="stories-subtitle">{{ translations.storiesSubtitle }}</p>
+        </div>
+
+        <el-carousel
+          indicator-position="outside"
+          height="360px"
+          trigger="click"
+          class="stories-carousel"
+          :interval="7000"
+        >
+          <el-carousel-item v-for="(story, index) in storySlides" :key="index">
+            <div class="story-slide">
+              <div class="story-media">
+                <img :src="story.image" :alt="story.title" class="story-image" />
+              </div>
+              <div class="story-content">
+                <div class="story-label">{{ story.title }}</div>
+                <blockquote class="story-quote">“{{ story.quote }}”</blockquote>
+                <div class="story-client">
+                  <span class="story-client-name">{{ story.client }}</span>
+                  <span class="story-client-role">{{ story.role }}</span>
+                </div>
+              </div>
+            </div>
+          </el-carousel-item>
+        </el-carousel>
+      </div>
+    </section>
+
     <!-- 公司图片展示 -->
     <section class="gallery-section">
       <div class="container">
@@ -91,6 +125,27 @@
               </div>
             </el-col>
           </el-row>
+        </div>
+      </div>
+    </section>
+
+    <!-- 合作伙伴展示 -->
+    <section class="partners-section">
+      <div class="container">
+        <div class="partners-header">
+          <h2 class="partners-title">{{ translations.partnersTitle }}</h2>
+          <p class="partners-subtitle">{{ translations.partnersSubtitle }}</p>
+        </div>
+        <div class="partners-grid">
+          <div class="partner-card" v-for="(partner, index) in partnerLogos" :key="index">
+            <div class="partner-logo-wrapper">
+              <img :src="partner.logo" :alt="partner.name" class="partner-logo" />
+            </div>
+            <div class="partner-info">
+              <h3 class="partner-name">{{ partner.name }}</h3>
+              <p class="partner-description">{{ partner.description }}</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -193,7 +248,11 @@ export default {
         growthChartTitle: safeTranslate('home.stats.charts.growth.title', locale),
         industryChartTitle: safeTranslate('home.stats.charts.industry.title', locale),
         growthChartSeries: safeTranslate('home.stats.charts.growth.series', locale),
-        growthChartYAxis: safeTranslate('home.stats.charts.growth.yAxis', locale)
+        growthChartYAxis: safeTranslate('home.stats.charts.growth.yAxis', locale),
+        storiesTitle: safeTranslate('home.stories.title', locale),
+        storiesSubtitle: safeTranslate('home.stories.subtitle', locale),
+        partnersTitle: safeTranslate('home.partners.title', locale),
+        partnersSubtitle: safeTranslate('home.partners.subtitle', locale)
       }
     })
 
@@ -262,37 +321,72 @@ export default {
     const companyImages = computed(() => {
       const locale = localeRef.value
       return [
-        {
-          url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop&auto=format',
+      {
+        url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop&auto=format',
           title: safeTranslate('home.gallery.images.office.title', locale),
           description: safeTranslate('home.gallery.images.office.description', locale)
-        },
-        {
-          url: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop&auto=format',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop&auto=format',
           title: safeTranslate('home.gallery.images.teamwork.title', locale),
           description: safeTranslate('home.gallery.images.teamwork.description', locale)
-        },
-        {
-          url: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop&auto=format',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop&auto=format',
           title: safeTranslate('home.gallery.images.technology.title', locale),
           description: safeTranslate('home.gallery.images.technology.description', locale)
-        },
-        {
-          url: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=600&fit=crop&auto=format',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=600&fit=crop&auto=format',
           title: safeTranslate('home.gallery.images.meeting.title', locale),
           description: safeTranslate('home.gallery.images.meeting.description', locale)
-        },
-        {
-          url: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&h=600&fit=crop&auto=format',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&h=600&fit=crop&auto=format',
           title: safeTranslate('home.gallery.images.service.title', locale),
           description: safeTranslate('home.gallery.images.service.description', locale)
-        },
-        {
-          url: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=600&fit=crop&auto=format',
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=600&fit=crop&auto=format',
           title: safeTranslate('home.gallery.images.culture.title', locale),
           description: safeTranslate('home.gallery.images.culture.description', locale)
-        }
+      }
       ]
+    })
+
+    const storySlides = computed(() => {
+      const locale = localeRef.value
+      const keys = ['digitalTwin', 'smartCity', 'aiRetail']
+      const images = {
+        digitalTwin: 'https://images.unsplash.com/photo-1526498460520-4c246339dccb?w=1000&h=600&fit=crop&auto=format',
+        smartCity: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=1000&h=600&fit=crop&auto=format',
+        aiRetail: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1000&h=600&fit=crop&auto=format'
+      }
+
+      return keys.map(key => ({
+        image: images[key],
+        title: safeTranslate(`home.stories.items.${key}.title`, locale),
+        quote: safeTranslate(`home.stories.items.${key}.quote`, locale),
+        client: safeTranslate(`home.stories.items.${key}.client`, locale),
+        role: safeTranslate(`home.stories.items.${key}.role`, locale)
+      }))
+    })
+
+    const partnerLogos = computed(() => {
+      const locale = localeRef.value
+      const keys = ['nebula', 'aurora', 'zenith', 'polaris']
+      const logos = {
+        nebula: 'https://images.unsplash.com/photo-1523475472560-d2df97ec485c?w=320&h=200&fit=crop&auto=format',
+        aurora: 'https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=320&h=200&fit=crop&auto=format',
+        zenith: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=320&h=200&fit=crop&auto=format',
+        polaris: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=320&h=200&fit=crop&auto=format'
+      }
+
+      return keys.map(key => ({
+        name: safeTranslate(`home.partners.items.${key}.name`, locale),
+        description: safeTranslate(`home.partners.items.${key}.description`, locale),
+        logo: logos[key]
+      }))
     })
 
     const handleImageHover = (index) => {
@@ -482,6 +576,8 @@ export default {
       statsData,
       featuresList,
       companyImages,
+      storySlides,
+      partnerLogos,
       footerTextComputed,
       getIconComponent,
       scrollToContent,

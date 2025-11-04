@@ -44,6 +44,49 @@
             </el-col>
           </el-row>
 
+          <section class="leadership-section">
+            <div class="section-header">
+              <h2 class="section-title">{{ translations.leadershipTitle }}</h2>
+              <p class="section-subtitle">{{ translations.leadershipSubtitle }}</p>
+            </div>
+            <el-row :gutter="24">
+              <el-col :xs="24" :sm="24" :md="12" :lg="8" :xl="8" v-for="(leader, index) in leadershipList" :key="index">
+                <el-card class="leader-card" shadow="hover" :body-style="{ padding: '0', height: '100%' }">
+                  <div class="leader-image-wrapper">
+                    <img :src="leader.avatar" :alt="leader.name" class="leader-image" />
+                    <div class="leader-overlay"></div>
+                  </div>
+                  <div class="leader-content">
+                    <h3 class="leader-name">{{ leader.name }}</h3>
+                    <div class="leader-role">{{ leader.role }}</div>
+                    <p class="leader-quote">{{ leader.quote }}</p>
+                  </div>
+                </el-card>
+              </el-col>
+            </el-row>
+          </section>
+
+          <section class="moments-section">
+            <div class="section-header">
+              <h2 class="section-title">{{ translations.momentsTitle }}</h2>
+              <p class="section-subtitle">{{ translations.momentsSubtitle }}</p>
+            </div>
+            <el-carousel indicator-position="outside" height="320px" class="moments-carousel" :interval="6500">
+              <el-carousel-item v-for="(moment, index) in teamMoments" :key="index">
+                <div class="moment-slide">
+                  <div class="moment-media">
+                    <img :src="moment.image" :alt="moment.title" />
+                  </div>
+                  <div class="moment-content">
+                    <div class="moment-tag">{{ moment.tag }}</div>
+                    <h3 class="moment-title">{{ moment.title }}</h3>
+                    <p class="moment-description">{{ moment.description }}</p>
+                  </div>
+                </div>
+              </el-carousel-item>
+            </el-carousel>
+          </section>
+
           <h2 style="margin-top: 50px;">{{ translations.advantagesTitle }}</h2>
           <el-row :gutter="20" class="advantages-row">
             <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12" v-for="(advantage, index) in advantagesList" :key="index">
@@ -97,7 +140,11 @@ export default {
         introTitle: safeTranslate('team.intro.title', locale),
         introText: safeTranslate('team.intro.text', locale),
         membersTitle: safeTranslate('team.membersTitle', locale),
-        advantagesTitle: safeTranslate('team.advantagesTitle', locale)
+        advantagesTitle: safeTranslate('team.advantagesTitle', locale),
+        leadershipTitle: safeTranslate('team.leadership.title', locale),
+        leadershipSubtitle: safeTranslate('team.leadership.subtitle', locale),
+        momentsTitle: safeTranslate('team.moments.title', locale),
+        momentsSubtitle: safeTranslate('team.moments.subtitle', locale)
       }
     })
 
@@ -143,6 +190,41 @@ export default {
       })
     })
 
+    const leadershipList = computed(() => {
+      const locale = localeRef.value
+      const keys = ['ceo', 'cto', 'coo']
+      const avatars = {
+        ceo: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&h=600&fit=crop&auto=format',
+        cto: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&h=600&fit=crop&auto=format',
+        coo: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=600&h=600&fit=crop&auto=format'
+      }
+
+      return keys.map(key => ({
+        name: safeTranslate(`team.leadership.members.${key}.name`, locale),
+        role: safeTranslate(`team.leadership.members.${key}.role`, locale),
+        quote: safeTranslate(`team.leadership.members.${key}.quote`, locale),
+        avatar: avatars[key]
+      }))
+    })
+
+    const teamMoments = computed(() => {
+      const locale = localeRef.value
+      const keys = ['hackathon', 'retreat', 'volunteer', 'innovation']
+      const images = {
+        hackathon: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&h=700&fit=crop&auto=format',
+        retreat: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&h=700&fit=crop&auto=format',
+        volunteer: 'https://images.unsplash.com/photo-1517502884422-41eaead166d4?w=1200&h=700&fit=crop&auto=format',
+        innovation: 'https://images.unsplash.com/photo-1522071901873-411886a10004?w=1200&h=700&fit=crop&auto=format'
+      }
+
+      return keys.map(key => ({
+        image: images[key],
+        tag: safeTranslate(`team.moments.items.${key}.tag`, locale),
+        title: safeTranslate(`team.moments.items.${key}.title`, locale),
+        description: safeTranslate(`team.moments.items.${key}.description`, locale)
+      }))
+    })
+
     // 团队优势列表
     const advantagesList = computed(() => {
       const locale = localeRef.value
@@ -166,6 +248,8 @@ export default {
       translations,
       statsData,
       membersList,
+      leadershipList,
+      teamMoments,
       advantagesList,
       footerTextComputed
     }
