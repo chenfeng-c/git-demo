@@ -78,21 +78,17 @@ footer {
 }
 
 /* 核心优势网格 */
+.advantages-section {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .advantages-grid {
     margin-top: 0;
-    display: flex;
-    justify-content: center;
-}
-
-.advantages-grid :deep(.el-col) {
-    margin-bottom: 30px;
-    display: flex;
-    justify-content: center;
-}
-
-.advantages-grid :deep(.el-row) {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px;
 }
 
 .advantage-card {
@@ -101,7 +97,6 @@ footer {
     flex-direction: column;
     height: 100%;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    max-width: 100%;
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
@@ -113,10 +108,11 @@ footer {
 
 .advantage-image-wrapper {
     width: 100%;
-    height: 280px;
+    height: 320px;
     overflow: hidden;
     position: relative;
     background: linear-gradient(135deg, #f0f7ff 0%, #e0f2fe 100%);
+    flex-shrink: 0;
 }
 
 .advantage-image {
@@ -874,6 +870,15 @@ footer {
         grid-template-columns: 1fr 1fr;
         gap: 30px;
     }
+
+    .advantages-section {
+        max-width: 100%;
+        padding: 0 20px;
+    }
+
+    .advantages-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 992px) {
@@ -915,6 +920,18 @@ footer {
         padding-left: 18px;
     }
 
+    .advantage-image-wrapper {
+        height: 260px;
+    }
+
+    .advantage-content {
+        padding: 28px;
+    }
+
+    .advantages-grid {
+        grid-template-columns: 1fr;
+    }
+
     .award-content {
         flex-direction: column;
         align-items: flex-start;
@@ -927,6 +944,26 @@ footer {
 }
 
 @media (max-width: 576px) {
+    .advantage-image-wrapper {
+        height: 220px;
+    }
+
+    .advantage-content {
+        padding: 24px;
+    }
+
+    .advantage-label {
+        font-size: 1.3em;
+    }
+
+    .advantage-text {
+        font-size: 1em;
+    }
+
+    .advantages-grid {
+        grid-template-columns: 1fr;
+    }
+
     .award-card {
         padding: 24px !important;
     }

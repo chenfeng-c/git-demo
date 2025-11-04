@@ -55,27 +55,23 @@
             <div class="section-header">
               <h3 class="section-title">{{ translations.advantagesTitle }}</h3>
             </div>
-            <el-row :gutter="30" class="advantages-grid" justify="center">
-              <el-col 
-                v-for="(advantage, index) in advantagesList" 
+            <div class="advantages-grid">
+              <el-card
+                v-for="(advantage, index) in advantagesList"
                 :key="index"
-                :xs="24" 
-                :sm="20"
-                :md="18"
-                :lg="16"
-                :xl="14"
+                class="advantage-card"
+                shadow="hover"
+                :body-style="{ padding: '0' }"
               >
-                <el-card class="advantage-card" shadow="hover" :body-style="{ padding: '0' }">
-                  <div class="advantage-image-wrapper">
-                    <img :src="advantage.image" :alt="advantage.label" class="advantage-image" />
-                  </div>
-                  <div class="advantage-content">
-                    <div class="advantage-label">{{ advantage.label }}</div>
-                    <div class="advantage-text">{{ advantage.text }}</div>
-                  </div>
-                </el-card>
-              </el-col>
-            </el-row>
+                <div class="advantage-image-wrapper">
+                  <img :src="advantage.image" :alt="advantage.label" class="advantage-image" />
+                </div>
+                <div class="advantage-content">
+                  <div class="advantage-label">{{ advantage.label }}</div>
+                  <div class="advantage-text">{{ advantage.text }}</div>
+                </div>
+              </el-card>
+            </div>
           </section>
 
           <!-- 荣誉资质 -->

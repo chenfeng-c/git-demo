@@ -107,14 +107,6 @@
             </el-timeline>
           </section>
 
-          <section class="values-section">
-            <el-card style="margin-top: 45px;" shadow="never">
-              <h3 style="margin: 0 0 18px 0; color: #1e40af;">{{ translations.valueTitle }}</h3>
-              <ul style="line-height: 2; color: #4a5568; margin: 0; padding-left: 20px;">
-                <li v-for="(value, index) in translations.values" :key="index">{{ value }}</li>
-              </ul>
-            </el-card>
-          </section>
         </div>
       </div>
     </div>
