@@ -34,7 +34,7 @@
                     <h4 class="highlight-title">{{ highlight.title }}</h4>
                     <p class="highlight-description">{{ highlight.description }}</p>
                   </div>
-                </div>
+            </div>
               </el-col>
             </el-row>
           </section>

@@ -106,29 +106,6 @@
       </div>
     </section>
 
-    <!-- 公司图片展示 -->
-    <section class="gallery-section">
-      <div class="container">
-        <div class="gallery-content">
-          <h2>{{ translations.galleryTitle }}</h2>
-          <p class="gallery-description">{{ translations.galleryDescription }}</p>
-          <el-row :gutter="20" class="gallery-grid">
-            <el-col :xs="24" :sm="12" :md="8" :lg="8" :xl="8" v-for="(image, index) in companyImages" :key="index">
-              <div class="gallery-item" @mouseenter="handleImageHover(index)" @mouseleave="handleImageLeave(index)">
-                <div class="image-wrapper">
-                  <img :src="image.url" :alt="image.title" class="gallery-image" :class="{ 'image-hover': hoveredIndex === index }" />
-                  <div class="image-overlay" :class="{ 'overlay-active': hoveredIndex === index }">
-                    <h3 class="image-title">{{ image.title }}</h3>
-                    <p class="image-desc">{{ image.description }}</p>
-                  </div>
-                </div>
-              </div>
-            </el-col>
-          </el-row>
-        </div>
-      </div>
-    </section>
-
     <!-- 合作伙伴展示 -->
     <section class="partners-section">
       <div class="container">

@@ -802,12 +802,18 @@
   background: #ffffff;
   padding: 120px 0;
   position: relative;
+  z-index: 2;
+  margin-top: 0;
+  clear: both;
+  isolation: isolate;
 }
 
 .gallery-content {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 60px;
+  position: relative;
+  z-index: 1;
 }
 
 .gallery-content h2 {
@@ -835,19 +841,27 @@
   margin-top: 40px;
 }
 
-.gallery-item {
+.gallery-grid .el-col {
   margin-bottom: 20px;
+}
+
+.gallery-item {
   cursor: pointer;
+  position: relative;
+  z-index: 1;
+  width: 100%;
 }
 
 .image-wrapper {
   position: relative;
   width: 100%;
-  height: 300px;
+  aspect-ratio: 16 / 9;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: #f8fafc;
+  display: block;
 }
 
 .image-wrapper:hover {
@@ -856,10 +870,15 @@
 }
 
 .gallery-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: block;
 }
 
 .gallery-image.image-hover {
@@ -879,6 +898,7 @@
   padding: 30px;
   opacity: 0;
   transition: opacity 0.4s ease;
+  z-index: 1;
 }
 
 .image-overlay.overlay-active {
@@ -1351,7 +1371,6 @@
   }
 
   .image-wrapper {
-    height: 220px;
     border-radius: 12px;
   }
 
@@ -1555,10 +1574,6 @@
     margin-bottom: 40px;
   }
 
-  .image-wrapper {
-    height: 250px;
-  }
-
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
@@ -1711,7 +1726,6 @@
   }
 
   .image-wrapper {
-    height: 220px;
     border-radius: 12px;
   }
 
@@ -1790,8 +1804,16 @@
 
 /* 成功案例轮播 */
 .stories-section {
-  padding: 100px 0;
+  padding: 100px 0 150px;
   background: linear-gradient(180deg, #f5f9ff 0%, #ffffff 100%);
+  position: relative;
+  z-index: 3;
+  isolation: isolate;
+}
+
+.stories-section .container {
+  position: relative;
+  z-index: 1;
 }
 
 .stories-header {
@@ -1816,15 +1838,38 @@
 
 .stories-carousel {
   border-radius: 24px;
-  overflow: hidden;
+  overflow: visible;
   box-shadow: 0 20px 60px rgba(26, 54, 93, 0.15);
+  margin-bottom: 50px;
+  position: relative;
+  z-index: 1;
+}
+
+.stories-carousel :deep(.el-carousel__container) {
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.stories-carousel :deep(.el-carousel__item) {
+  width: 100%;
+  height: 100%;
+}
+
+.stories-carousel :deep(.el-carousel__indicators) {
+  position: relative;
+  z-index: 2;
 }
 
 .story-slide {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
-  height: 100%;
+  height: 360px;
+  width: 100%;
   background: #ffffff;
+  position: relative;
+  z-index: 1;
 }
 
 .story-media {
@@ -1990,11 +2035,12 @@
 
 @media (max-width: 1200px) {
   .stories-section {
-    padding: 80px 0;
+    padding: 80px 0 120px;
   }
 
   .story-slide {
     grid-template-columns: 1fr 1fr;
+    height: 360px;
   }
 
   .story-content {
@@ -2007,16 +2053,24 @@
 }
 
 @media (max-width: 768px) {
+  .stories-section {
+    padding: 80px 0 100px;
+  }
+
   .stories-carousel {
     height: auto !important;
+    margin-bottom: 40px;
   }
 
   .story-slide {
     grid-template-columns: 1fr;
+    height: auto;
+    min-height: auto;
   }
 
   .story-media {
     height: 220px;
+    width: 100%;
   }
 
   .story-content {

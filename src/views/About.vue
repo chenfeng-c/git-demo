@@ -63,14 +63,14 @@
                 shadow="hover"
                 :body-style="{ padding: '0' }"
               >
-                <div class="advantage-image-wrapper">
-                  <img :src="advantage.image" :alt="advantage.label" class="advantage-image" />
-                </div>
-                <div class="advantage-content">
-                  <div class="advantage-label">{{ advantage.label }}</div>
-                  <div class="advantage-text">{{ advantage.text }}</div>
-                </div>
-              </el-card>
+                  <div class="advantage-image-wrapper">
+                    <img :src="advantage.image" :alt="advantage.label" class="advantage-image" />
+                  </div>
+                  <div class="advantage-content">
+                    <div class="advantage-label">{{ advantage.label }}</div>
+                    <div class="advantage-text">{{ advantage.text }}</div>
+                  </div>
+                </el-card>
             </div>
           </section>
 
